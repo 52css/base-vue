@@ -1,14 +1,16 @@
 import { App } from 'vue';
 
 import MyComponent from './components/my-component.vue';
-import BaseIntersection from './components/base-intersection-observer.vue';
+import BaseIntersectionObserver from './components/base-intersection-observer.vue';
+import BaseResizeObserver from './components/base-resize-observer.vue';
 
-export { MyComponent, BaseIntersection };
+export { MyComponent, BaseIntersectionObserver, BaseResizeObserver };
 
 // 默认导出
 export default {
   install(app: App) {
     app.component('MyComponent', MyComponent);
-    app.component('BaseIntersection', BaseIntersection);
+    app.component('BaseIntersectionObserver', BaseIntersectionObserver);
+    app.component('BaseResizeObserver', BaseResizeObserver);
   },
 };

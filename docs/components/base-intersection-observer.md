@@ -10,8 +10,9 @@
 
 ## API
 
-| 参数     | 说明 | 类型      | 默认值  | 版本 |
-| -------- | ---- | --------- | ------- | ---- |
-| disabled | 禁用 | `boolean` | `false` |      |
-| enter    | 出现 | `v-slot`  | \-      |      |
-| leave    | 离开 | `v-slot`  | \-      |      |
+| 参数     | 说明 | 类型                                                | 默认值  | 版本 |
+| -------- | ---- | --------------------------------------------------- | ------- | ---- |
+| disabled | 禁用 | `boolean`                                           | `false` |      |
+| enter    | 出现 | `v-slot`                                            | \-      |      |
+| leave    | 离开 | `v-slot`                                            | \-      |      |
+| observer | 离开 | `v-slot:(entry: IntersectionObserverEntry) => void` | \-      |      |

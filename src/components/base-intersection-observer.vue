@@ -9,6 +9,7 @@ export const BaseIntersectionObserverDefault = {
 export interface BaseIntersectionObserverEmits {
   (event: 'enter'): void;
   (event: 'leave'): void;
+  (event: 'observer', entry: IntersectionObserverEntry): void;
 }
 </script>
 <script setup lang="ts">
@@ -27,6 +28,7 @@ const ob = new IntersectionObserver(async (entries) => {
   if (props.disabled) {
     return;
   }
+  emit('observer', entry)
   // console.log('entry', entry.isIntersecting, loading.value, noMore.value)
   if (!entry.isIntersecting) {
     emit('leave');

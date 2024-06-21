@@ -18,7 +18,13 @@ defineOptions({
   name: 'BaseIntersectionDemo',
 });
 const disabled = ref(false);
-const show = ref(false);
+const width = ref(0);
+const height = ref(0);
+const onObserver = (entry) => {
+  const rect = entry.contentRect;
+  width.value = rect.width;
+  height.value = rect.height;
+};
 </script>
 
 <template>
@@ -28,38 +34,19 @@ const show = ref(false);
       <input type="checkbox" v-model="disabled" />
     </label>
   </header>
-  <header>
-    Element
-    <template v-if="show">
-      <span> inside </span>
-    </template>
-    <template v-else>
-      <span> outside </span>
-    </template>
 
-    the viewport
-  </header>
-
-  <div
-    class="base-intersection-demo"
+  <base-resize-observer
+    :disabled="disabled"
+    @observer="onObserver"
     style="
-      border: 2px dashed #ccc;
-      height: 200px;
-      margin: 2rem 1rem;
-      overflow: auto;
+      resize: both;
+      cursor: ew-resize;
+      overflow: hidden;
+      border: 1px solid red;
     "
   >
-    <div style="height: 500px"></div>
-    <base-intersection-observe
-      :disabled="disabled"
-      @enter="show = true"
-      @leave="show = false"
-      style="border: 2px dashed green; margin: 10px; padding: 10px"
-    >
-      Hello world
-    </base-intersection-observe>
-    <div style="height: 500px"></div>
-  </div>
+    width: {{ width }} height: {{ height }}
+  </base-resize-observer>
 </template>
 
 <style scoped lang="scss">

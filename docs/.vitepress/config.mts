@@ -22,6 +22,7 @@ export default defineConfig({
           // { text: "MyComponent", link: "/components/my-component" },
           // { text: "BaseJsonForm", link: "/components/base-json-form" },
           { text: "BaseIntersectionObserver 交叉", link: "/components/base-intersection-observer" },
+          { text: "BaseResizeObserver 变更", link: "/components/base-resize-observer" },
         ],
       },
     ],
