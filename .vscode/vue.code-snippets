@@ -1,0 +1,80 @@
+{
+  // 用户代码片段生成网址
+  // https://snippet-generator.app/
+  "Vue SFC Template": {
+    "prefix": "sfc",
+    "body": [
+      "<script lang=\"ts\">",
+      "export interface ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}Props {",
+      "  prop1?: string",
+      "}",
+      "export const ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}Default = {}",
+      "export interface ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}Emits {",
+      "  (event: 'event1'): void",
+      "}",
+      "</script>",
+      "<script setup lang=\"ts\">",
+      "withDefaults(defineProps<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}Props>(), ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}Default)",
+      "defineEmits<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}Emits>()",
+      "defineOptions({",
+      "  name: '${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}',",
+      "})",
+      "</script>",
+      "",
+      "<template>",
+      "  <div class=\"${TM_FILENAME_BASE}\">",
+      "    ${TM_FILENAME_BASE}",
+      "  </div>",
+      "</template>",
+      "",
+      "<style scoped lang=\"scss\">",
+      ".${TM_FILENAME_BASE} {",
+      "}",
+      "</style>",
+      ""
+    ],
+    "description": "Vue SFC Template"
+  },
+  "Vue SFV Template": {
+    "prefix": "sfv",
+    "body": [
+      "<script lang=\"ts\">",
+      "export interface ${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/${1:/pascalcase}/g}Props {",
+      "  prop1?: string",
+      "}",
+      "export const ${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/${1:/pascalcase}/g}Default = {}",
+      "export interface ${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/${1:/pascalcase}/g}Emits {",
+      "  (event: 'event1'): void",
+      "}",
+      "</script>",
+      "<script setup lang=\"ts\">",
+      "withDefaults(defineProps<${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/${1:/pascalcase}/g}Props>(), ${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/${1:/pascalcase}/g}Default)",
+      "defineEmits<${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/${1:/pascalcase}/g}Emits>()",
+      "defineOptions({",
+      "  name: '${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/${1:/pascalcase}/g}',",
+      "})",
+      "</script>",
+      "",
+      "<template>",
+      "  <div class=\"${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/$1/}\">",
+      "    ${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/$1/}",
+      "  </div>",
+      "</template>",
+      "",
+      "<style scoped lang=\"scss\">",
+      ".${TM_DIRECTORY/^.+[\\/\\\\]+(.*)$/$1/} {",
+      "}",
+      "</style>",
+      ""
+    ],
+    "description": "Vue SFC Template"
+  },
+  "Picsum Template": {
+    "prefix": "picsum",
+    "body": ["https://picsum.photos/200/300?random=1"],
+    "description": "生成随机图片"
+    // 文字使用
+    // lorem 生成文字
+    // lorem100 生成100个文字
+  }
+}

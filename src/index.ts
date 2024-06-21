@@ -1,3 +1,14 @@
-import MyComponent from "./components/MyComponent.vue";
+import { App } from 'vue';
 
-export { MyComponent };
+import MyComponent from './components/my-component.vue';
+import BaseIntersection from './components/base-intersection.vue';
+
+export { MyComponent, BaseIntersection };
+
+// 默认导出
+export default {
+  install(app: App) {
+    app.component('MyComponent', MyComponent);
+    app.component('BaseIntersection', BaseIntersection);
+  },
+};

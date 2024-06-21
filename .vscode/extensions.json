@@ -1,0 +1,21 @@
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "vue.volar",
+    "antfu.unocss",
+    "zixuanchen.vitest-explorer",
+    "wiensss.region-highlighter",
+    "CodeStream.codestream",
+    "usernamehw.errorlens",
+    "kisstkondoros.vscode-codemetrics",
+    "Codeium.codeium",
+    "eamodio.gitlens",
+    "streetsidesoftware.code-spell-checker",
+    "shardulm94.trailing-spaces",
+    "cschlosser.doxdocgen",
+    "SimonSiefke.svg-preview",
+    "stylelint.vscode-stylelint"
+  ]
+}

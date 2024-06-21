@@ -1,0 +1,40 @@
+{
+  "editor.tabSize": 2, // Tab 的大小 2个空格
+  "editor.formatOnSave": true, // 保存是格式化
+  "prettier.singleQuote": true, // 单引号
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // vue支持styleelint校验 https://blog.csdn.net/qq_40098888/article/details/123120556
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  // 关闭编辑器内置样式检查（避免与stylelint冲突）
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  // 配置stylelint检查的文件类型范围
+  "stylelint.validate": ["css", "less", "postcss", "scss", "sass", "vue"],
+  "typescript.preferences.autoImportFileExcludePatterns": ["vue-router"],
+  "cSpell.words": [
+    "bodyparser",
+    "tsnd",
+    "typecheck",
+    "vite",
+    "vitejs",
+    "vuex",
+    "picsum",
+    "vueuse",
+    "pinia",
+    "screenfull",
+    "datetime",
+    "cascader",
+    "endregion",
+    "tdesign",
+    "popconfirm",
+    "vxetable"
+  ]
+}
