@@ -28,7 +28,7 @@ export default defineConfig({
       {
         text: "hooks",
         items: [
-          { text: "useAsyncRef", link: "/hooks/use-async-ref" },
+          { text: "useAsyncRef 异步Ref", link: "/hooks/use-async-ref" },
         ],
       },
     ],

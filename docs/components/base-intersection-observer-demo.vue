@@ -50,14 +50,14 @@ const show = ref(false);
     "
   >
     <div style="height: 500px"></div>
-    <base-intersection-observe
+    <base-intersection-observer
       :disabled="disabled"
       @enter="show = true"
       @leave="show = false"
       style="border: 2px dashed green; margin: 10px; padding: 10px"
     >
       Hello world
-    </base-intersection-observe>
+    </base-intersection-observer>
     <div style="height: 500px"></div>
   </div>
 </template>

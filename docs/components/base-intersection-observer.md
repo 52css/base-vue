@@ -4,7 +4,12 @@
 
 ## 使用场景
 
-- 滚动加载，原生方案：scroll 并且判断 是否滚动到 底，优化方案：底部放 `BaseIntersectionObserver` 触发了 `enter` 事件即可
+### 滚动加载
+
+- ~~原始方案，scroll 并且判断 是否滚动到底, 最主要没有到底方法，每次需要`scrollHeight`太麻烦~~
+- 优化方法，滚动底部放`BaseIntersectionObserver`元素，如果触发了`enter`即显示了就是到底部
+
+## Demo
 
 <preview path="./base-intersection-observer-demo.vue" title="基本使用"></preview>
 
