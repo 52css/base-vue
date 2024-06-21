@@ -1,7 +1,7 @@
 import { App } from 'vue';
 
 import MyComponent from './components/my-component.vue';
-import BaseIntersection from './components/base-intersection.vue';
+import BaseIntersection from './components/base-intersection-observer.vue';
 
 export { MyComponent, BaseIntersection };
 

@@ -1,5 +1,5 @@
 {
-  "name": "base-vue",
+  "name": "@52css/base-vue",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,8 @@
     "build": "vite build",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "deploy": "bash scripts/deploy.sh"
   },
   "keywords": [],
   "author": "",

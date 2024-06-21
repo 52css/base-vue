@@ -1,26 +1,26 @@
 <script lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue';
-export interface BaseIntersectionProps {
+export interface BaseIntersectionObserverProps {
   disabled?: boolean;
 }
-export const BaseIntersectionDefault = {
+export const BaseIntersectionObserverDefault = {
   disabled: false,
 };
-export interface BaseIntersectionEmits {
+export interface BaseIntersectionObserverEmits {
   (event: 'enter'): void;
   (event: 'leave'): void;
 }
 </script>
 <script setup lang="ts">
 const props = withDefaults(
-  defineProps<BaseIntersectionProps>(),
-  BaseIntersectionDefault
+  defineProps<BaseIntersectionObserverProps>(),
+  BaseIntersectionObserverDefault
 );
-const emit = defineEmits<BaseIntersectionEmits>();
+const emit = defineEmits<BaseIntersectionObserverEmits>();
 defineOptions({
-  name: 'BaseIntersection',
+  name: 'BaseIntersectionObserver',
 });
-const baseIntersectionRef = ref();
+const baseIntersectionObserverRef = ref();
 
 const ob = new IntersectionObserver(async (entries) => {
   const entry = entries[0];
@@ -37,22 +37,22 @@ const ob = new IntersectionObserver(async (entries) => {
 });
 
 onMounted(async () => {
-  const element = baseIntersectionRef.value;
+  const element = baseIntersectionObserverRef.value;
   element && ob.observe(element);
 });
 onBeforeUnmount(() => {
-  const element = baseIntersectionRef.value;
+  const element = baseIntersectionObserverRef.value;
   element && ob.unobserve(element);
 });
 </script>
 
 <template>
-  <div ref="baseIntersectionRef" class="base-appear">
+  <div ref="baseIntersectionObserverRef" class="base-appear">
     <slot />
   </div>
 </template>
 
 <style scoped lang="scss">
-.base-appear {
+.base-intersection-observer {
 }
 </style>
