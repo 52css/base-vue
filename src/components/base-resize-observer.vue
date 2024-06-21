@@ -27,8 +27,6 @@ const ob = new ResizeObserver((entries) => {
     return;
   }
 
-  console.log('11');
-
   emit('observer', entry);
 });
 

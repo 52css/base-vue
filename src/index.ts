@@ -1,16 +1,23 @@
-import { App } from 'vue';
+import { App, Component } from 'vue';
 
-import MyComponent from './components/my-component.vue';
-import BaseIntersectionObserver from './components/base-intersection-observer.vue';
-import BaseResizeObserver from './components/base-resize-observer.vue';
+const componentFileMap = import.meta.glob('./components/**/**.vue', {
+  eager: true,
+});
 
-export { MyComponent, BaseIntersectionObserver, BaseResizeObserver };
+// console.log('vueFileMap', vueFileMap);
+
+// export { MyComponent, BaseIntersectionObserver, BaseResizeObserver };
+
+export interface Module {
+  default: Component;
+}
 
 // 默认导出
 export default {
   install(app: App) {
-    app.component('MyComponent', MyComponent);
-    app.component('BaseIntersectionObserver', BaseIntersectionObserver);
-    app.component('BaseResizeObserver', BaseResizeObserver);
+    Object.keys(componentFileMap).forEach((filePath) => {
+      const c = (componentFileMap[filePath] as Module).default;
+      app.component(c.name as string, c);
+    });
   },
 };
