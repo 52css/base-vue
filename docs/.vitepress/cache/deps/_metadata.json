@@ -1,37 +1,37 @@
 {
-  "hash": "0f5cddde",
-  "configHash": "285b8d09",
+  "hash": "83b46dcc",
+  "configHash": "4ba05798",
   "lockfileHash": "7de4c891",
-  "browserHash": "4ae9618a",
+  "browserHash": "e76d6438",
   "optimized": {
     "vue": {
-      "src": "../../../../node_modules/.pnpm/vue@3.4.29/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "src": "../../../../node_modules/.pnpm/vue@3.4.29_typescript@5.5.2/node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "9cbae98c",
+      "fileHash": "9f503313",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/.pnpm/@vue+devtools-api@7.3.2/node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "26b151d7",
+      "fileHash": "afb170a3",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
-      "src": "../../../../node_modules/.pnpm/@vueuse+core@10.11.0_vue@3.4.29/node_modules/@vueuse/core/index.mjs",
+      "src": "../../../../node_modules/.pnpm/@vueuse+core@10.11.0_vue@3.4.29_typescript@5.5.2_/node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "faeab8b3",
+      "fileHash": "7488abde",
       "needsInterop": false
     },
     "@vitepress-demo-preview/component": {
-      "src": "../../../../node_modules/.pnpm/@vitepress-demo-preview+component@2.3.2_vitepress@1.2.3_@algolia+client-search@4.23.3_@types+_ojcnk3klufh6xhcujho2ibtv64/node_modules/@vitepress-demo-preview/component/dist/preview-component.js",
+      "src": "../../../../node_modules/.pnpm/@vitepress-demo-preview+component@2.3.2_vitepress@1.2.3_@algolia+client-search@4.23.3_@types+_34ex22pnpplaaq2lhdhn34ksrq/node_modules/@vitepress-demo-preview/component/dist/preview-component.js",
       "file": "@vitepress-demo-preview_component.js",
-      "fileHash": "d63b94de",
+      "fileHash": "13812162",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-PPTVPZ73": {
-      "file": "chunk-PPTVPZ73.js"
+    "chunk-MSTZEHYC": {
+      "file": "chunk-MSTZEHYC.js"
     }
   }
 }

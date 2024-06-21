@@ -1,4 +1,5 @@
 import { App, Component } from 'vue';
+import { useAsyncRef } from './hooks/use-async-ref';
 
 const componentFileMap = import.meta.glob('./components/**/**.vue', {
   eager: true,
@@ -7,6 +8,8 @@ const componentFileMap = import.meta.glob('./components/**/**.vue', {
 // console.log('vueFileMap', vueFileMap);
 
 // export { MyComponent, BaseIntersectionObserver, BaseResizeObserver };
+
+export { useAsyncRef };
 
 export interface Module {
   default: Component;

@@ -25,6 +25,12 @@ export default defineConfig({
           { text: "BaseResizeObserver 变更", link: "/components/base-resize-observer" },
         ],
       },
+      {
+        text: "hooks",
+        items: [
+          { text: "useAsyncRef", link: "/hooks/use-async-ref" },
+        ],
+      },
     ],
 
     socialLinks: [
