@@ -1,7 +1,7 @@
 import { App, Component } from 'vue';
 import { useAsyncRef } from './hooks/use-async-ref';
 // 导入Unocss
-import 'uno.css';
+import 'virtual:uno.css'
 
 const componentFileMap = import.meta.glob('./components/**/**.vue', {
   eager: true,
