@@ -1,5 +1,6 @@
 import { App, Component } from 'vue';
 import { useAsyncRef } from './hooks/use-async-ref';
+import { useEsc } from './hooks/use-esc';
 // 导入Unocss
 import 'virtual:uno.css'
 
@@ -11,7 +12,7 @@ const componentFileMap = import.meta.glob('./components/**/**.vue', {
 
 // export { MyComponent, BaseIntersectionObserver, BaseResizeObserver };
 
-export { useAsyncRef };
+export { useAsyncRef, useEsc };
 
 export interface Module {
   default: Component;

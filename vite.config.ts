@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
-      name: "MyComponentLibrary",
+      name: "BaseVue",
       fileName: (format) => `base-vue.${format}.js`,
     },
     rollupOptions: {
