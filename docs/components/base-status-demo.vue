@@ -1,4 +1,5 @@
 <script lang="ts">
+import { ref } from 'vue';
 export interface BaseStatusDemoProps {
   prop1?: string;
 }
@@ -13,6 +14,7 @@ defineEmits<BaseStatusDemoEmits>();
 defineOptions({
   name: 'BaseStatusDemo',
 });
+const status = ref(2);
 </script>
 
 <template>
@@ -20,7 +22,7 @@ defineOptions({
     <base-status value="进行中" />
 
     <base-status
-      :value="2"
+      :value="status"
       :options="[
         { label: '未开始', value: 0, theme: 'default' },
         { label: '进行中', value: 1, theme: 'primary' },

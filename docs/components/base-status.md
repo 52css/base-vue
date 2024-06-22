@@ -24,18 +24,23 @@
 
 <preview path="./base-status-demo.vue" title="基本使用"></preview>
 
+## Variant
+
+<preview path="./base-status-variant.vue" title="variant"></preview>
+
 ## API
 
-| 参数    | 说明                                       | 类型                                                    | 默认值 | 版本 |
-| ------- | ------------------------------------------ | ------------------------------------------------------- | ------ | ---- |
-| value   | 值，没有 options 是 label                  | `string` \| `number`                                    | \-     |      |
-| options | 设置选项                                   | `BaseStatusOption`                                      | \-     |      |
-| theme   | 主题色，设置优先级最高，没有是 `'primary'` | `'primary'` \| `'success'` \| `'danger'` \| `'default'` | \-     |      |
+| 参数    | 说明                                       | 类型                                                         | 默认值  | 版本 |
+| ------- | ------------------------------------------ | ------------------------------------------------------------ | ------- | ---- |
+| options | 设置选项                                   | `BaseStatusOption`                                           | \-      |      |
+| theme   | 主题色，设置优先级最高，没有是 `'primary'` | `'primary'` \| `'success'` \| `'danger'` \| `'default'`      | \-      |      |
+| value   | 值，没有 options 是 label                  | `string` \| `number`                                         | \-      |      |
+| variant | 形变,                                      | `'dot'` \| `'fill'` \| `'outline'` \| `'dashed'` \| `'text'` | `'dot'` |      |
 
 ### BaseStatusOption 属性
 
 | 参数  | 说明 | 类型                                                    | 默认值 | 版本 |
 | ----- | ---- | ------------------------------------------------------- | ------ | ---- |
 | label | 标签 | `string`                                                | \-     |      |
-| value | 值   | `string` \| `number`                                    | \-     |      |
 | theme | 主题 | `'primary'` \| `'success'` \| `'danger'` \| `'default'` | \-     |      |
+| value | 值   | `string` \| `number`                                    | \-     |      |
