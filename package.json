@@ -24,6 +24,7 @@
   "devDependencies": {
     "@types/node": "^20.14.6",
     "@types/vue": "^2.0.0",
-    "sass": "^1.77.6"
+    "sass": "^1.77.6",
+    "vitepress-plugin-auto-sidebar": "^1.2.0"
   }
 }

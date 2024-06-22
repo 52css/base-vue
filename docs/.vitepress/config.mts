@@ -1,46 +1,36 @@
-import { defineConfig } from "vitepress";
+import { defineConfig } from 'vitepress';
 import {
   componentPreview,
   containerPreview,
-} from "@vitepress-demo-preview/plugin";
+} from '@vitepress-demo-preview/plugin';
+import { getSidebar } from 'vitepress-plugin-auto-sidebar';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Base Vue",
-  description: "A VitePress Site",
+  title: 'Base Vue',
+  description: 'A VitePress Site',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: "Home", link: "/" },
-      { text: "Examples", link: "/markdown-examples" },
+      { text: 'Home', link: '/' },
+      { text: 'Examples', link: '/markdown-examples' },
     ],
 
-    sidebar: [
-      {
-        text: "Components",
-        items: [
-          // { text: "MyComponent", link: "/components/my-component" },
-          // { text: "BaseJsonForm", link: "/components/base-json-form" },
-          { text: "BaseIntersectionObserver 交叉", link: "/components/base-intersection-observer" },
-          { text: "BaseResizeObserver 变更", link: "/components/base-resize-observer" },
-        ],
-      },
-      {
-        text: "hooks",
-        items: [
-          { text: "useAsyncRef 异步Ref", link: "/hooks/use-async-ref" },
-        ],
-      },
-    ],
+    sidebar: getSidebar({
+      contentRoot: '/docs',
+      contentDirs: ['components', 'hooks'],
+      collapsible: true,
+      collapsed: false,
+    }),
 
     socialLinks: [
-      { icon: "github", link: "https://github.com/vuejs/vitepress" },
+      { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
     ],
   },
   markdown: {
     theme: {
-      light: "vitesse-light",
-      dark: "vitesse-dark",
+      light: 'vitesse-light',
+      dark: 'vitesse-dark',
     },
     lineNumbers: true,
     config(md) {
