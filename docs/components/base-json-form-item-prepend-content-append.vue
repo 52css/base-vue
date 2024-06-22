@@ -19,11 +19,21 @@ defineOptions({
 </script>
 
 <template>
-  <base-json-form-item>
-    <template #prepend> http:// </template>
-    <template #append> .com </template>
-    <input placeholder="请输入" style="width: 100%" />
-  </base-json-form-item>
+  <section flex flex-col gap-2>
+    <base-json-form-item>
+      <template #prepend> http:// </template>
+      <template #append> .com </template>
+      <input placeholder="请输入" style="width: 100%" />
+    </base-json-form-item>
+    <base-json-form-item>
+      <template #prepend> http:// </template>
+      <input placeholder="请输入" style="width: 100%" />
+    </base-json-form-item>
+    <base-json-form-item>
+      <template #append> .com </template>
+      <input placeholder="请输入" style="width: 100%" />
+    </base-json-form-item>
+  </section>
 </template>
 
 <style scoped lang="scss">

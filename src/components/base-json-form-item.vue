@@ -67,20 +67,29 @@ defineOptions({
       background-color: #f3f3f3;
       padding: 0 8px;
       border-radius: 3px 0 0 3px;
-      border: 1px solid #dcdcdc;
+      border: solid #dcdcdc;
+      border-width: 1px 0 1px 1px;
+      + .base-json-form-item__container__content {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
     }
     &__append {
       background-color: #f3f3f3;
       padding: 0 8px;
       border-radius: 0 3px 3px 0;
-      border: 1px solid #dcdcdc;
+      border: solid #dcdcdc;
+      border-width: 1px 1px 1px 0;
     }
     &__content {
+      border-radius: 3px 0 0 3px;
+      &:not(:has(+ .base-json-form-item__container__append)) {
+        border-radius: 0 3px 3px 0;
+      }
     }
     &--wrapped {
       .base-json-form-item__container__content {
-        border: solid #dcdcdc;
-        border-width: 1px 0;
+        border: 1px solid #dcdcdc;
         padding: 0 8px;
       }
     }
