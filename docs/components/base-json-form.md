@@ -18,59 +18,55 @@
 
 ## API
 
-| 参数           | 说明                                                                                           | 类型                                                  | 默认值         | 版本  |
-| -------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------- | -------------- | ----- |
-| ...            | 继承`TForm` \| `TTable` 字段                                                                   | `unknown`                                             | \-             |       |
-| action         | 右边操作按钮                                                                                   | `v-slot`                                              | \-             |       |
-| colon          | 是否显示分号                                                                                   | `boolean`                                             | \-             |       |
-| columns        | 表格项, `key` 支持 `aa.bb` 模式，提交转换成对象`aa: {bb: val}`; `value` 是 `字符串` 是 `label` | `Record<key \| v-slot, string \| BaseJsonFormColumn>` | {}             |       |
-| inputAfter     | 表单后面                                                                                       | `v-slot`                                              | \-             |       |
-| inputAppend    | 表单结尾                                                                                       | `v-slot`                                              | \-             |       |
-| inputBefore    | 表单前面                                                                                       | `v-slot`                                              | \-             |       |
-| inputPrepend   | 表单开头                                                                                       | `v-slot`                                              | \-             |       |
-| inputs         | 表单项, `key` 支持 `aa.bb` 模式，提交转换成对象`aa: {bb: val}`; `value` 是 `字符串` 是 `label` | `Record<key \| v-slot, string \| BaseJsonFormInput>`  | {}             |       |
-| labelAlign     | 标签对其方式                                                                                   | `'left'` \| `'right'` \| `'top'`                      | \-             |       |
-| layout         | 表单对其方式                                                                                   | `'inline'` \| `'vertical'`                            | \-             |       |
-| model          | 提交表单对应的 model                                                                           | `BaseJsonFormModel`                                   | {}             |       |
-| modelValue     | 表格多选`数组`、单选`原始类型`返回勾选数据                                                     | `string[]` \| `number[]` \| `string` \| `number`      | \-             | 1.0.1 |
-| paginationType | 分页展现                                                                                       | `'pagination'` \|`'scroll'`                           | `'pagination'` | 1.0.1 |
-| query          | 查询按钮                                                                                       | `v-slot`                                              | \-             |       |
-| request        | 表单提交的接口或表格查询的接口                                                                 | `BaseJsonFormRequest`                                 | \-             |       |
-| showQuery      | 是否显示查询按钮                                                                               | `boolean`                                             | \-             |       |
-| span           | 整体分栏                                                                                       | `number`                                              | 12             |       |
-| tableAfter     | 表格后面                                                                                       | `v-slot`                                              | \-             |       |
-| tableAppend    | 表格结尾                                                                                       | `v-slot`                                              | \-             |       |
-| tableBefore    | 表格前面                                                                                       | `v-slot`                                              | \-             |       |
-| tablePrepend   | 表格开头                                                                                       | `v-slot`                                              | \-             |       |
-| tableType      | 表格展现                                                                                       | `'table'` \|`'vxe'`                                   | `'table'`      | 1.0.1 |
-| title          | 标题                                                                                           | `string` \| `v-slot`                                  | \-             |       |
-| titleBold      | 标题加粗                                                                                       | `boolean`                                             | \-             |       |
-| type           | 展现方式, 未传递类型，有 `columns` 是 `query`, 没有是 `form`                                   | `'query'` \|`'form'`                                  | \-             |       |
+| 参数           | 说明                                                                                           | 类型                                                             | 默认值         | 版本  |
+| -------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | -------------- | ----- |
+| ...            | 继承`TForm` \| `TTable` 字段                                                                   | `unknown`                                                        | \-             |       |
+| action         | 右边操作按钮                                                                                   | `v-slot`                                                         | \-             |       |
+| autoFetch      | 自动请求                                                                                       | `boolean`                                                        | `true`         |       |
+| colon          | 是否显示分号                                                                                   | `boolean`                                                        | \-             |       |
+| columns        | 表格项, `key` 支持 `aa.bb` 模式，提交转换成对象`aa: {bb: val}`; `value` 是 `字符串` 是 `label` | `Record<key \| v-slot, string \| BaseJsonFormColumn>`            | {}             |       |
+| inputs         | 表单项, `key` 支持 `aa.bb` 模式，提交转换成对象`aa: {bb: val}`; `value` 是 `字符串` 是 `label` | `v-slot` \| `Record<key \| v-slot, string \| BaseJsonFormInput>` | {}             |       |
+| labelAlign     | 标签对其方式                                                                                   | `'left'` \| `'right'` \| `'top'`                                 | \-             |       |
+| layout         | 表单对其方式                                                                                   | `'inline'` \| `'vertical'`                                       | \-             |       |
+| model          | 提交表单对应的 model                                                                           | `BaseJsonFormModel`                                              | {}             |       |
+| modelValue     | 表格多选`数组`、单选`原始类型`返回勾选数据                                                     | `string[]` \| `number[]` \| `string` \| `number`                 | \-             | 1.0.1 |
+| paginationType | 分页展现                                                                                       | `'pagination'` \|`'scroll'`                                      | `'pagination'` | 1.0.1 |
+| query          | 查询按钮                                                                                       | `v-slot`                                                         | \-             |       |
+| request        | 表单提交的接口或表格查询的接口                                                                 | `BaseJsonFormRequest`                                            | \-             |       |
+| showQuery      | 是否显示查询按钮                                                                               | `boolean`                                                        | `true`         |       |
+| span           | 整体分栏                                                                                       | `number`                                                         | 12             |       |
+| table          | 表格                                                                                           | `v-slot`                                                         | `'table'`      |       |
+| tableType      | 表格展现                                                                                       | `'table'` \|`'vxe'`                                              | `'table'`      | 1.0.1 |
+| title          | 标题                                                                                           | `v-slot` \| `string`                                             | \-             |       |
+| titleBold      | 标题加粗                                                                                       | `boolean`                                                        | \-             |       |
+| type           | 展现方式, 未传递类型，有 `columns` 是 `query`, 没有是 `form`                                   | `'query'` \|`'form'`                                             | \-             |       |
 
 ### BaseJsonFormInput 属性
 
-| 参数     | 说明                                     | 类型                                                                                                | 默认值   | 版本  |
-| -------- | ---------------------------------------- | --------------------------------------------------------------------------------------------------- | -------- | ----- |
-| ...      | 继承`TFormItem` \| `TField`字段          | `unknown`                                                                                           | \-       |       |
-| after    | 后面                                     | `string`                                                                                            | \-       | 1.0.1 |
-| append   | 结尾                                     | `string`                                                                                            | \-       |       |
-| before   | 前面                                     | `string`                                                                                            | \-       | 1.0.1 |
-| group    | 组合, 同名组合并在一起展示               | `[groupName: string, position?: 'top' \| 'before' \| 'prepend' \| 'append' \| 'after' \| 'bottom']` | \-       | 1.0.1 |
-| if       | 判断，用于动态控制显示和隐藏，默认都展示 | `(model: BaseJsonFormModel) => boolean`                                                             | \-       |       |
-| label    | 标签, `字符串`有`*`代表必填              | `string` \| `v-slot`                                                                                | \-       |       |
-| on       | `on`前缀，触发原生事件, 例如 `onChange`  | `(model: BaseJsonFormModel, ...其他默认值) => void`                                                 | \-       |       |
-| options  | 选项集合、下拉、单选、多选               | `BaseJsonFormInputOption[]`                                                                         | \-       |       |
-| outputs  | 输出项，onChange 触发                    | `Record<string, string \| (option: BaseJsonFormInputOption) => any>`                                | \-       |       |
-| prefix   | 前缀                                     | `string`                                                                                            | \-       |       |
-| prepend  | 开头                                     | `string`                                                                                            | \-       |       |
-| required | 必填                                     | `boolean`                                                                                           | \-       |       |
-| span     | 拆分栏目, 没值使用整体`span`             | `number`                                                                                            | \-       |       |
-| subLabel | 副标签, `字符串`有`*`代表必填            | `string` \| `v-slot`                                                                                | \-       | 1.0.1 |
-| suffix   | 后缀                                     | `string`                                                                                            | \-       |       |
-| tips     | 标签后面提示文案                         | `string`                                                                                            | \-       |       |
-| type     | 类型                                     | `BaseJsonFormInputType`                                                                             | \-       |       |
-| value    | 默认值                                   | `BaseJsonFormInputValue`                                                                            | \-       |       |
-| width    | field 宽度                               | `string`                                                                                            | `'auto'` |       |
+| 参数     | 说明                                     | 类型                                                                                              | 默认值   | 版本  |
+| -------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------- | -------- | ----- |
+| ...      | 继承`TFormItem` \| `TField`字段          | `unknown`                                                                                         | \-       |       |
+| append   | 结尾，包裹在灰色盒子内                   | `string`                                                                                          | \-       |       |
+| bottom   | 底                                       | `string`                                                                                          | \-       | 1.0.1 |
+| group    | 组合, 同名组合并在一起展示               | `[groupName: string, position?: 'top' \| 'bottom' \| 'left' \| 'right' \| 'prepend' \| 'append']` | \-       | 1.0.1 |
+| if       | 判断，用于动态控制显示和隐藏，默认都展示 | `(model: BaseJsonFormModel) => boolean`                                                           | \-       |       |
+| label    | 标签, `字符串`有`*`代表必填              | `string` \| `v-slot`                                                                              | \-       |       |
+| left     | 左边                                     | `string`                                                                                          | \-       | 1.0.1 |
+| on       | `on`前缀，触发原生事件, 例如 `onChange`  | `(model: BaseJsonFormModel, ...其他默认值) => void`                                               | \-       |       |
+| options  | 选项集合、下拉、单选、多选               | `BaseJsonFormInputOption[]`                                                                       | \-       |       |
+| outputs  | 输出项，onChange 触发                    | `Record<string, string \| (option: BaseJsonFormInputOption) => any>`                              | \-       |       |
+| prefix   | 前缀                                     | `string`                                                                                          | \-       |       |
+| prepend  | 开头，包裹在灰色盒子内                   | `string`                                                                                          | \-       |       |
+| required | 必填                                     | `boolean`                                                                                         | \-       |       |
+| right    | 右边                                     | `string`                                                                                          | \-       | 1.0.1 |
+| span     | 拆分栏目, 没值使用整体`span`             | `number`                                                                                          | \-       |       |
+| subLabel | 副标签, `字符串`有`*`代表必填            | `string` \| `v-slot`                                                                              | \-       | 1.0.1 |
+| suffix   | 后缀                                     | `string`                                                                                          | \-       |       |
+| tips     | 标签后面提示文案                         | `string`                                                                                          | \-       |       |
+| top      | 顶                                       | `string`                                                                                          | \-       | 1.0.1 |
+| type     | 类型                                     | `BaseJsonFormInputType`                                                                           | \-       |       |
+| value    | 默认值                                   | `BaseJsonFormInputValue`                                                                          | \-       |       |
+| width    | field 宽度                               | `string`                                                                                          | `'auto'` |       |
 
 ### BaseJsonFormColumn 属性
 
