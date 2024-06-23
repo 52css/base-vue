@@ -25,13 +25,15 @@
 | 参数           | 说明                                                                                           | 类型                                                             | 默认值         | 版本  |
 | -------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | -------------- | ----- |
 | ...            | 继承`TForm` \| `TTable` 字段                                                                   | `unknown`                                                        | \-             |       |
+| colon          | 分号                                                                                           | `boolean`                                                        | `false`        |       |
 | action         | 右边操作按钮                                                                                   | `v-slot`                                                         | \-             |       |
-| autoFetch      | 自动请求                                                                                       | `boolean`                                                        | `true`         |       |
-| colon          | 是否显示分号                                                                                   | `boolean`                                                        | \-             |       |
+| autoFetch      | 自动请求，是`query`的自动请求为`true`                                                          | `boolean`                                                        | \-             |       |
 | columns        | 表格项, `key` 支持 `aa.bb` 模式，提交转换成对象`aa: {bb: val}`; `value` 是 `字符串` 是 `label` | `Record<key \| v-slot, string \| BaseJsonFormColumn>`            | {}             |       |
 | inputs         | 表单项, `key` 支持 `aa.bb` 模式，提交转换成对象`aa: {bb: val}`; `value` 是 `字符串` 是 `label` | `v-slot` \| `Record<key \| v-slot, string \| BaseJsonFormInput>` | {}             |       |
 | labelAlign     | 标签对其方式                                                                                   | `'left'` \| `'right'` \| `'top'`                                 | \-             |       |
 | layout         | 表单对其方式                                                                                   | `'inline'` \| `'vertical'`                                       | \-             |       |
+| list           | 表格                                                                                           | `v-slot`                                                         | \-             |       |
+| listType       | 表格展现                                                                                       | `'table'` \|`'card'`                                             | `'table'`      | 1.0.1 |
 | model          | 提交表单对应的 model                                                                           | `BaseJsonFormModel`                                              | {}             |       |
 | modelValue     | 表格多选`数组`、单选`原始类型`返回勾选数据                                                     | `string[]` \| `number[]` \| `string` \| `number`                 | \-             | 1.0.1 |
 | paginationType | 分页展现                                                                                       | `'pagination'` \|`'scroll'`                                      | `'pagination'` | 1.0.1 |
@@ -39,11 +41,8 @@
 | request        | 表单提交的接口或表格查询的接口                                                                 | `BaseJsonFormRequest`                                            | \-             |       |
 | showQuery      | 是否显示查询按钮                                                                               | `boolean`                                                        | `true`         |       |
 | span           | 整体分栏                                                                                       | `number`                                                         | 12             |       |
-| table          | 表格                                                                                           | `v-slot`                                                         | `'table'`      |       |
-| tableType      | 表格展现                                                                                       | `'table'` \|`'list'`                                              | `'table'`      | 1.0.1 |
 | title          | 标题                                                                                           | `v-slot` \| `string`                                             | \-             |       |
 | titleBold      | 标题加粗                                                                                       | `boolean`                                                        | \-             |       |
-| type           | 展现方式, 未传递类型，有 `columns` 是 `query`, 没有是 `form`                                   | `'query'` \|`'form'`                                             | \-             |       |
 
 ### BaseJsonFormInput 属性
 
@@ -71,57 +70,58 @@
 | type     | 类型                                     | `BaseJsonFormInputType`                                                                           | \-       |       |
 | value    | 默认值                                   | `BaseJsonFormInputValue`                                                                          | \-       |       |
 | width    | field 宽度                               | `string`                                                                                          | `'auto'` |       |
+| subLabel | 副标签,                                  | `string` \| `v-slot`                                                                              | \-       | 1.0.1 |
 
 ### BaseJsonFormColumn 属性
 
-| 参数     | 说明                                                   | 类型                                    | 默认值           | 版本  |
-| -------- | ------------------------------------------------------ | --------------------------------------- | ---------------- | ----- |
-| after    | 后面                                                   | `string`                                | \-               | 1.0.1 |
-| align    | 对齐方式                                               | `'left'` \| `'right'` \| `'center'`     | `'left'`         |       |
-| append   | 结尾                                                   | `string`                                | \-               | 1.0.1 |
-| before   | 前面                                                   | `string`                                | \-               | 1.0.1 |
-| ellipsis | 省略号                                                 | `boolean`                               | `true`           |       |
-| fixed    | 固定, 左边第一个默认固定在左边，右边最后一个固定在右边 | `'left'` \| `'right'`                   | \-               |       |
-| if       | 判断，用于动态控制显示和隐藏，默认都展示               | `(model: BaseJsonFormModel) => boolean` | \-               |       |
-| label    | 标签, `字符串`有`*`代表必填                            | `string` \| `v-slot`                    | \-               |       |
-| minWidth | column 最小宽度                                        | `string`                                | `'auto'`         |       |
-| prefix   | 前缀                                                   | `string`                                | \-               | 1.0.1 |
-| prepend  | 开头                                                   | `string`                                | \-               | 1.0.1 |
-| required | 必填                                                   | `boolean`                               | \-               | 1.0.1 |
-| subLabel | 副标签, `字符串`有`*`代表必填                          | `string` \| `v-slot`                    | \-               | 1.0.1 |
-| suffix   | 后缀                                                   | `string`                                | \-               | 1.0.1 |
-| tips     | 标签后面提示文案                                       | `string`                                | \-               | 1.0.1 |
+| 参数     | 说明                                                   | 类型                                    | 默认值   | 版本  |
+| -------- | ------------------------------------------------------ | --------------------------------------- | -------- | ----- |
+| after    | 后面                                                   | `string`                                | \-       | 1.0.1 |
+| align    | 对齐方式                                               | `'left'` \| `'right'` \| `'center'`     | `'left'` |       |
+| append   | 结尾                                                   | `string`                                | \-       | 1.0.1 |
+| before   | 前面                                                   | `string`                                | \-       | 1.0.1 |
+| ellipsis | 省略号                                                 | `boolean`                               | `true`   |       |
+| fixed    | 固定, 左边第一个默认固定在左边，右边最后一个固定在右边 | `'left'` \| `'right'`                   | \-       |       |
+| if       | 判断，用于动态控制显示和隐藏，默认都展示               | `(model: BaseJsonFormModel) => boolean` | \-       |       |
+| label    | 标签, `字符串`有`*`代表必填                            | `string` \| `v-slot`                    | \-       |       |
+| minWidth | column 最小宽度                                        | `string`                                | `'auto'` |       |
+| prefix   | 前缀                                                   | `string`                                | \-       | 1.0.1 |
+| prepend  | 开头                                                   | `string`                                | \-       | 1.0.1 |
+| required | 必填                                                   | `boolean`                               | \-       | 1.0.1 |
+| subLabel | 副标签,                                                | `string` \| `v-slot`                    | \-       | 1.0.1 |
+| suffix   | 后缀                                                   | `string`                                | \-       | 1.0.1 |
+| tips     | 标签后面提示文案                                       | `string`                                | \-       | 1.0.1 |
 | type     | 类型                                                   | `BaseJsonFormInputType`                 | `'text'` |       |
-| width    | column 宽度                                            | `string`                                | `'auto'`         |       |
+| width    | column 宽度                                            | `string`                                | `'auto'` |       |
 
 #### BaseJsonFormInputType 属性
 
-- 目前注入TDesign下输入组件
+- 目前注入 TDesign 下输入组件
 
-| 类型           | 说明       | TDesign                           | 版本  |
-| -------------- | ---------- | --------------------------------- | ----- |
-| AutoComplete   | 自动填充   | AutoComplete 自动填充             |       |
-| Cascader       | 级联选择器 | Cascader 级联选择器               |       |
-| Checkbox       | 多选框     | CheckboxGroup 多选框              |       |
-| ColorPicker    | 颜色       | ColorPicker 颜色选择器            |       |
-| DatePicker     | 日期       | DatePicker 日期选择器             |       |
-| Form           |            | Form 表单                         |       |
-| Input          |            | Input 输入框                      |       |
-| InputAdornment |            | InputAdornment 输入装饰器         |       |
-| InputNumber    |            | InputNumber 数字输入框            |       |
-| TagInput       |            | TagInput 标签输入框               |       |
-| Radio          |            | RadioGroup 单选框                 |       |
-| RangeInput     |            | RangeInput 范围输入框             |       |
-| Select         |            | Select 选择器                     |       |
-| SelectInput    |            | SelectInput 筛选器输入框          |       |
-| Slider         |            | Slider 滑块                       |       |
-| Switch         |            | Switch 开关                       |       |
-| Textarea       |            | Textarea 多行文本框               |       |
-| Transfer       |            | Transfer 穿梭框                   |       |
-| TimePicker     |            | TimePicker 时间选择器             |       |
-| TreeSelect     |            | TreeSelect 树选择                 |       |
-| Upload         |            | Upload 上传                       |       |
-| text           | 显示文本   |                                   | 1.0.1 |
+| 类型           | 说明       | TDesign                   | 版本  |
+| -------------- | ---------- | ------------------------- | ----- |
+| AutoComplete   | 自动填充   | AutoComplete 自动填充     |       |
+| Cascader       | 级联选择器 | Cascader 级联选择器       |       |
+| Checkbox       | 多选框     | CheckboxGroup 多选框      |       |
+| ColorPicker    | 颜色       | ColorPicker 颜色选择器    |       |
+| DatePicker     | 日期       | DatePicker 日期选择器     |       |
+| Form           |            | Form 表单                 |       |
+| Input          |            | Input 输入框              |       |
+| InputAdornment |            | InputAdornment 输入装饰器 |       |
+| InputNumber    |            | InputNumber 数字输入框    |       |
+| TagInput       |            | TagInput 标签输入框       |       |
+| Radio          |            | RadioGroup 单选框         |       |
+| RangeInput     |            | RangeInput 范围输入框     |       |
+| Select         |            | Select 选择器             |       |
+| SelectInput    |            | SelectInput 筛选器输入框  |       |
+| Slider         |            | Slider 滑块               |       |
+| Switch         |            | Switch 开关               |       |
+| Textarea       |            | Textarea 多行文本框       |       |
+| Transfer       |            | Transfer 穿梭框           |       |
+| TimePicker     |            | TimePicker 时间选择器     |       |
+| TreeSelect     |            | TreeSelect 树选择         |       |
+| Upload         |            | Upload 上传               |       |
+| text           | 显示文本   |                           | 1.0.1 |
 
 ### 类型定义
 
