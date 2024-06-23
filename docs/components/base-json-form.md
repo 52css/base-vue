@@ -16,6 +16,10 @@
 - tabs（整个表单一起提交） + 表单
 - steps + 表单（每个 step 对应一个表单, 每步可以单独提交，也可以最后一步提交）
 
+## Demo
+
+<preview path="./base-json-form-demo.vue" title="基本使用"></preview>
+
 ## API
 
 | 参数           | 说明                                                                                           | 类型                                                             | 默认值         | 版本  |
@@ -36,7 +40,7 @@
 | showQuery      | 是否显示查询按钮                                                                               | `boolean`                                                        | `true`         |       |
 | span           | 整体分栏                                                                                       | `number`                                                         | 12             |       |
 | table          | 表格                                                                                           | `v-slot`                                                         | `'table'`      |       |
-| tableType      | 表格展现                                                                                       | `'table'` \|`'vxe'`                                              | `'table'`      | 1.0.1 |
+| tableType      | 表格展现                                                                                       | `'table'` \|`'list'`                                              | `'table'`      | 1.0.1 |
 | title          | 标题                                                                                           | `v-slot` \| `string`                                             | \-             |       |
 | titleBold      | 标题加粗                                                                                       | `boolean`                                                        | \-             |       |
 | type           | 展现方式, 未传递类型，有 `columns` 是 `query`, 没有是 `form`                                   | `'query'` \|`'form'`                                             | \-             |       |
@@ -87,47 +91,37 @@
 | subLabel | 副标签, `字符串`有`*`代表必填                          | `string` \| `v-slot`                    | \-               | 1.0.1 |
 | suffix   | 后缀                                                   | `string`                                | \-               | 1.0.1 |
 | tips     | 标签后面提示文案                                       | `string`                                | \-               | 1.0.1 |
-| type     | 类型                                                   | `BaseJsonFormInputType`                 | `'display-text'` |       |
+| type     | 类型                                                   | `BaseJsonFormInputType`                 | `'text'` |       |
 | width    | column 宽度                                            | `string`                                | `'auto'`         |       |
 
 #### BaseJsonFormInputType 属性
 
-- 需要提供注入类型功能，方便扩充 1.0.2
+- 目前注入TDesign下输入组件
 
-| 类型                  | 说明             | TDesign                           | 版本  |
-| --------------------- | ---------------- | --------------------------------- | ----- |
-| cascader              | 级联选择器       | Cascader 级联选择器               |       |
-| checkbox              | 多选框           | Checkbox 多选框                   |       |
-| color                 | 颜色             | ColorPicker 颜色选择器            |       |
-| date                  | 日期             | DatePicker 日期选择器             |       |
-| date-range            | 日期范围         | DatePicker 颜色选择器             |       |
-| datetime              | 日期时间         | DatePicker 日期选择器             |       |
-| datetime-local        |                  | DatePicker 日期选择器             |       |
-| datetime-range        | 日期时间范围     | DatePicker 日期选择器             |       |
-| display-date          | 显示日期         |                                   | 1.0.1 |
-| display-date-range    | 显示日期范围     |                                   | 1.0.1 |
-| display-datetime      | 显示日期时间     |                                   | 1.0.1 |
-| display-datetime-rang | 显示日期时间范围 |                                   | 1.0.1 |
-| display-number        | 显示数字         |                                   | 1.0.1 |
-| display-text          | 显示文本         |                                   |       |
-| email                 | 邮箱             | -                                 |       |
-| file                  | 文档             | Upload 上传                       |       |
-| hidden                | 隐藏             | -                                 |       |
-| image                 | 图片             | Upload 上传                       |       |
-| month                 | 月               | DatePicker 日期选择器             |       |
-| number                | 数字             | InputNumber 数字输入框            |       |
-| radio                 | 单选框           | Radio 单选框                      |       |
-| range                 | 范围             | Slider 滑块                       |       |
-| search                | 搜索             | AutoComplete 自动填充（二次开发） |       |
-| select                | 选择器           | Select 选择器                     |       |
-| switch                | 开关             | Switch 开关                       |       |
-| tel                   | 电话             | -                                 |       |
-| text                  | 输入框           | Input 输入框                      |       |
-| textarea              | 文本框           | Textarea 多行文本框               |       |
-| time                  | 时间             | TimePicker 时间选择器             |       |
-| tree-select           | 树选择           | TreeSelect 树选择                 |       |
-| url                   | 地址             | -                                 |       |
-| week                  | 周               | DatePicker 日期选择器             |       |
+| 类型           | 说明       | TDesign                           | 版本  |
+| -------------- | ---------- | --------------------------------- | ----- |
+| AutoComplete   | 自动填充   | AutoComplete 自动填充             |       |
+| Cascader       | 级联选择器 | Cascader 级联选择器               |       |
+| Checkbox       | 多选框     | CheckboxGroup 多选框              |       |
+| ColorPicker    | 颜色       | ColorPicker 颜色选择器            |       |
+| DatePicker     | 日期       | DatePicker 日期选择器             |       |
+| Form           |            | Form 表单                         |       |
+| Input          |            | Input 输入框                      |       |
+| InputAdornment |            | InputAdornment 输入装饰器         |       |
+| InputNumber    |            | InputNumber 数字输入框            |       |
+| TagInput       |            | TagInput 标签输入框               |       |
+| Radio          |            | RadioGroup 单选框                 |       |
+| RangeInput     |            | RangeInput 范围输入框             |       |
+| Select         |            | Select 选择器                     |       |
+| SelectInput    |            | SelectInput 筛选器输入框          |       |
+| Slider         |            | Slider 滑块                       |       |
+| Switch         |            | Switch 开关                       |       |
+| Textarea       |            | Textarea 多行文本框               |       |
+| Transfer       |            | Transfer 穿梭框                   |       |
+| TimePicker     |            | TimePicker 时间选择器             |       |
+| TreeSelect     |            | TreeSelect 树选择                 |       |
+| Upload         |            | Upload 上传                       |       |
+| text           | 显示文本   |                                   | 1.0.1 |
 
 ### 类型定义
 

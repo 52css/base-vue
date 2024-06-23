@@ -1,35 +1,50 @@
 {
-  "hash": "f0bf093a",
-  "configHash": "4c7d1181",
-  "lockfileHash": "c4e25803",
-  "browserHash": "1ea07366",
+  "hash": "b337dc5c",
+  "configHash": "91e33278",
+  "lockfileHash": "9f4f0e89",
+  "browserHash": "69a5eb3c",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/.pnpm/vue@3.4.29/node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "ed44fc33",
+      "fileHash": "b55c9601",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/.pnpm/@vue+devtools-api@7.3.2/node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "9c287654",
+      "fileHash": "1b9da840",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/.pnpm/@vueuse+core@10.11.0_vue@3.4.29/node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "fc9146fe",
+      "fileHash": "499b10a8",
       "needsInterop": false
     },
     "@vitepress-demo-preview/component": {
-      "src": "../../../../node_modules/.pnpm/@vitepress-demo-preview+component@2.3.2_vitepress@1.2.3_@algolia+client-search@4.23.3_@types+_ojcnk3klufh6xhcujho2ibtv64/node_modules/@vitepress-demo-preview/component/dist/preview-component.js",
+      "src": "../../../../node_modules/.pnpm/@vitepress-demo-preview+component@2.3.2_vitepress@1.2.3_@algolia+client-search@4.23.3_@types+_jfkbc7v6jq6t7s7n62i7mta6om/node_modules/@vitepress-demo-preview/component/dist/preview-component.js",
       "file": "@vitepress-demo-preview_component.js",
-      "fileHash": "9801fedc",
+      "fileHash": "e584c8d7",
+      "needsInterop": false
+    },
+    "tdesign-vue-next": {
+      "src": "../../../../node_modules/.pnpm/tdesign-vue-next@1.9.6_vue@3.4.29/node_modules/tdesign-vue-next/es/index.mjs",
+      "file": "tdesign-vue-next.js",
+      "fileHash": "a49909bd",
+      "needsInterop": false
+    },
+    "tdesign-icons-vue-next": {
+      "src": "../../../../node_modules/.pnpm/tdesign-icons-vue-next@0.2.2_vue@3.4.29/node_modules/tdesign-icons-vue-next/esm/index.js",
+      "file": "tdesign-icons-vue-next.js",
+      "fileHash": "3ecfbeb2",
       "needsInterop": false
     }
   },
   "chunks": {
+    "chunk-6LWPVKTS": {
+      "file": "chunk-6LWPVKTS.js"
+    },
     "chunk-PPTVPZ73": {
       "file": "chunk-PPTVPZ73.js"
     }
