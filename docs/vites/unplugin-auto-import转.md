@@ -22,7 +22,12 @@ export default defineConfig(){
     AutoImport({
       dts: "src/types/auto-import.d.ts",
       imports: [
-        "vue"
+        'vue',
+        'vue-router',
+        '@vueuse/core',
+        // 路由是通过菜单自动注入
+        // VueRouterAutoImports,
+        'pinia',
       ],
     }),
     // ...
@@ -45,7 +50,12 @@ export default {
     AutoImport({
       dts: "src/types/auto-import.d.ts",
       imports: [
-        "vue"
+        'vue',
+        'vue-router',
+        '@vueuse/core',
+        // 路由是通过菜单自动注入
+        // VueRouterAutoImports,
+        'pinia',
       ],
       resolvers: [TDesignResolver({
         library: 'vue-next'
