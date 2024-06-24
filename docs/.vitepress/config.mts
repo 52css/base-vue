@@ -6,7 +6,7 @@ import {
 import { getSidebar } from 'vitepress-plugin-auto-sidebar';
 // 引入Unocss
 import Unocss from 'unocss/vite';
-import { presetUno, presetAttributify, presetIcons } from 'unocss'
+import { presetUno, presetAttributify, presetIcons } from 'unocss';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -43,13 +43,10 @@ export default defineConfig({
   },
   vite: {
     plugins: [
-      Unocss({ // 使用Unocss
-        presets: [
-          presetUno(),
-          presetAttributify(),
-          presetIcons()
-        ],
-      })
+      Unocss({
+        // 使用Unocss
+        presets: [presetUno(), presetAttributify(), presetIcons()],
+      }),
     ],
-  }
+  },
 });
