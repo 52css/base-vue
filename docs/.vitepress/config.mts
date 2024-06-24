@@ -12,6 +12,7 @@ import { presetUno, presetAttributify, presetIcons } from 'unocss';
 export default defineConfig({
   title: 'Base Vue',
   description: 'A VitePress Site',
+  base: '/base-vue/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [

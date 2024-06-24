@@ -20,6 +20,6 @@ git commit -m 'deploy'
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
 
 # 如果你是要部署到 https://<USERNAME>.github.io/<REPO>
-git push -f https://52css.github.io/base-vue main:gh-pages
+git push -f git@github.com:52css/base-vue.git master:gh-pages
 
-cd -
+# cd -
