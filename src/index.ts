@@ -1,7 +1,9 @@
 import { App, Component } from 'vue';
 import { useAsyncRef } from './hooks/use-async-ref';
 import { useEsc } from './hooks/use-esc';
+import { useDPI } from './hooks/use-dpi';
 import { registerBaseJsonFormComponent } from './components/base-json-form.vue';
+import { registerBaseButtonComponent } from './components/base-button.vue';
 // 导入Unocss
 import 'virtual:uno.css';
 
@@ -13,7 +15,13 @@ const componentFileMap = import.meta.glob('./components/**/**.vue', {
 
 // export { MyComponent, BaseIntersectionObserver, BaseResizeObserver };
 
-export { useAsyncRef, useEsc, registerBaseJsonFormComponent };
+export {
+  useAsyncRef,
+  useEsc,
+  useDPI,
+  registerBaseJsonFormComponent,
+  registerBaseButtonComponent,
+};
 
 export interface Module {
   default: Component;

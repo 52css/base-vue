@@ -15,7 +15,7 @@ export const componentMap: Record<string, Component> = {
   Button,
   Popconfirm,
 };
-export const registerBaseJsonFormComponent = (
+export const registerBaseButtonComponent = (
   name: string,
   component: Component
 ) => {

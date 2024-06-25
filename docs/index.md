@@ -15,7 +15,7 @@ hero:
       link: /guide
     - theme: alt
       text: Component
-      link: /components
+      link: /components/base-button
 
 # features:
 #   - title: Feature A
