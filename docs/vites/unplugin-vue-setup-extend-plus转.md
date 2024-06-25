@@ -4,13 +4,13 @@
 
 Vue3 组件自定义命名插件，可以在`script`标签中，通过设置 name 属性为组件命名
 
-## 3.1 依赖安装
+## 依赖安装
 
 ```sh
 pnpm install unplugin-vue-setup-extend-plus -D
 ```
 
-## 3.2 插件配置
+## 插件配置
 
 在 vite.config.ts 中进行插件配置，如下：
 

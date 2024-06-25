@@ -4,13 +4,13 @@
 
 unplugin-auto-import 是为 Vite、Webpack、Rollup 和 esbuild 按需自动导入 API。例如：ref,reactive 等 API 无需额外导入，就可以全局使用。
 
-## 1.1 依赖安装
+## 依赖安装
 
 ```sh
 pnpm install unplugin-auto-import -D
 ```
 
-## 1.2 插件配置
+## 插件配置
 
 在 vite.config.ts 中进行插件配置，如下：
 
@@ -37,7 +37,7 @@ export default defineConfig(){
 
 上面已经配置了 vue 框架自动导入 API
 
-## 1.3 第三方组件自动, 例如添加tdesign，其他组件可以查看对应的网站
+## 第三方组件自动, 例如添加tdesign，其他组件可以查看对应的网站
 
 ```ts
 import AutoImport from 'unplugin-auto-import/vite';
