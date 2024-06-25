@@ -11,13 +11,17 @@ import { presetUno, presetAttributify, presetIcons } from 'unocss';
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'Base Vue',
-  description: 'A VitePress Site',
+  description: 'Vue 组件加强版',
   base: '/base-vue/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' },
+      { text: '文档', link: '/guide/', activeMatch: '^/guide/' },
+      { text: '组件', link: '/components/base-button', activeMatch: '^/components/' },
+      {
+        text: '更新日志',
+        link: 'https://github.com/52css/base-vue',
+      },
     ],
 
     sidebar: getSidebar({
@@ -28,8 +32,18 @@ export default defineConfig({
     }),
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
+      { icon: 'github', link: 'https://github.com/52css/base-vue' },
     ],
+
+    search: {
+      provider: 'local',
+      // provider: 'algolia',
+      // options: {
+      //   appId: 'X51HWTCQJJ',
+      //   apiKey: 'ca20f15eb8a667898b65d13f4213ae3d',
+      //   indexName: 'el-pro'
+      // }
+    },
   },
   markdown: {
     theme: {
