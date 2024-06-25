@@ -109,19 +109,20 @@
 | Input          |            | Input 输入框              |       |
 | InputAdornment |            | InputAdornment 输入装饰器 |       |
 | InputNumber    |            | InputNumber 数字输入框    |       |
-| TagInput       |            | TagInput 标签输入框       |       |
 | Radio          |            | RadioGroup 单选框         |       |
 | RangeInput     |            | RangeInput 范围输入框     |       |
 | Select         |            | Select 选择器             |       |
 | SelectInput    |            | SelectInput 筛选器输入框  |       |
 | Slider         |            | Slider 滑块               |       |
+| Status         | 显示状态   |                           | 1.0.1 |
 | Switch         |            | Switch 开关               |       |
+| TagInput       |            | TagInput 标签输入框       |       |
+| Text           | 显示文本   |                           | 1.0.1 |
 | Textarea       |            | Textarea 多行文本框       |       |
-| Transfer       |            | Transfer 穿梭框           |       |
 | TimePicker     |            | TimePicker 时间选择器     |       |
+| Transfer       |            | Transfer 穿梭框           |       |
 | TreeSelect     |            | TreeSelect 树选择         |       |
 | Upload         |            | Upload 上传               |       |
-| text           | 显示文本   |                           | 1.0.1 |
 
 ### 类型定义
 
