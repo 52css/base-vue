@@ -49,7 +49,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="baseIntersectionObserverRef" class="base-appear">
+  <div ref="baseIntersectionObserverRef" class="base-intersection-observer">
     <slot />
   </div>
 </template>
