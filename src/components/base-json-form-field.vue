@@ -27,7 +27,6 @@ defineOptions({
       :rules="[
         {
           required: formItem.required,
-          trigger: 'change',
         },
       ]"
       :label-width="0"

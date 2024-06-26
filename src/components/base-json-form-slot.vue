@@ -6,7 +6,7 @@ export interface BaseJsonFormSlotProps {
   formData?: any;
   formItem?: any;
   getFormItemList?: any;
-  position?: string;
+  position: string;
 }
 export const BaseJsonFormSlotDefault = {};
 export interface BaseJsonFormSlotEmits {
