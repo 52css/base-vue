@@ -18,9 +18,25 @@ const span = ref(12);
 </script>
 
 <template>
-  <input type="range" min="1" max="12" v-model="span" />
+  <section flex items-center>
+    <input type="range" min="1" max="12" v-model="span" /> {{ span }}
+  </section>
 
-  <base-json-form />
+  <base-json-form
+    label-align="top"
+    :span="span"
+    :inputs="{
+      input1: '测试1',
+      input2: '测试2',
+      input3: '测试3',
+      input4: '测试4',
+      input5: '测试5',
+      input6: {
+        label: '测试6',
+        span: 12, // 永远1行
+      },
+    }"
+  />
 </template>
 
 <style scoped lang="scss">

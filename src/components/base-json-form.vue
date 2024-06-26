@@ -144,6 +144,7 @@ export const BaseJsonFormDefault = {
   model: () => ({}),
   paginationType: 'pagination' as BaseJsonFormPaginationType,
   showQuery: true,
+  span: 12,
 };
 export interface BaseJsonFormEmits {
   (event: 'event1'): void;
@@ -222,10 +223,10 @@ const getFormItemList = computed(() => {
     }
   }
 
-  const formModel = model()
-  return rtv.filter(x => {
+  const formModel = model();
+  return rtv.filter((x) => {
     if (x.if) {
-      return x?.if(formModel)
+      return x?.if(formModel);
     }
 
     return true;
@@ -337,14 +338,14 @@ defineExpose({
 
 <template>
   <div class="base-json-form">
-    <section flex>
+    <section flex w-full>
       <div class="base-json-form__title">
         <slot v-if="$slots.title" />
         <template v-else>
           {{ title }}
         </template>
       </div>
-      <div class="base-json-form__inputs">
+      <div class="base-json-form__inputs" flex-1 min-w-0>
         <slot v-if="$slots.inputs" />
         <template v-else>
           <!-- {{ formData }} -->
@@ -358,6 +359,7 @@ defineExpose({
             :layout="layout"
             v-bind="$attrs"
             resetType="initial"
+            style="display: flex; flex-wrap: wrap; column-gap: 1rem;"
           >
             <component
               v-for="formItem in getFormItemList"
@@ -371,6 +373,9 @@ defineExpose({
                   required: formItem.required,
                 },
               ]"
+              :style="{
+                width: `calc(${(formItem.span ?? span) * 100 / 12}% - 1rem)`,
+              }"
             >
               <template #label>
                 <base-label :tips="formItem.tips">
@@ -387,6 +392,9 @@ defineExpose({
               </base-json-form-item>
             </component>
             <component :is="componentMap.FormItem" v-if="showQuery">
+              <template #label>
+                &nbsp;
+              </template>
               <slot v-if="$slots.query" name="query" />
               <section v-else flex gap-2>
                 <base-button theme="primary" @click="onSubmit">
