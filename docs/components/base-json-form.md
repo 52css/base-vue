@@ -52,6 +52,10 @@
 
 <preview path="./base-json-form-group.vue"></preview>
 
+## 典型表格
+
+<preview path="./base-json-form-table.vue"></preview>
+
 ## API
 
 | 参数           | 说明                                                                                           | 类型                                                             | 默认值         | 版本  |
