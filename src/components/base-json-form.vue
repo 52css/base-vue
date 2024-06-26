@@ -25,7 +25,7 @@ import {
   TreeSelect,
   Upload,
 } from 'tdesign-vue-next';
-import { cloneDeep } from 'lodash';
+import { cloneDeep } from 'lodash-es';
 import BaseJsonFormItem from './base-json-form-item.vue';
 import BaseLabel from './base-label.vue';
 import BaseButton from './base-button.vue';
