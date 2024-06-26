@@ -1,18 +1,21 @@
 <script lang="ts">
 import { ref } from 'vue';
-export interface BaseJsonFormGroupProps {
+export interface BaseJsonFormGroupDemoProps {
   prop1?: string;
 }
-export const BaseJsonFormGroupDefault = {};
-export interface BaseJsonFormGroupEmits {
+export const BaseJsonFormGroupDemoDefault = {};
+export interface BaseJsonFormGroupDemoEmits {
   (event: 'event1'): void;
 }
 </script>
 <script setup lang="ts">
-withDefaults(defineProps<BaseJsonFormGroupProps>(), BaseJsonFormGroupDefault);
-defineEmits<BaseJsonFormGroupEmits>();
+withDefaults(
+  defineProps<BaseJsonFormGroupDemoProps>(),
+  BaseJsonFormGroupDemoDefault
+);
+defineEmits<BaseJsonFormGroupDemoEmits>();
 defineOptions({
-  name: 'BaseJsonFormGroup',
+  name: 'BaseJsonFormGroupDemo',
 });
 const model = ref({});
 const spColorOptions = [
@@ -84,8 +87,6 @@ const spColorOptions = [
           if (!m.hasSp) {
             m.spColor = undefined
           }
-
-          console.log('m', m)
         }
       },
       spColor: {
@@ -96,6 +97,7 @@ const spColorOptions = [
         placeholder: '颜色',
         options: spColorOptions,
         disabled: (m: any) => !m.hasSp,
+        required: (m: any) => m.hasSp,
       }
     }"
     :model="model"

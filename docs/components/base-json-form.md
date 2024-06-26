@@ -50,7 +50,7 @@
 
 ## 使用 group 完成复杂表单项
 
-<preview path="./base-json-form-group.vue"></preview>
+<preview path="./base-json-form-group-demo.vue"></preview>
 
 ## API
 
