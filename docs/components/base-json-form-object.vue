@@ -1,10 +1,11 @@
 <script lang="ts">
+import { ref } from 'vue';
 export interface BaseJsonFormObjectProps {
-  prop1?: string
+  prop1?: string;
 }
-export const BaseJsonFormObjectDefault = {}
+export const BaseJsonFormObjectDefault = {};
 export interface BaseJsonFormObjectEmits {
-  (event: 'event1'): void
+  (event: 'event1'): void;
 }
 export const sleep = (time: number = 2000) => {
   return new Promise((resolve) => {
@@ -33,17 +34,31 @@ export const enumToOptions = (enumObj: any): Option[] => {
 };
 </script>
 <script setup lang="ts">
-withDefaults(defineProps<BaseJsonFormObjectProps>(), BaseJsonFormObjectDefault)
-defineEmits<BaseJsonFormObjectEmits>()
+withDefaults(defineProps<BaseJsonFormObjectProps>(), BaseJsonFormObjectDefault);
+defineEmits<BaseJsonFormObjectEmits>();
 defineOptions({
   name: 'BaseJsonFormObject',
-})
+});
 const genderOptions = enumToOptions(Gender);
 const courseOptions = enumToOptions(Course);
 const request = async (model) => {
   console.log('model', model);
   await sleep(1000);
 };
+const model = ref({
+  student: {},
+});
+// 模拟请求后重新赋值model
+setTimeout(() => {
+  model.value = {
+    student: {
+      name: '张三',
+      gender: Gender.男,
+      course: [Course.语文, Course.数学],
+    },
+  };
+  // model.value['student.name'] = '张三'
+}, 200);
 </script>
 
 <template>
@@ -67,6 +82,7 @@ const request = async (model) => {
         options: courseOptions,
       },
     }"
+    :model="model"
     :request="request"
   />
 </template>

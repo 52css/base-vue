@@ -280,6 +280,17 @@ const setDefaultValue = () => {
     }
   }
 };
+const setModelValue = (key: string, val: any) => {
+  if (typeof val === 'object') {
+    for (let [subKey, subVal] of Object.entries(val)) {
+      if (props.inputs[`${key}.${subKey}`] !== undefined) {
+        setModelValue(`${key}.${subKey}`, subVal);
+      }
+    }
+  }
+
+  formData.value[key] = val;
+};
 const model = () => {
   return Object.keys(formData.value).reduce((prev, item) => {
     // 前端过滤不是if展示的数据
@@ -297,7 +308,13 @@ const model = () => {
 watch(
   () => props.model,
   (newVal) => {
-    formData.value = newVal;
+    Object.keys(newVal).forEach((key) => {
+      const val = newVal[key];
+
+      setModelValue(key, val);
+    });
+    // setModelValue(newVal);
+    // formData.value = newVal;
     setDefaultValue();
   },
   {
@@ -323,6 +340,7 @@ defineExpose({
       <div class="base-json-form__inputs">
         <slot v-if="$slots.inputs" />
         <template v-else>
+          <!-- {{ formData }} -->
           <component
             :is="componentMap.Form"
             ref="formRef"
