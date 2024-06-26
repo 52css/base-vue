@@ -521,6 +521,7 @@ onMounted(() => {
 defineExpose({
   onSubmit,
   model,
+  init
 });
 </script>
 
