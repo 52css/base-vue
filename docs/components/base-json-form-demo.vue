@@ -6,6 +6,13 @@ export const BaseJsonFormDemoDefault = {};
 export interface BaseJsonFormDemoEmits {
   (event: 'event1'): void;
 }
+export const sleep = (time: number = 2000) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true);
+    }, time);
+  });
+};
 </script>
 <script setup lang="ts">
 withDefaults(defineProps<BaseJsonFormDemoProps>(), BaseJsonFormDemoDefault);
@@ -18,24 +25,38 @@ const genderOptions = [
   { label: '男', value: 1 },
   { label: '女', value: 2 },
 ];
+const courseOptions = [
+  { label: '语文', value: 1 },
+  { label: '数学', value: 2 },
+  { label: '英语', value: 3 },
+];
+const request = async (model) => {
+  await sleep(1000);
+  console.log('model', model);
+};
 </script>
 
 <template>
   <base-json-form
     :inputs="{
-      input1: '姓名',
-      input2: '姓名*',
-      select1: {
-        label: '性别',
-        type: 'Select',
-        options: genderOptions,
+      name: '姓名*',
+      tel: '手机号码',
+      status: {
+        label: '接收短信',
+        type: 'Switch',
       },
-      radio1: {
+      gender: {
         label: '性别',
         type: 'Radio',
         options: genderOptions,
-      }
+      },
+      course: {
+        label: '课程',
+        type: 'Checkbox',
+        options: courseOptions,
+      },
     }"
+    :request="request"
   />
 </template>
 

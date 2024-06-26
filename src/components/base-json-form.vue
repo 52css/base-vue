@@ -1,11 +1,10 @@
 <script lang="ts">
 import { type Component, ref, computed } from 'vue';
 import {
-  Tooltip,
   Table,
   AutoComplete,
   Cascader,
-  CheckboxGroup,
+  CheckboxGroup as Checkbox,
   ColorPicker,
   DatePicker,
   Form,
@@ -28,6 +27,7 @@ import {
 } from 'tdesign-vue-next';
 import BaseJsonFormItem from './base-json-form-item.vue';
 import BaseLabel from './base-label.vue';
+import BaseButton from './base-button.vue';
 
 export type BaseJsonFormColumnFixed = 'left' | 'right';
 export type BaseJsonFormColumn = {
@@ -144,7 +144,7 @@ export const componentMap: Record<string, Component> = {
   Table,
   AutoComplete,
   Cascader,
-  CheckboxGroup,
+  Checkbox,
   ColorPicker,
   DatePicker,
   Form,
@@ -212,7 +212,33 @@ const getFormItemList = computed(() => {
 
   return rtv;
 });
+// const onSubmit: FormProps['onSubmit'] = ({ validateResult, firstError }) => {
+//   if (validateResult === true) {
+//     MessagePlugin.success('提交成功');
+//   } else {
+//     console.log('Validate Errors: ', firstError, validateResult);
+//     MessagePlugin.warning(firstError);
+//   }
+// };
 // console.log('getFormItemList.value', getFormItemList.value);
+const onSubmit = async () => {
+  const valid = await formRef.value.validate();
+
+  // console.log('valid', valid)
+  if (valid === true) {
+    await props.request?.(formData.value);
+  }
+};
+const getHasList = computed(() => {
+  return props.listType === 'card' || (props.listType === 'table' && Object.keys(props.columns).length > 0);
+})
+const onReset = async () => {
+  formRef.value.reset();
+
+  if (getHasList.value) {
+    onSubmit();
+  }
+};
 </script>
 
 <template>
@@ -260,6 +286,16 @@ const getFormItemList = computed(() => {
                   :label="formItem.prefix"
                 />
               </base-json-form-item>
+            </component>
+            <component :is="componentMap.FormItem" v-if="showQuery">
+              <section flex gap-2>
+                <base-button theme="primary" @click="onSubmit">
+                  提交
+                </base-button>
+                <base-button theme="default" variant="base" @click="onReset">
+                  重置
+                </base-button>
+              </section>
             </component>
           </component>
         </template>
