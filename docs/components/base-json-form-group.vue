@@ -21,11 +21,6 @@ const timeUnknownOptions = [
   },
 ];
 const model = ref({});
-const onChange = (m: any) => {
-  if (m.timeUnknown) {
-    m.time = undefined;
-  }
-};
 </script>
 
 <template>
@@ -41,7 +36,11 @@ const onChange = (m: any) => {
       timeUnknown: {
         type: 'Checkbox',
         group: ['time', 'right'],
-        onChange: onChange,
+        onChange: (m: any) => {
+          if (m.timeUnknown) {
+            m.time = undefined;
+          }
+        },
       },
     }"
     :model="model"
