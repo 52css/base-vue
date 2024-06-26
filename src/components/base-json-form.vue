@@ -31,7 +31,6 @@ import {
 import { cloneDeep, set, isEqual } from 'lodash-es';
 import BaseJsonFormItem from './base-json-form-item.vue';
 import BaseJsonFormField from './base-json-form-field.vue';
-import BaseJsonFormGroup from './base-json-form-group.vue';
 import BaseLabel from './base-label.vue';
 import BaseButton from './base-button.vue';
 
@@ -372,6 +371,17 @@ const model = () => {
   }, {});
 };
 
+const getGroupFromItem = (groupName: string, positionName?: string) => {
+  const item = getFormItemList.value.find((x: any) =>
+    isEqual(x?.group, [groupName, positionName])
+  );
+
+  return item;
+  // return props..value.find(
+  //   (x) => x?.group === [groupName, positionName]
+  // );
+};
+
 watch(
   () => props.model,
   (newVal) => {
@@ -448,40 +458,52 @@ defineExpose({
                   :formItem="formItem"
                 />
                 <template #top>
-                  <base-json-form-group
-                    :componentMap="componentMap"
-                    :formData="formData"
-                    :formItem="formItem"
-                    :getFormItemList="getFormItemList"
-                    position="top"
-                  />
+                  <template v-if="formItem.group">
+                    <base-json-form-field
+                      :componentMap="componentMap"
+                      :formData="formData"
+                      :formItem="getGroupFromItem(formItem.group?.[0], 'top')"
+                    />
+                  </template>
+                  <template v-else>
+                    {{ formItem?.top }}
+                  </template>
                 </template>
                 <template #left>
-                  <base-json-form-group
-                    :componentMap="componentMap"
-                    :formData="formData"
-                    :formItem="formItem"
-                    :getFormItemList="getFormItemList"
-                    position="left"
-                  />
+                  <template v-if="formItem.group">
+                    <base-json-form-field
+                      :componentMap="componentMap"
+                      :formData="formData"
+                      :formItem="getGroupFromItem(formItem.group?.[0], 'left')"
+                    />
+                  </template>
+                  <template v-else>
+                    {{ formItem?.left }}
+                  </template>
                 </template>
                 <template #right>
-                  <base-json-form-group
-                    :componentMap="componentMap"
-                    :formData="formData"
-                    :formItem="formItem"
-                    :getFormItemList="getFormItemList"
-                    position="right"
-                  />
+                  <template v-if="formItem.group">
+                    <base-json-form-field
+                      :componentMap="componentMap"
+                      :formData="formData"
+                      :formItem="getGroupFromItem(formItem.group?.[0], 'right')"
+                    />
+                  </template>
+                  <template v-else>
+                    {{ formItem?.right }}
+                  </template>
                 </template>
                 <template #bottom>
-                  <base-json-form-group
-                    :componentMap="componentMap"
-                    :formData="formData"
-                    :formItem="formItem"
-                    :getFormItemList="getFormItemList"
-                    position="bottom"
-                  />
+                  <template v-if="formItem.group">
+                    <base-json-form-field
+                      :componentMap="componentMap"
+                      :formData="formData"
+                      :formItem="getGroupFromItem(formItem.group?.[0], 'bottom')"
+                    />
+                  </template>
+                  <template v-else>
+                    {{ formItem?.bottom }}
+                  </template>
                 </template>
               </base-json-form-item>
             </component>

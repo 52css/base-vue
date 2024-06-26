@@ -106,6 +106,6 @@ const spColorOptions = [
 </template>
 
 <style scoped lang="scss">
-.base-json-form-group {
+.base-json-form-group-demo {
 }
 </style>
