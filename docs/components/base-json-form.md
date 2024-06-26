@@ -28,6 +28,10 @@
 
 <preview path="./base-json-form-alignment.vue"></preview>
 
+## 不同布局类型的表单
+
+<preview path="./base-json-form-layout.vue"></preview>
+
 ## API
 
 | 参数           | 说明                                                                                           | 类型                                                             | 默认值         | 版本  |
