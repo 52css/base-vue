@@ -56,6 +56,10 @@
 
 <preview path="./base-json-form-table.vue"></preview>
 
+## 表格多选
+
+<preview path="./base-json-form-table-checkbox.vue"></preview>
+
 ## API
 
 | 参数           | 说明                                                                                           | 类型                                                             | 默认值         | 版本  |

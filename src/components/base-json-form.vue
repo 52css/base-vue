@@ -1,5 +1,6 @@
 <script lang="ts">
 import { type Component, ref, reactive, computed, watch, onMounted } from 'vue';
+// import { useVModel } from '@vueuse/core';
 import {
   EnhancedTable as Table,
   // Table,
@@ -29,7 +30,7 @@ import {
   TreeSelect,
   Upload,
 } from 'tdesign-vue-next';
-import { cloneDeep, set, isEqual } from 'lodash-es';
+import { cloneDeep, set } from 'lodash-es';
 import BaseJsonFormItem from './base-json-form-item.vue';
 import BaseJsonFormField from './base-json-form-field.vue';
 import BaseLabel from './base-label.vue';
@@ -143,7 +144,7 @@ export interface BaseJsonFormProps {
   layout?: BaseJsonFormLayout;
   listType?: BaseJsonFormListType;
   model?: BaseJsonFormModel;
-  modelValue?: BaseJsonFormModelValue;
+  modelValue?: BaseJsonFormModelValue | BaseJsonFormModelValue[];
   paginationType?: BaseJsonFormPaginationType;
   request?: BaseJsonFormRequest;
   showQuery?: boolean;
@@ -165,6 +166,7 @@ export const BaseJsonFormDefault = {
 };
 export interface BaseJsonFormEmits {
   (event: 'event1'): void;
+  (event: 'update:modelValue', value: BaseJsonFormModelValue): void;
 }
 
 export const componentMap: Record<string, Component> = {
@@ -209,10 +211,13 @@ const props = withDefaults(
   defineProps<BaseJsonFormProps>(),
   BaseJsonFormDefault
 );
-defineEmits<BaseJsonFormEmits>();
+const emit = defineEmits<BaseJsonFormEmits>();
 defineOptions({
   name: 'BaseJsonForm',
 });
+
+// const value = useVModel(props, 'modelValue', emit);
+const value = defineModel();
 
 //#region 表单
 const formRef = ref();
@@ -441,17 +446,38 @@ const createReactiveColumn = (formInput: BaseJsonFormColumn) => {
 };
 const getColumnList = computed(() => {
   const columnList = [];
+  const getColKey = (colKey: string) => {
+    if (colKey === '$radio') {
+      return {
+        colKey: 'row-select',
+        type: 'single',
+      };
+    } else if (colKey === '$checkbox') {
+      return {
+        colKey: 'row-select',
+        type: 'multiple',
+      };
+    } else if (colKey === '$index') {
+      return {
+        colKey: 'serial-number',
+      };
+    }
+    return {
+      colKey,
+    };
+  };
 
   for (let [colKey, value] of Object.entries(props.columns)) {
+    const colKeyParams = getColKey(colKey);
     if (typeof value === 'string') {
       const originLabel = value;
       const title = getLabel(originLabel);
       columnList.push(
         createReactiveColumn({
-          colKey,
+          ...colKeyParams,
           title,
           required: getRequired(undefined, originLabel),
-          type: 'Text',
+          // type: 'Text',
         })
       );
     } else {
@@ -460,11 +486,11 @@ const getColumnList = computed(() => {
 
       columnList.push(
         createReactiveColumn({
+          ...colKeyParams,
           ...value,
-          colKey,
           title,
           required: getRequired(value.required, originLabel),
-          type: value?.type ?? 'Text',
+          // type: value?.type ?? 'Text',
         })
       );
       // rtv.push();
@@ -512,6 +538,18 @@ const onPageChange = (pageInfo: BaseJsonFromPageInfo) => {
   pagination.value.pageSize = pageInfo.pageSize;
   onSubmit();
 };
+// const selectedRowKeys = ref<string[] | number[]>([]);
+const onSelectChange = (val: string[] | number[]) => {
+  // selectedRowKeys.value = val;
+
+  if (props.columns.$checkbox) {
+    emit('update:modelValue', val)
+    // value.value = val;
+  } else if (props.columns.$radio) {
+    emit('update:modelValue', val[0])
+    // value.value = val[0];
+  }
+};
 
 onMounted(() => {
   props.autoFetch && init();
@@ -521,7 +559,7 @@ onMounted(() => {
 defineExpose({
   onSubmit,
   model,
-  init
+  init,
 });
 </script>
 
@@ -643,7 +681,9 @@ defineExpose({
     <section v-if="getHasList" class="base-json-form__list" w-full>
       <!-- columns: {{ getColumnNoGroupList }} -->
       <!-- tableData: {{ tableData }} -->
+      <!-- selectedRowKeys: {{ selectedRowKeys }} -->
       <component
+        v-bind="$attrs"
         :is="componentMap.Table"
         :columns="getColumnNoGroupList"
         :data="tableData"
