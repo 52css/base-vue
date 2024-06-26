@@ -371,17 +371,6 @@ const model = () => {
   }, {});
 };
 
-const getGroupFromItem = (groupName: string, positionName?: string) => {
-  const item = getFormItemList.value.find((x: any) =>
-    isEqual(x?.group, [groupName, positionName])
-  );
-
-  return item;
-  // return props..value.find(
-  //   (x) => x?.group === [groupName, positionName]
-  // );
-};
-
 watch(
   () => props.model,
   (newVal) => {
@@ -458,52 +447,40 @@ defineExpose({
                   :formItem="formItem"
                 />
                 <template #top>
-                  <template v-if="formItem.group">
-                    <base-json-form-field
-                      :componentMap="componentMap"
-                      :formData="formData"
-                      :formItem="getGroupFromItem(formItem.group?.[0], 'top')"
-                    />
-                  </template>
-                  <template v-else>
-                    {{ formItem?.top }}
-                  </template>
+                  <base-json-form-slot
+                    :componentMap="componentMap"
+                    :formData="formData"
+                    :formItem="formItem"
+                    :getFormItemList="getFormItemList"
+                    position="top"
+                  />
                 </template>
                 <template #left>
-                  <template v-if="formItem.group">
-                    <base-json-form-field
-                      :componentMap="componentMap"
-                      :formData="formData"
-                      :formItem="getGroupFromItem(formItem.group?.[0], 'left')"
-                    />
-                  </template>
-                  <template v-else>
-                    {{ formItem?.left }}
-                  </template>
+                  <base-json-form-slot
+                    :componentMap="componentMap"
+                    :formData="formData"
+                    :formItem="formItem"
+                    :getFormItemList="getFormItemList"
+                    position="left"
+                  />
                 </template>
                 <template #right>
-                  <template v-if="formItem.group">
-                    <base-json-form-field
-                      :componentMap="componentMap"
-                      :formData="formData"
-                      :formItem="getGroupFromItem(formItem.group?.[0], 'right')"
-                    />
-                  </template>
-                  <template v-else>
-                    {{ formItem?.right }}
-                  </template>
+                  <base-json-form-slot
+                    :componentMap="componentMap"
+                    :formData="formData"
+                    :formItem="formItem"
+                    :getFormItemList="getFormItemList"
+                    position="right"
+                  />
                 </template>
                 <template #bottom>
-                  <template v-if="formItem.group">
-                    <base-json-form-field
-                      :componentMap="componentMap"
-                      :formData="formData"
-                      :formItem="getGroupFromItem(formItem.group?.[0], 'bottom')"
-                    />
-                  </template>
-                  <template v-else>
-                    {{ formItem?.bottom }}
-                  </template>
+                  <base-json-form-slot
+                    :componentMap="componentMap"
+                    :formData="formData"
+                    :formItem="formItem"
+                    :getFormItemList="getFormItemList"
+                    position="bottom"
+                  />
                 </template>
               </base-json-form-item>
             </component>

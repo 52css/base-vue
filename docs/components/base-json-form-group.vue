@@ -64,11 +64,12 @@ const spColorOptions = [
         required: true,
       },
       time: {
-        label: '置管时间*',
+        label: '置管时间',
         requiredMark: true,
         type: 'DatePicker',
         group: ['time'],
         disabled: (m: any) => m.timeUnknown,
+        required: (m: any) => !m.timeUnknown,
       },
       timeUnknown: {
         type: 'Checkbox',
