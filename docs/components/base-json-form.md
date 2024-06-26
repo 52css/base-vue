@@ -48,6 +48,10 @@
 
 <preview path="./base-json-form-span.vue"></preview>
 
+## 使用group完成复杂表单项（需要完善）
+
+<preview path="./base-json-form-group.vue"></preview>
+
 ## API
 
 | 参数           | 说明                                                                                           | 类型                                                             | 默认值         | 版本  |

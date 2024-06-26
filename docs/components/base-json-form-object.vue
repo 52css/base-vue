@@ -78,7 +78,7 @@ setTimeout(() => {
       },
       'student.course': {
         label: '课程',
-        type: 'Checkbox',
+        type: 'CheckboxGroup',
         options: courseOptions,
       },
     }"

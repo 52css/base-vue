@@ -1,10 +1,11 @@
 <script lang="ts">
-import { type Component, ref, computed, watch } from 'vue';
+import { type Component, ref, reactive, computed, watch } from 'vue';
 import {
   Table,
   AutoComplete,
   Cascader,
-  CheckboxGroup as Checkbox,
+  Checkbox,
+  CheckboxGroup,
   ColorPicker,
   DatePicker,
   DateRangePicker,
@@ -27,7 +28,7 @@ import {
   TreeSelect,
   Upload,
 } from 'tdesign-vue-next';
-import { cloneDeep, set } from 'lodash-es';
+import { cloneDeep, set, isEqual } from 'lodash-es';
 import BaseJsonFormItem from './base-json-form-item.vue';
 import BaseLabel from './base-label.vue';
 import BaseButton from './base-button.vue';
@@ -67,12 +68,18 @@ export type BaseJsonFormOutput = {
   (option: BaseJsonFormOption): BaseJsonFormModelValue;
 };
 
+export type BaseJsonFormGroup =
+  | 'top'
+  | 'left'
+  | 'bottom'
+  | 'right'
+  | 'prepend'
+  | 'append';
+
 export type BaseJsonFormInput = {
   append?: string;
   bottom?: string;
-  group?:
-    | [string]
-    | [string, 'top' | 'left' | 'bottom' | 'right' | 'prepend' | 'append'];
+  group?: [string, BaseJsonFormGroup];
   if?: (model: BaseJsonFormModel) => boolean;
   label?: string;
   left?: string;
@@ -92,6 +99,7 @@ export type BaseJsonFormInput = {
   width?: string;
   multiple?: boolean;
   range?: boolean;
+  [key: string]: any;
 };
 
 export type BaseJsonFormLabelAlign = 'left' | 'right' | 'top';
@@ -155,6 +163,7 @@ export const componentMap: Record<string, Component> = {
   AutoComplete,
   Cascader,
   Checkbox,
+  CheckboxGroup,
   ColorPicker,
   DatePicker,
   DateRangePicker,
@@ -199,34 +208,82 @@ const formRef = ref();
 const formData = ref<Record<string, any>>({});
 // const model = defineModel('model')
 // console.log('model', props.model);
-const getLabel = (label: string) => label.replaceAll('*', '');
+const getLabel = (label?: string) => label?.replaceAll('*', '');
 const getRequired = (required?: boolean, label?: string) =>
   required ?? /\*/.test(String(label));
+const createReactiveFormItem = (formInput: BaseJsonFormInput) => {
+  const formItem = reactive<Record<string, any>>({});
+  for (const [key, val] of Object.entries(formInput)) {
+    formItem[`_${key}`] = val;
+    if (/^on/.test(key)) {
+      formItem[key] = function (...args: any[]) {
+        const formModel = model();
+        val && val(formModel, ...args);
+      };
+      continue;
+    }
+    Object.defineProperty(formItem, key, {
+      get() {
+        const formModel = model();
+        return typeof val === 'function' ? val(formModel) : val;
+      },
+      // 设置可枚举，可以用直接 v-bind 绑定所有属性
+      enumerable: true,
+    });
+  }
+
+  return formItem;
+};
 const getFormItemList = computed(() => {
-  const rtv = [];
+  const formItemList = [];
 
   for (let [prop, value] of Object.entries(props.inputs)) {
     if (typeof value === 'string') {
-      const label = getLabel(value);
-      rtv.push({
-        prop,
-        label,
-        required: getRequired(undefined, value),
-        type: 'Input',
-      });
+      const originLabel = value;
+      const label = getLabel(originLabel);
+      formItemList.push(
+        createReactiveFormItem({
+          prop,
+          label,
+          required: getRequired(undefined, originLabel),
+          type: 'Input',
+        })
+      );
     } else {
-      rtv.push({
-        ...value,
-        prop,
-        type: value?.type ?? 'Input',
-      });
+      const originLabel = value?.label;
+      const label = getLabel(originLabel);
+
+      formItemList.push(
+        createReactiveFormItem({
+          ...value,
+          prop,
+          label,
+          required: getRequired(value.required, originLabel),
+          type: value?.type ?? 'Input',
+        })
+      );
+      // rtv.push();
     }
   }
 
   const formModel = model();
-  return rtv.filter((x) => {
-    if (x.if) {
-      return x?.if(formModel);
+  return formItemList.filter((x) => {
+    if (x._if) {
+      return x?._if(formModel);
+    }
+
+    // if (x.group) {
+    //   return !x.group?.[1];
+    // }
+
+    return true;
+  });
+});
+
+const getFormItemNoGroupList = computed(() => {
+  return getFormItemList.value.filter((x) => {
+    if (x.group) {
+      return !x.group[1];
     }
 
     return true;
@@ -267,7 +324,7 @@ const getDefaultValueByType = (input?: BaseJsonFormInput) => {
   const { type, multiple, range } = input ?? {};
 
   if (
-    ['Checkbox', 'DateRangePicker', 'TagInput', 'RangeInput'].includes(
+    ['CheckboxGroup', 'DateRangePicker', 'TagInput', 'RangeInput'].includes(
       String(type)
     ) ||
     (type === 'Cascader' && multiple) ||
@@ -303,7 +360,7 @@ const model = () => {
   return Object.keys(formData.value).reduce((prev, item) => {
     // 前端过滤不是if展示的数据
     const param = props.inputs[item] as BaseJsonFormInput;
-    const canSet = param && param.if ? param.if(formData.value) : true;
+    const canSet = param && param._if ? param._if(formData.value) : true;
 
     if (canSet) {
       set(prev, item, formData.value[item]);
@@ -311,6 +368,20 @@ const model = () => {
 
     return prev;
   }, {});
+};
+
+const getGroupFromItem = (
+  groupName: string,
+  positionName: BaseJsonFormGroup
+) => {
+  const item = getFormItemList.value.find((x) =>
+    isEqual(x?.group, [groupName, positionName])
+  );
+
+  return item;
+  // return props..value.find(
+  //   (x) => x?.group === [groupName, positionName]
+  // );
 };
 
 watch(
@@ -359,10 +430,10 @@ defineExpose({
             :layout="layout"
             v-bind="$attrs"
             resetType="initial"
-            style="display: flex; flex-wrap: wrap; column-gap: 1rem;"
+            style="display: flex; flex-wrap: wrap; column-gap: 1rem"
           >
             <component
-              v-for="formItem in getFormItemList"
+              v-for="formItem in getFormItemNoGroupList"
               v-bind="formItem"
               :is="componentMap.FormItem"
               :name="formItem.prop"
@@ -374,7 +445,7 @@ defineExpose({
                 },
               ]"
               :style="{
-                width: `calc(${(formItem.span ?? span) * 100 / 12}% - 1rem)`,
+                width: `calc(${((formItem.span ?? span) * 100) / 12}% - 1rem)`,
               }"
             >
               <template #label>
@@ -389,12 +460,33 @@ defineExpose({
                   v-bind="formItem"
                   :label="formItem.prefix"
                 />
+                <template #right>
+                  <template v-if="formItem.group">
+                    <component
+                      :is="
+                        componentMap[
+                          getGroupFromItem(formItem.group?.[0], 'right')?.type as keyof typeof componentMap
+                        ]
+                      "
+                      v-model="
+                        formData[
+                          getGroupFromItem(formItem.group?.[0], 'right')?.prop as string
+                        ]
+                      "
+                      v-bind="getGroupFromItem(formItem.group?.[0], 'right')"
+                      :label="
+                        getGroupFromItem(formItem.group?.[0], 'right')?.prefix
+                      "
+                    />
+                  </template>
+                  <template v-else>
+                    {{ formItem.right }}
+                  </template>
+                </template>
               </base-json-form-item>
             </component>
             <component :is="componentMap.FormItem" v-if="showQuery">
-              <template #label>
-                &nbsp;
-              </template>
+              <template #label> &nbsp; </template>
               <slot v-if="$slots.query" name="query" />
               <section v-else flex gap-2>
                 <base-button theme="primary" @click="onSubmit">

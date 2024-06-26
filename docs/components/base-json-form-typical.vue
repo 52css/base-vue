@@ -62,7 +62,7 @@ const request = async (model) => {
       },
       course: {
         label: '课程',
-        type: 'Checkbox',
+        type: 'CheckboxGroup',
         options: courseOptions,
       },
     }"
