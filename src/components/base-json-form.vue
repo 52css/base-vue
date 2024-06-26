@@ -1,5 +1,5 @@
 <script lang="ts">
-import { type Component, ref, computed } from 'vue';
+import { type Component, ref, computed, watch } from 'vue';
 import {
   Table,
   AutoComplete,
@@ -7,6 +7,7 @@ import {
   CheckboxGroup as Checkbox,
   ColorPicker,
   DatePicker,
+  DateRangePicker,
   Form,
   FormItem,
   Input,
@@ -22,6 +23,7 @@ import {
   Textarea,
   Transfer,
   TimePicker,
+  TimeRangePicker,
   TreeSelect,
   Upload,
 } from 'tdesign-vue-next';
@@ -88,6 +90,8 @@ export type BaseJsonFormInput = {
   type?: keyof typeof componentMap;
   value?: BaseJsonFormModelValue;
   width?: string;
+  multiple?: boolean;
+  range?: boolean;
 };
 
 export type BaseJsonFormLabelAlign = 'left' | 'right' | 'top';
@@ -135,6 +139,7 @@ export const BaseJsonFormDefault = {
   colon: false,
   columns: () => ({}),
   inputs: () => ({}),
+  // labelAlign: 'top' as BaseJsonFormLabelAlign,
   listType: 'table' as BaseJsonFormListType,
   model: () => ({}),
   paginationType: 'pagination' as BaseJsonFormPaginationType,
@@ -151,6 +156,7 @@ export const componentMap: Record<string, Component> = {
   Checkbox,
   ColorPicker,
   DatePicker,
+  DateRangePicker,
   Form,
   FormItem,
   Input,
@@ -167,6 +173,7 @@ export const componentMap: Record<string, Component> = {
   Textarea,
   Transfer,
   TimePicker,
+  TimeRangePicker,
   TreeSelect,
   Upload,
 };
@@ -247,6 +254,42 @@ const onReset = async () => {
     onSubmit();
   }
 };
+const getDefaultValueByType = (input?: BaseJsonFormInput) => {
+  const { type, multiple, range } = input ?? {};
+
+  if (
+    ['Checkbox', 'DateRangePicker', 'TagInput', 'RangeInput'].includes(
+      String(type)
+    ) ||
+    (type === 'Cascader' && multiple) ||
+    (type === 'Select' && multiple) ||
+    (type === 'SelectInput' && multiple) ||
+    (type === 'Slider' && range) ||
+    (type === 'TreeSelect' && multiple) ||
+    (type === 'Upload' && multiple)
+  ) {
+    return [];
+  }
+};
+const setDefaultValue = () => {
+  for (let [prop, val] of Object.entries(props.inputs)) {
+    if (typeof val === 'object') {
+      const defaultValue = getDefaultValueByType(val);
+      formData.value[prop] = formData.value[prop] ?? val?.value ?? defaultValue;
+    }
+  }
+};
+
+watch(
+  () => props.model,
+  (newVal) => {
+    formData.value = newVal;
+    setDefaultValue();
+  },
+  {
+    immediate: true,
+  }
+);
 
 defineExpose({
   onSubmit,
@@ -269,10 +312,12 @@ defineExpose({
             :is="componentMap.Form"
             ref="formRef"
             :data="formData"
+            :model="formData"
             :colon="colon"
             :labelAlign="labelAlign"
             :layout="layout"
             v-bind="$attrs"
+            resetType="initial"
           >
             <component
               v-for="formItem in getFormItemList"

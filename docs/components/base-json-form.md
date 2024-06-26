@@ -32,6 +32,14 @@
 
 <preview path="./base-json-form-layout.vue"></preview>
 
+## 支持默认值
+
+<preview path="./base-json-form-value.vue"></preview>
+
+## 不同span的表单
+
+<preview path="./base-json-form-span.vue"></preview>
+
 ## API
 
 | 参数           | 说明                                                                                           | 类型                                                             | 默认值         | 版本  |
