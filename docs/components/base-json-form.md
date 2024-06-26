@@ -68,29 +68,29 @@
 | tips     | 标签后面提示文案                         | `string`                                                                                          | \-       |       |
 | top      | 顶                                       | `string`                                                                                          | \-       | 1.0.1 |
 | type     | 类型                                     | `BaseJsonFormInputType`                                                                           | \-       |       |
-| value    | 默认值                                   | `BaseJsonFormInputValue`                                                                          | \-       |       |
+| value    | 默认值                                   | `BaseJsonFormModelValue`                                                                          | \-       |       |
 | width    | field 宽度                               | `string`                                                                                          | `'auto'` |       |
-| subLabel | 副标签,                                  | `string` \| `v-slot`                                                                              | \-       | 1.0.1 |
 
 ### BaseJsonFormColumn 属性
 
 | 参数     | 说明                                                   | 类型                                    | 默认值   | 版本  |
 | -------- | ------------------------------------------------------ | --------------------------------------- | -------- | ----- |
-| after    | 后面                                                   | `string`                                | \-       | 1.0.1 |
 | align    | 对齐方式                                               | `'left'` \| `'right'` \| `'center'`     | `'left'` |       |
-| append   | 结尾                                                   | `string`                                | \-       | 1.0.1 |
+| append   | 结尾，灰色里面                                         | `string`                                | \-       | 1.0.1 |
 | before   | 前面                                                   | `string`                                | \-       | 1.0.1 |
+| bottom   | 底部                                                   | `string`                                | \-       | 1.0.1 |
 | ellipsis | 省略号                                                 | `boolean`                               | `true`   |       |
 | fixed    | 固定, 左边第一个默认固定在左边，右边最后一个固定在右边 | `'left'` \| `'right'`                   | \-       |       |
 | if       | 判断，用于动态控制显示和隐藏，默认都展示               | `(model: BaseJsonFormModel) => boolean` | \-       |       |
 | label    | 标签, `字符串`有`*`代表必填                            | `string` \| `v-slot`                    | \-       |       |
+| left     | 左边                                                   | `string`                                | \-       | 1.0.1 |
 | minWidth | column 最小宽度                                        | `string`                                | `'auto'` |       |
-| prefix   | 前缀                                                   | `string`                                | \-       | 1.0.1 |
-| prepend  | 开头                                                   | `string`                                | \-       | 1.0.1 |
+| prepend  | 开头，灰色里面                                         | `string`                                | \-       | 1.0.1 |
 | required | 必填                                                   | `boolean`                               | \-       | 1.0.1 |
+| right    | 右边                                                   | `string`                                | \-       | 1.0.1 |
 | subLabel | 副标签,                                                | `string` \| `v-slot`                    | \-       | 1.0.1 |
-| suffix   | 后缀                                                   | `string`                                | \-       | 1.0.1 |
 | tips     | 标签后面提示文案                                       | `string`                                | \-       | 1.0.1 |
+| top      | 上面                                                   | `string`                                | \-       | 1.0.1 |
 | type     | 类型                                                   | `BaseJsonFormInputType`                 | `'text'` |       |
 | width    | column 宽度                                            | `string`                                | `'auto'` |       |
 
@@ -127,8 +127,8 @@
 ### 类型定义
 
 ```ts
-export type BaseJsonFormModel = Record<string, BaseJsonFormInputValue>;
-export type BaseJsonFormInputValue =
+export type BaseJsonFormModel = Record<string, BaseJsonFormModelValue>;
+export type BaseJsonFormModelValue =
   | string
   | number
   | boolean
@@ -136,7 +136,7 @@ export type BaseJsonFormInputValue =
   | number[];
 export type BaseJsonFormInputOption = {
   label: string;
-  value: BaseJsonFormInputValue;
+  value: BaseJsonFormModelValue;
   children?: BaseJsonFormInputOption[];
   [key: string]: any;
 };
