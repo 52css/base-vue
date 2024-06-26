@@ -44,11 +44,11 @@
 
 <preview path="./base-json-form-dynamic.vue"></preview>
 
-## 不同span的表单
+## 不同 span 的表单
 
 <preview path="./base-json-form-span.vue"></preview>
 
-## 使用group完成复杂表单项
+## 使用 group 完成复杂表单项
 
 <preview path="./base-json-form-group.vue"></preview>
 
@@ -134,7 +134,8 @@
 | -------------- | ---------- | ------------------------- | ----- |
 | AutoComplete   | 自动填充   | AutoComplete 自动填充     |       |
 | Cascader       | 级联选择器 | Cascader 级联选择器       |       |
-| Checkbox       | 多选框     | CheckboxGroup 多选框      |       |
+| Checkbox       | 多选       | Checkbox 多选             |       |
+| CheckboxGroup  | 多选框组   | CheckboxGroup 多选框      |       |
 | ColorPicker    | 颜色       | ColorPicker 颜色选择器    |       |
 | DatePicker     | 日期       | DatePicker 日期选择器     |       |
 | Form           |            | Form 表单                 |       |
