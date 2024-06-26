@@ -19,7 +19,31 @@ defineOptions({
 
 <template>
   <!-- {{ formItem?.type }} -->
+  <template v-if="formItem?.group">
+    <component
+      :is="componentMap.FormItem"
+      :name="formItem.prop"
+      :prop="formItem.prop"
+      :rules="[
+        {
+          required: formItem.required,
+        },
+      ]"
+      :label-width="0"
+      style="margin-right: 0;"
+    >
+      <component
+        :is="componentMap[formItem?.type]"
+        v-model="formData[formItem?.prop]"
+        v-bind="formItem"
+        :label="formItem?.prefix"
+      >
+        {{ formItem?.children }}
+      </component>
+    </component>
+  </template>
   <component
+    v-else
     :is="componentMap[formItem?.type]"
     v-model="formData[formItem?.prop]"
     v-bind="formItem"

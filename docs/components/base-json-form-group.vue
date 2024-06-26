@@ -38,6 +38,7 @@ const spColorOptions = [
         placeholder: '长',
         theme: 'normal',
         autoWidth: true,
+        required: true,
       },
       width: {
         label: '大小',
@@ -48,6 +49,7 @@ const spColorOptions = [
         placeholder: '宽',
         theme: 'normal',
         autoWidth: true,
+        required: true,
       },
       height: {
         type: 'InputNumber',
@@ -56,9 +58,11 @@ const spColorOptions = [
         placeholder: '高',
         theme: 'normal',
         autoWidth: true,
+        required: true,
       },
       time: {
         label: '置管时间*',
+        requiredMark: true,
         type: 'DatePicker',
         group: ['time'],
         disabled: (m: any) => m.timeUnknown,
@@ -75,14 +79,23 @@ const spColorOptions = [
       },
       hasSp: {
         type: 'Switch',
-        group: ['spColor', 'left']
+        group: ['spColor', 'left'],
+        onChange: (m: any) => {
+          if (!m.hasSp) {
+            m.spColor = undefined
+          }
+
+          console.log('m', m)
+        }
       },
       spColor: {
+        label: '水泡',
+        requiredMark: true,
         type: 'Select',
         group: ['spColor'],
-        label: '水泡*',
         placeholder: '颜色',
-        options: spColorOptions
+        options: spColorOptions,
+        disabled: (m: any) => !m.hasSp,
       }
     }"
     :model="model"

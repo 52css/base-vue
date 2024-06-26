@@ -424,12 +424,12 @@ defineExpose({
               v-for="formItem in getFormItemNoGroupList"
               v-bind="formItem"
               :is="componentMap.FormItem"
-              :name="formItem.prop"
-              :prop="formItem.prop"
+              :name="formItem.group ? false : formItem.prop"
+              :prop="formItem.group ? false : formItem.prop"
               :key="formItem.prop"
               :rules="[
                 {
-                  required: formItem.required,
+                  required: formItem.group ? false : formItem.required,
                 },
               ]"
               :style="{
@@ -506,5 +506,8 @@ defineExpose({
 
 <style scoped lang="scss">
 .base-json-form {
+  :deep(.t-is-error > .t-input__extra) {
+    color: var(--td-error-color);
+  }
 }
 </style>

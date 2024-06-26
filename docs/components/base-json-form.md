@@ -48,7 +48,7 @@
 
 <preview path="./base-json-form-span.vue"></preview>
 
-## 使用group完成复杂表单项（需要完善）
+## 使用group完成复杂表单项
 
 <preview path="./base-json-form-group.vue"></preview>
 
