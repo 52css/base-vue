@@ -270,6 +270,7 @@ defineExpose({
             ref="formRef"
             :data="formData"
             :colon="colon"
+            :labelAlign="labelAlign"
             v-bind="$attrs"
           >
             <component
