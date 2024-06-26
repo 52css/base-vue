@@ -222,7 +222,14 @@ const getFormItemList = computed(() => {
     }
   }
 
-  return rtv;
+  const formModel = model()
+  return rtv.filter(x => {
+    if (x.if) {
+      return x?.if(formModel)
+    }
+
+    return true;
+  });
 });
 // const onSubmit: FormProps['onSubmit'] = ({ validateResult, firstError }) => {
 //   if (validateResult === true) {

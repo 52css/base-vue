@@ -40,6 +40,10 @@
 
 <preview path="./base-json-form-object.vue"></preview>
 
+## 动态表单
+
+<preview path="./base-json-form-dynamic.vue"></preview>
+
 ## 不同span的表单
 
 <preview path="./base-json-form-span.vue"></preview>
