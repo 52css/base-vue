@@ -2,6 +2,7 @@ import { App, Component } from 'vue';
 import { useAsyncRef } from './hooks/use-async-ref';
 import { useEsc } from './hooks/use-esc';
 import { useDPI } from './hooks/use-dpi';
+import { sleep } from './utils/sleep';
 import { registerBaseJsonFormComponent } from './components/base-json-form.vue';
 import { registerBaseButtonComponent } from './components/base-button.vue';
 // 导入Unocss
@@ -19,6 +20,7 @@ export {
   useAsyncRef,
   useEsc,
   useDPI,
+  sleep,
   registerBaseJsonFormComponent,
   registerBaseButtonComponent,
 };

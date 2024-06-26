@@ -25,9 +25,13 @@ import {
   TreeSelect,
   Upload,
 } from 'tdesign-vue-next';
+import { cloneDeep } from 'lodash';
 import BaseJsonFormItem from './base-json-form-item.vue';
 import BaseLabel from './base-label.vue';
 import BaseButton from './base-button.vue';
+
+export const Password = cloneDeep(Input);
+Password.props.type.default = 'password';
 
 export type BaseJsonFormColumnFixed = 'left' | 'right';
 export type BaseJsonFormColumn = {
@@ -155,6 +159,7 @@ export const componentMap: Record<string, Component> = {
   TagInput,
   Radio,
   RangeInput,
+  Password,
   Select,
   SelectInput,
   Slider,
@@ -230,8 +235,11 @@ const onSubmit = async () => {
   }
 };
 const getHasList = computed(() => {
-  return props.listType === 'card' || (props.listType === 'table' && Object.keys(props.columns).length > 0);
-})
+  return (
+    props.listType === 'card' ||
+    (props.listType === 'table' && Object.keys(props.columns).length > 0)
+  );
+});
 const onReset = async () => {
   formRef.value.reset();
 
@@ -239,6 +247,10 @@ const onReset = async () => {
     onSubmit();
   }
 };
+
+defineExpose({
+  onSubmit,
+});
 </script>
 
 <template>
@@ -288,7 +300,8 @@ const onReset = async () => {
               </base-json-form-item>
             </component>
             <component :is="componentMap.FormItem" v-if="showQuery">
-              <section flex gap-2>
+              <slot v-if="$slots.query" name="query" />
+              <section v-else flex gap-2>
                 <base-button theme="primary" @click="onSubmit">
                   提交
                 </base-button>

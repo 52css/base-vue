@@ -17,6 +17,7 @@
     "@vitejs/plugin-vue": "^5.0.5",
     "@vitepress-demo-preview/component": "^2.3.2",
     "@vitepress-demo-preview/plugin": "^1.2.3",
+    "lodash": "^4.17.21",
     "tdesign-icons-vue-next": "^0.2.2",
     "tdesign-vue-next": "^1.9.6",
     "vite": "^5.3.1",
@@ -24,6 +25,7 @@
     "vue": "^3.4.29"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.5",
     "@types/node": "^20.14.6",
     "@types/vue": "^2.0.0",
     "@unocss/preset-attributify": "^0.61.0",

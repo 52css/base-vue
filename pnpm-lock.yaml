@@ -17,6 +17,9 @@ importers:
       '@vitepress-demo-preview/plugin':
         specifier: ^1.2.3
         version: 1.2.3(markdown-it-container@3.0.0)(vitepress@1.2.3(@algolia/client-search@4.23.3)(@types/node@20.14.6)(postcss@8.4.38)(sass@1.77.6)(search-insights@2.14.0)(sortablejs@1.15.2))(vue@3.4.29)
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       tdesign-icons-vue-next:
         specifier: ^0.2.2
         version: 0.2.2(vue@3.4.29)
@@ -33,6 +36,9 @@ importers:
         specifier: ^3.4.29
         version: 3.4.29
     devDependencies:
+      '@types/lodash':
+        specifier: ^4.17.5
+        version: 4.17.5
       '@types/node':
         specifier: ^20.14.6
         version: 20.14.6
@@ -597,6 +603,9 @@ packages:
 
   '@types/lodash@4.14.182':
     resolution: {integrity: sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==}
+
+  '@types/lodash@4.17.5':
+    resolution: {integrity: sha512-MBIOHVZqVqgfro1euRDWX7OO0fBVUUMrN6Pwm8LQsz8cWhEpihlvR70ENj3f40j58TNxZaWv2ndSkInykNBBJw==}
 
   '@types/markdown-it@14.1.1':
     resolution: {integrity: sha512-4NpsnpYl2Gt1ljyBGrKMxFYAYvpqbnnkgP/i/g+NLpjEUa3obn1XJCur9YbEXKDAkaXqsR1LbDnGEJ0MmKFxfg==}
@@ -1979,6 +1988,8 @@ snapshots:
   '@types/linkify-it@5.0.0': {}
 
   '@types/lodash@4.14.182': {}
+
+  '@types/lodash@4.17.5': {}
 
   '@types/markdown-it@14.1.1':
     dependencies:

@@ -16,9 +16,13 @@
 - tabs（整个表单一起提交） + 表单
 - steps + 表单（每个 step 对应一个表单, 每步可以单独提交，也可以最后一步提交）
 
-## Demo
+## 典型表单
 
-<preview path="./base-json-form-demo.vue" title="基本使用"></preview>
+<preview path="./base-json-form-typical.vue"></preview>
+
+## 登录表单
+
+<preview path="./base-json-form-login.vue"></preview>
 
 ## API
 
