@@ -30,7 +30,7 @@ defineOptions({
         },
       ]"
       :label-width="0"
-      style="margin-right: 0;"
+      style="margin-right: 0"
     >
       <component
         :is="componentMap[formItem?.type]"
@@ -38,7 +38,9 @@ defineOptions({
         v-bind="formItem"
         :label="formItem?.prefix"
       >
-        {{ formItem?.children }}
+        <template v-if="formItem?.children">
+          {{ formItem?.children }}
+        </template>
       </component>
     </component>
   </template>
@@ -49,7 +51,9 @@ defineOptions({
     v-bind="formItem"
     :label="formItem?.prefix"
   >
-    {{ formItem?.children }}
+    <template v-if="formItem?.children">
+      {{ formItem?.children }}
+    </template>
   </component>
 </template>
 
