@@ -38,9 +38,9 @@ defineOptions({
         v-bind="formItem"
         :label="formItem?.prefix"
       >
-        <template v-if="formItem?.children">
+        <!-- <template v-if="formItem?.children">
           {{ formItem?.children }}
-        </template>
+        </template> -->
       </component>
     </component>
   </template>
@@ -51,9 +51,9 @@ defineOptions({
     v-bind="formItem"
     :label="formItem?.prefix"
   >
-    <template v-if="formItem?.children">
+    <!-- <template v-if="formItem?.children">
       {{ formItem?.children }}
-    </template>
+    </template> -->
   </component>
 </template>
 
