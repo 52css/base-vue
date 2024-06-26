@@ -30,6 +30,8 @@ import {
 } from 'tdesign-vue-next';
 import { cloneDeep, set, isEqual } from 'lodash-es';
 import BaseJsonFormItem from './base-json-form-item.vue';
+import BaseJsonFormField from './base-json-form-field.vue';
+import BaseJsonFormGroup from './base-json-form-group.vue';
 import BaseLabel from './base-label.vue';
 import BaseButton from './base-button.vue';
 
@@ -68,7 +70,7 @@ export type BaseJsonFormOutput = {
   (option: BaseJsonFormOption): BaseJsonFormModelValue;
 };
 
-export type BaseJsonFormGroup =
+export type BaseJsonFormGroupPosition =
   | 'top'
   | 'left'
   | 'bottom'
@@ -79,7 +81,7 @@ export type BaseJsonFormGroup =
 export type BaseJsonFormInput = {
   append?: string;
   bottom?: string;
-  group?: [string, BaseJsonFormGroup];
+  group?: [string, BaseJsonFormGroupPosition];
   if?: (model: BaseJsonFormModel) => boolean;
   label?: string;
   left?: string;
@@ -370,20 +372,6 @@ const model = () => {
   }, {});
 };
 
-const getGroupFromItem = (
-  groupName: string,
-  positionName: BaseJsonFormGroup
-) => {
-  const item = getFormItemList.value.find((x) =>
-    isEqual(x?.group, [groupName, positionName])
-  );
-
-  return item;
-  // return props..value.find(
-  //   (x) => x?.group === [groupName, positionName]
-  // );
-};
-
 watch(
   () => props.model,
   (newVal) => {
@@ -454,34 +442,46 @@ defineExpose({
                 </base-label>
               </template>
               <base-json-form-item>
-                <component
-                  :is="componentMap[formItem.type]"
-                  v-model="formData[formItem.prop]"
-                  v-bind="formItem"
-                  :label="formItem.prefix"
+                <base-json-form-field
+                  :componentMap="componentMap"
+                  :formData="formData"
+                  :formItem="formItem"
                 />
+                <template #top>
+                  <base-json-form-group
+                    :componentMap="componentMap"
+                    :formData="formData"
+                    :formItem="formItem"
+                    :getFormItemList="getFormItemList"
+                    position="top"
+                  />
+                </template>
+                <template #left>
+                  <base-json-form-group
+                    :componentMap="componentMap"
+                    :formData="formData"
+                    :formItem="formItem"
+                    :getFormItemList="getFormItemList"
+                    position="left"
+                  />
+                </template>
                 <template #right>
-                  <template v-if="formItem.group">
-                    <component
-                      :is="
-                        componentMap[
-                          getGroupFromItem(formItem.group?.[0], 'right')?.type as keyof typeof componentMap
-                        ]
-                      "
-                      v-model="
-                        formData[
-                          getGroupFromItem(formItem.group?.[0], 'right')?.prop as string
-                        ]
-                      "
-                      v-bind="getGroupFromItem(formItem.group?.[0], 'right')"
-                      :label="
-                        getGroupFromItem(formItem.group?.[0], 'right')?.prefix
-                      "
-                    />
-                  </template>
-                  <template v-else>
-                    {{ formItem.right }}
-                  </template>
+                  <base-json-form-group
+                    :componentMap="componentMap"
+                    :formData="formData"
+                    :formItem="formItem"
+                    :getFormItemList="getFormItemList"
+                    position="right"
+                  />
+                </template>
+                <template #bottom>
+                  <base-json-form-group
+                    :componentMap="componentMap"
+                    :formData="formData"
+                    :formItem="formItem"
+                    :getFormItemList="getFormItemList"
+                    position="bottom"
+                  />
                 </template>
               </base-json-form-item>
             </component>

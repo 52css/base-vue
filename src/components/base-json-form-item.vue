@@ -26,7 +26,7 @@ defineOptions({
 <template>
   <section class="base-json-form-item" flex flex-col gap-2 w-full>
     <slot name="top" />
-    <div flex gap-2>
+    <div flex gap-2 items-center>
       <slot name="left" />
       <section
         class="base-json-form-item__container"

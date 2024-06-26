@@ -14,19 +14,49 @@ defineEmits<BaseJsonFormGroupEmits>();
 defineOptions({
   name: 'BaseJsonFormGroup',
 });
-const timeUnknownOptions = [
+const model = ref({});
+const spColorOptions = [
   {
-    label: '不详',
-    value: true,
+    label: '红色',
+    value: 'red',
+  },
+  {
+    label: '黄色',
+    value: 'yellow',
   },
 ];
-const model = ref({});
 </script>
 
 <template>
   <base-json-form
     label-align="top"
     :inputs="{
+      length: {
+        type: 'InputNumber',
+        append: 'mm',
+        group: ['width', 'left'],
+        placeholder: '长',
+        theme: 'normal',
+        autoWidth: true,
+      },
+      width: {
+        label: '大小',
+        requiredMark: true,
+        type: 'InputNumber',
+        append: 'mm',
+        group: ['width'],
+        placeholder: '宽',
+        theme: 'normal',
+        autoWidth: true,
+      },
+      height: {
+        type: 'InputNumber',
+        append: 'mm',
+        group: ['width', 'right'],
+        placeholder: '高',
+        theme: 'normal',
+        autoWidth: true,
+      },
       time: {
         label: '置管时间*',
         type: 'DatePicker',
@@ -41,11 +71,22 @@ const model = ref({});
             m.time = undefined;
           }
         },
+        children: '不详'
       },
+      hasSp: {
+        type: 'Switch',
+        group: ['spColor', 'left']
+      },
+      spColor: {
+        type: 'Select',
+        group: ['spColor'],
+        label: '水泡*',
+        placeholder: '颜色',
+        options: spColorOptions
+      }
     }"
     :model="model"
-    :span="3"
-    :show-query="false"
+    :span="4"
   />
 </template>
 
