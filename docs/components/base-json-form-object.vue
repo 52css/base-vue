@@ -1,10 +1,10 @@
 <script lang="ts">
-export interface BaseJsonFormDemoProps {
-  prop1?: string;
+export interface BaseJsonFormObjectProps {
+  prop1?: string
 }
-export const BaseJsonFormDemoDefault = {};
-export interface BaseJsonFormDemoEmits {
-  (event: 'event1'): void;
+export const BaseJsonFormObjectDefault = {}
+export interface BaseJsonFormObjectEmits {
+  (event: 'event1'): void
 }
 export const sleep = (time: number = 2000) => {
   return new Promise((resolve) => {
@@ -33,34 +33,35 @@ export const enumToOptions = (enumObj: any): Option[] => {
 };
 </script>
 <script setup lang="ts">
-withDefaults(defineProps<BaseJsonFormDemoProps>(), BaseJsonFormDemoDefault);
-defineEmits<BaseJsonFormDemoEmits>();
+withDefaults(defineProps<BaseJsonFormObjectProps>(), BaseJsonFormObjectDefault)
+defineEmits<BaseJsonFormObjectEmits>()
 defineOptions({
-  name: 'BaseJsonFormDemo',
-});
+  name: 'BaseJsonFormObject',
+})
 const genderOptions = enumToOptions(Gender);
 const courseOptions = enumToOptions(Course);
 const request = async (model) => {
-  await sleep(1000);
   console.log('model', model);
+  await sleep(1000);
 };
 </script>
 
 <template>
   <base-json-form
     :inputs="{
-      name: '姓名*',
-      tel: '手机号码',
-      status: {
+      'student.name': '姓名*',
+      'student.tel': '手机号码',
+      'student.status': {
         label: '接收短信',
         type: 'Switch',
       },
-      gender: {
+      'student.gender': {
         label: '性别',
         type: 'Radio',
+        value: Gender.男,
         options: genderOptions,
       },
-      course: {
+      'student.course': {
         label: '课程',
         type: 'Checkbox',
         options: courseOptions,
@@ -71,6 +72,6 @@ const request = async (model) => {
 </template>
 
 <style scoped lang="scss">
-.base-json-form-demo {
+.base-json-form-object {
 }
 </style>

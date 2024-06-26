@@ -36,6 +36,10 @@
 
 <preview path="./base-json-form-value.vue"></preview>
 
+## 对象表单
+
+<preview path="./base-json-form-object.vue"></preview>
+
 ## 不同span的表单
 
 <preview path="./base-json-form-span.vue"></preview>

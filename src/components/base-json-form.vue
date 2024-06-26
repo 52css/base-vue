@@ -27,7 +27,7 @@ import {
   TreeSelect,
   Upload,
 } from 'tdesign-vue-next';
-import { cloneDeep } from 'lodash-es';
+import { cloneDeep, set } from 'lodash-es';
 import BaseJsonFormItem from './base-json-form-item.vue';
 import BaseLabel from './base-label.vue';
 import BaseButton from './base-button.vue';
@@ -235,10 +235,11 @@ const getFormItemList = computed(() => {
 // console.log('getFormItemList.value', getFormItemList.value);
 const onSubmit = async () => {
   const valid = await formRef.value.validate();
+  const formModel = model();
 
   // console.log('valid', valid)
   if (valid === true) {
-    await props.request?.(formData.value);
+    await props.request?.(formModel);
   }
 };
 const getHasList = computed(() => {
@@ -279,6 +280,19 @@ const setDefaultValue = () => {
     }
   }
 };
+const model = () => {
+  return Object.keys(formData.value).reduce((prev, item) => {
+    // 前端过滤不是if展示的数据
+    const param = props.inputs[item] as BaseJsonFormInput;
+    const canSet = param && param.if ? param.if(formData.value) : true;
+
+    if (canSet) {
+      set(prev, item, formData.value[item]);
+    }
+
+    return prev;
+  }, {});
+};
 
 watch(
   () => props.model,
@@ -293,6 +307,7 @@ watch(
 
 defineExpose({
   onSubmit,
+  model,
 });
 </script>
 
