@@ -36,7 +36,6 @@ const spColorOptions = [
     :inputs="{
       length: {
         type: 'InputNumber',
-        append: 'mm',
         group: ['width', 'left'],
         placeholder: '长',
         theme: 'normal',
@@ -47,7 +46,6 @@ const spColorOptions = [
         label: '大小',
         requiredMark: true,
         type: 'InputNumber',
-        append: 'mm',
         group: ['width'],
         placeholder: '宽',
         theme: 'normal',
@@ -56,7 +54,6 @@ const spColorOptions = [
       },
       height: {
         type: 'InputNumber',
-        append: 'mm',
         group: ['width', 'right'],
         placeholder: '高',
         theme: 'normal',
