@@ -80,34 +80,36 @@
 
 ## TODO: 树状筛选列表页
 
-## TODO: 卡片列表
+## 卡片列表
 
 - 默认滚动加载
 
+<preview path="./base-json-form-card.vue"></preview>
 
 ## API
 
-| 参数           | 说明                                                                                           | 类型                                                             | 默认值         | 版本  |
-| -------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | -------------- | ----- |
-| ...            | 继承`TForm` \| `TTable` 字段                                                                   | `unknown`                                                        | \-             |       |
-| colon          | 分号                                                                                           | `boolean`                                                        | `false`        |       |
-| action         | 右边操作按钮                                                                                   | `v-slot`                                                         | \-             |       |
-| autoFetch      | 自动请求，是`query`的自动请求为`true`                                                          | `boolean`                                                        | \-             |       |
-| columns        | 表格项, `key` 支持 `aa.bb` 模式，提交转换成对象`aa: {bb: val}`; `value` 是 `字符串` 是 `label` | `Record<key \| v-slot, string \| BaseJsonFormColumn>`            | {}             |       |
-| inputs         | 表单项, `key` 支持 `aa.bb` 模式，提交转换成对象`aa: {bb: val}`; `value` 是 `字符串` 是 `label` | `v-slot` \| `Record<key \| v-slot, string \| BaseJsonFormInput>` | {}             |       |
-| labelAlign     | 标签对其方式                                                                                   | `'left'` \| `'right'` \| `'top'`                                 | \-             |       |
-| layout         | 表单对其方式                                                                                   | `'inline'` \| `'vertical'`                                       | \-             |       |
-| list           | 表格                                                                                           | `v-slot`                                                         | \-             |       |
-| listType       | 表格展现                                                                                       | `'table'` \|`'card'`                                             | `'table'`      | 1.0.1 |
-| model          | 提交表单对应的 model                                                                           | `BaseJsonFormModel`                                              | {}             |       |
-| modelValue     | 表格多选`数组`、单选`原始类型`返回勾选数据                                                     | `string[]` \| `number[]` \| `string` \| `number`                 | \-             | 1.0.1 |
-| paginationType | 分页展现                                                                                       | `'pagination'` \|`'scroll'`                                      | `'pagination'` | 1.0.1 |
-| query          | 查询按钮                                                                                       | `v-slot`                                                         | \-             |       |
-| request        | 表单提交的接口或表格查询的接口                                                                 | `BaseJsonFormRequest`                                            | \-             |       |
-| showQuery      | 是否显示查询按钮                                                                               | `boolean`                                                        | `true`         |       |
-| span           | 整体分栏                                                                                       | `number`                                                         | 12             |       |
-| title          | 标题                                                                                           | `v-slot` \| `string`                                             | \-             |       |
-| titleBold      | 标题加粗                                                                                       | `boolean`                                                        | \-             |       |
+| 参数           | 说明                                                                                           | 类型                                                             | 默认值    | 版本  |
+| -------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | --------- | ----- |
+| ...            | 继承`TForm` \| `TTable` 字段                                                                   | `unknown`                                                        | \-        |       |
+| action         | 右边操作按钮                                                                                   | `v-slot`                                                         | \-        |       |
+| autoFetch      | 自动请求，是`query`的自动请求为`true`                                                          | `boolean`                                                        | \-        |       |
+| colon          | 分号                                                                                           | `boolean`                                                        | `false`   |       |
+| columns        | 表格项, `key` 支持 `aa.bb` 模式，提交转换成对象`aa: {bb: val}`; `value` 是 `字符串` 是 `label` | `Record<key \| v-slot, string \| BaseJsonFormColumn>`            | {}        |       |
+| inputs         | 表单项, `key` 支持 `aa.bb` 模式，提交转换成对象`aa: {bb: val}`; `value` 是 `字符串` 是 `label` | `v-slot` \| `Record<key \| v-slot, string \| BaseJsonFormInput>` | {}        |       |
+| labelAlign     | 标签对其方式                                                                                   | `'left'` \| `'right'` \| `'top'`                                 | \-        |       |
+| labelWidth     | 标签宽度                                                                                       | `string` \| `number`                                             | `100px`   |       |
+| layout         | 表单对其方式                                                                                   | `'inline'` \| `'vertical'`                                       | \-        |       |
+| list           | 表格                                                                                           | `v-slot`                                                         | \-        |       |
+| listType       | 表格展现                                                                                       | `'table'` \|`'card'`                                             | `'table'` | 1.0.1 |
+| model          | 提交表单对应的 model                                                                           | `BaseJsonFormModel`                                              | {}        |       |
+| modelValue     | 表格多选`数组`、单选`原始类型`返回勾选数据                                                     | `string[]` \| `number[]` \| `string` \| `number`                 | \-        | 1.0.1 |
+| paginationType | 分页展现, 列表展现`card`默认`scroll`; `table`默认`pagination`                                  | `'pagination'` \|`'scroll'`                                      | \-        | 1.0.1 |
+| query          | 查询按钮                                                                                       | `v-slot`                                                         | \-        |       |
+| request        | 表单提交的接口或表格查询的接口                                                                 | `BaseJsonFormRequest`                                            | \-        |       |
+| showQuery      | 是否显示查询按钮                                                                               | `boolean`                                                        | `true`    |       |
+| span           | 整体分栏                                                                                       | `number`                                                         | 12        |       |
+| title          | 标题                                                                                           | `v-slot` \| `string`                                             | \-        |       |
+| titleBold      | 标题加粗                                                                                       | `boolean`                                                        | \-        |       |
 
 ### BaseJsonFormInput 属性
 
@@ -217,9 +219,9 @@ export type BaseJsonFormRequest = {
 
 | 参数               | 说明           | 类型                                                                                                  | 默认值 | 版本 |
 | ------------------ | -------------- | ----------------------------------------------------------------------------------------------------- | ------ | ---- |
+| clearValidate      |                | `(fields?: Array<keyof FormData>)`                                                                    | \-     |      |
 | init               | 初始化         | `() => void`                                                                                          | \-     |      |
 | model              | 获取 flatModel | `() => BaseJsonFormModel`                                                                             | \-     |      |
-| clearValidate      |                | `(fields?: Array<keyof FormData>)`                                                                    | \-     |      |
 | reset              |                | `(params?: FormResetParams<FormData>)`                                                                | \-     |      |
 | setValidateMessage |                | `(message: FormValidateMessage<FormData>)`                                                            | \-     |      |
 | submit             |                | `(params?: { showErrorMessage?: boolean })`                                                           | \-     |      |

@@ -161,7 +161,7 @@ export const BaseJsonFormDefault = {
   // labelAlign: 'top' as BaseJsonFormLabelAlign,
   listType: 'table' as BaseJsonFormListType,
   model: () => ({}),
-  paginationType: 'pagination' as BaseJsonFormPaginationType,
+  // paginationType: 'pagination' as BaseJsonFormPaginationType,
   showQuery: true,
   span: 12,
   labelWidth: '100px',
@@ -307,13 +307,18 @@ const getFormItemNoGroupList = computed(() => {
     return true;
   });
 });
-
+const noMore = ref(false);
+const loading = ref(false);
 const onSubmit = async (params: Record<string, any> = {}) => {
   const valid = await formRef.value.validate();
   const formModel = model();
 
   // console.log('valid', valid)
   if (valid === true) {
+    if (loading.value) {
+      return;
+    }
+
     const lastParams = {
       pageNum: pagination.value.current,
       pageSize: pagination.value.pageSize,
@@ -322,14 +327,38 @@ const onSubmit = async (params: Record<string, any> = {}) => {
     };
 
     formLastQueryModel.value = cloneDeep(lastParams);
-    const res = await props.request?.(lastParams);
-    if (getHasList.value) {
-      if (Array.isArray(res)) {
-        tableData.value = res ?? [];
-      } else if (res) {
-        tableData.value = res.rows ?? [];
-        pagination.value.total = res.total ?? 0;
+    loading.value = true;
+    try {
+      const res = await props.request?.(lastParams);
+      const isScroll = getPaginationType.value === 'scroll';
+      if (getHasList.value) {
+        let rows;
+        let total;
+        if (Array.isArray(res)) {
+          rows = res;
+        } else if (res) {
+          rows = res.rows ?? [];
+          total = res.total ?? 0;
+        }
+
+        pagination.value.total = total;
+
+        if (isScroll) {
+          if (pagination.value.current === 1) {
+            tableData.value = rows;
+          } else {
+            tableData.value = tableData.value.concat(rows);
+          }
+          noMore.value = tableData.value.length >= total;
+          if (!noMore.value) {
+            pagination.value.current = pagination.value.current! + 1;
+          }
+        } else {
+          tableData.value = rows;
+        }
       }
+    } finally {
+      loading.value = false;
     }
   }
 };
@@ -539,18 +568,12 @@ const onPageChange = (pageInfo: BaseJsonFromPageInfo) => {
   pagination.value.pageSize = pageInfo.pageSize;
   onSubmit();
 };
-// const selectedRowKeys = ref<string[] | number[]>([]);
-const onSelectChange = (val: string[] | number[]) => {
-  // selectedRowKeys.value = val;
-
-  if (props.columns.$checkbox) {
-    emit('update:modelValue', val);
-    // value.value = val;
-  } else if (props.columns.$radio) {
-    emit('update:modelValue', val[0]);
-    // value.value = val[0];
-  }
-};
+const getPaginationType = computed(() => {
+  return (
+    props.paginationType ??
+    (props.listType === 'table' ? 'pagination' : 'scroll')
+  );
+});
 
 onMounted(() => {
   props.autoFetch && init();
@@ -687,13 +710,30 @@ defineExpose({
       <!-- tableData: {{ tableData }} -->
       <!-- selectedRowKeys: {{ selectedRowKeys }} -->
       <component
+        v-if="listType === 'table'"
         v-bind="$attrs"
         :is="componentMap.Table"
         :columns="getColumnNoGroupList"
         :data="tableData"
-        :pagination="pagination.total > 0 && pagination"
+        :pagination="
+          getPaginationType === 'pagination' &&
+          pagination.total > 0 &&
+          pagination
+        "
         @page-change="onPageChange"
       />
+      <slot v-else name="list" :data="tableData" :pagination="pagination" />
+
+      <base-intersection-observer
+        v-if="getPaginationType === 'scroll'"
+        :disabled="noMore"
+        class="base-infinite-loading__loading secondary"
+        font-size-3
+        text-center
+        @enter="onSubmit"
+      >
+        {{ noMore ? '没有更多了' : '加载中...' }}
+      </base-intersection-observer>
     </section>
   </div>
 </template>
