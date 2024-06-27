@@ -151,6 +151,7 @@ export interface BaseJsonFormProps {
   span?: number;
   title?: string;
   titleBold?: boolean;
+  labelWidth?: string | number;
 }
 export const BaseJsonFormDefault = {
   colon: false,
@@ -163,6 +164,7 @@ export const BaseJsonFormDefault = {
   paginationType: 'pagination' as BaseJsonFormPaginationType,
   showQuery: true,
   span: 12,
+  labelWidth: '100px',
 };
 export interface BaseJsonFormEmits {
   (event: 'event1'): void;
@@ -313,13 +315,12 @@ const onSubmit = async (params: Record<string, any> = {}) => {
   // console.log('valid', valid)
   if (valid === true) {
     const lastParams = {
+      pageNum: pagination.value.current,
+      pageSize: pagination.value.pageSize,
       ...formModel,
       ...params,
     };
-    if (getHasList.value) {
-      lastParams.pageNum = pagination.value.current;
-      lastParams.pageSize = pagination.value.pageSize;
-    }
+
     formLastQueryModel.value = cloneDeep(lastParams);
     const res = await props.request?.(lastParams);
     if (getHasList.value) {
@@ -543,10 +544,10 @@ const onSelectChange = (val: string[] | number[]) => {
   // selectedRowKeys.value = val;
 
   if (props.columns.$checkbox) {
-    emit('update:modelValue', val)
+    emit('update:modelValue', val);
     // value.value = val;
   } else if (props.columns.$radio) {
-    emit('update:modelValue', val[0])
+    emit('update:modelValue', val[0]);
     // value.value = val[0];
   }
 };
@@ -583,6 +584,7 @@ defineExpose({
             :model="formData"
             :colon="colon"
             :labelAlign="labelAlign"
+            :labelWidth="labelWidth"
             :layout="getLayout"
             v-bind="$attrs"
             resetType="initial"
@@ -658,9 +660,11 @@ defineExpose({
             <component
               :is="componentMap.FormItem"
               v-if="showQuery"
-              :label-width="getHasList ? 0 : 'auto'"
+              :label-width="getHasList ? 0 : labelWidth"
+              :class="[getHasList ? '' : 'w-full']"
             >
               <template #label> &nbsp; </template>
+              <!-- getHasList: {{ getHasList }} -->
               <slot v-if="$slots.query" name="query" />
               <section v-else flex gap-2>
                 <base-button theme="primary" @click="onSubmit">
