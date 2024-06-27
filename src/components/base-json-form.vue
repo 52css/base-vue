@@ -6,8 +6,7 @@ import {
   // Table,
   AutoComplete,
   Cascader,
-  Checkbox,
-  CheckboxGroup,
+  CheckboxGroup as Checkbox,
   ColorPicker,
   DatePicker,
   DateRangePicker,
@@ -144,7 +143,6 @@ export interface BaseJsonFormProps {
   layout?: BaseJsonFormLayout;
   listType?: BaseJsonFormListType;
   model?: BaseJsonFormModel;
-  modelValue?: BaseJsonFormModelValue | BaseJsonFormModelValue[];
   paginationType?: BaseJsonFormPaginationType;
   request?: BaseJsonFormRequest;
   showQuery?: boolean;
@@ -176,7 +174,7 @@ export const componentMap: Record<string, Component> = {
   AutoComplete,
   Cascader,
   Checkbox,
-  CheckboxGroup,
+  // CheckboxGroup,
   ColorPicker,
   DatePicker,
   DateRangePicker,

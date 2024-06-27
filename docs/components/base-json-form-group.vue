@@ -28,6 +28,12 @@ const spColorOptions = [
     value: 'yellow',
   },
 ];
+const timeUnknownOptions = [
+  {
+    label: '不详',
+    value: true,
+  },
+];
 </script>
 
 <template>
@@ -76,7 +82,7 @@ const spColorOptions = [
             m.time = undefined;
           }
         },
-        children: '不详'
+        options: timeUnknownOptions
       },
       hasSp: {
         type: 'Switch',

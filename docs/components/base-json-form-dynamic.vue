@@ -82,7 +82,7 @@ const request = (model) => {
       },
       input3: {
         if: (m: any) => m.input1 !== 'test1',
-        type: 'CheckboxGroup',
+        type: 'Checkbox',
         label: 'test3',
         options: input3Options
       },
