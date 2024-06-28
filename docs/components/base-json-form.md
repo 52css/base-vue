@@ -56,7 +56,7 @@
 
 <preview path="./base-json-form-tabs-left.vue"></preview>
 
-## 头部表单
+## 头部表单(待完善)
 
 <preview path="./base-json-form-tabs-top.vue"></preview>
 
