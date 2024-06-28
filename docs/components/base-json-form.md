@@ -52,7 +52,9 @@
 
 <preview path="./base-json-form-group.vue"></preview>
 
-## TODO: 左边表单
+## 左边表单
+
+<preview path="./base-json-form-tabs-left.vue"></preview>
 
 ## TODO: 头部表单
 
