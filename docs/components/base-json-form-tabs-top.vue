@@ -56,18 +56,19 @@ const checkbox1Options = [
   { label: '选项2', value: '2' },
 ];
 const tabsValue = ref(0);
-const baseJsonForm1Ref = ref();
-const baseJsonForm2Ref = ref();
+const baseJsonFormRefs = ref<any[]>([]);
+const setBaseJsonFormRef = (el: any, index: number) => {
+  baseJsonFormRefs.value[index] = el;
+};
 const onSubmit = async () => {
-  const allFormRef = [baseJsonForm1Ref.value, baseJsonForm2Ref.value];
-  const allFormValidate = allFormRef.map((x) => x.validate());
+  const allFormValidate = baseJsonFormRefs.value.map((x) => x?.validate());
   const allValidate = await Promise.all(allFormValidate);
   const allOk = allValidate.every((x) => x === true);
 
   if (allOk) {
     // 去提交表单
-    const allModel = allFormRef
-      .map((x) => x.model())
+    const allModel = baseJsonFormRefs.value
+      .map((x) => x?.model())
       .reduce((prev, item) => {
         prev = { ...prev, ...item };
         return prev;
@@ -87,7 +88,7 @@ const onSubmit = async () => {
   <t-tabs v-model="tabsValue" theme="card">
     <t-tab-panel label="基本信息" :value="0" :destroy-on-hide="false">
       <base-json-form
-        ref="baseJsonForm1Ref"
+        :ref="(el) => setBaseJsonFormRef(el, 0)"
         :inputs="{
           input1: '普通输入框',
           select1: {
@@ -129,7 +130,7 @@ const onSubmit = async () => {
     </t-tab-panel>
     <t-tab-panel label="高级信息" :value="1" :destroy-on-hide="false">
       <base-json-form
-        ref="baseJsonForm2Ref"
+        :ref="(el) => setBaseJsonFormRef(el, 1)"
         :inputs="{
           aa: 'aa1',
           bb: 'bb2*',
