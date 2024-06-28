@@ -361,6 +361,8 @@ const onSubmit = async (params: Record<string, any> = {}) => {
     } finally {
       loading.value = false;
     }
+  } else {
+    throw new Error('校验不通过')
   }
 };
 const onReset = async (params?: FormResetParams<FormData>) => {

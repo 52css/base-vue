@@ -60,7 +60,9 @@
 
 <preview path="./base-json-form-tabs-top.vue"></preview>
 
-## TODO: 步骤表单
+## 步骤表单
+
+<preview path="./base-json-form-step.vue"></preview>
 
 ## 典型表格
 
