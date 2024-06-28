@@ -362,7 +362,7 @@ const onSubmit = async (params: Record<string, any> = {}) => {
       loading.value = false;
     }
   } else {
-    throw new Error('校验不通过')
+    throw new Error('校验不通过');
   }
 };
 const onQuery = async () => {
@@ -370,7 +370,7 @@ const onQuery = async () => {
     pagination.value.current = 1;
   }
   await onSubmit();
-}
+};
 const onReset = async (params?: FormResetParams<FormData>) => {
   formRef.value.reset(params);
 
@@ -720,7 +720,11 @@ defineExpose({
                 <base-button theme="primary" @click="() => onQuery()">
                   {{ getHasList ? '查询' : '提交' }}
                 </base-button>
-                <base-button theme="default" variant="base" @click="() => onReset()">
+                <base-button
+                  theme="default"
+                  variant="base"
+                  @click="() => onReset()"
+                >
                   重置
                 </base-button>
               </section>
@@ -732,35 +736,43 @@ defineExpose({
         <slot name="action" />
       </div>
     </section>
-    <section v-if="getHasList" class="base-json-form__list" w-full>
-      <!-- columns: {{ getColumnNoGroupList }} -->
-      <!-- tableData: {{ tableData }} -->
-      <!-- selectedRowKeys: {{ selectedRowKeys }} -->
-      <component
-        v-if="listType === 'table'"
-        v-bind="$attrs"
-        :is="componentMap.Table"
-        :columns="getColumnNoGroupList"
-        :data="tableData"
-        :pagination="
-          getPaginationType === 'pagination' &&
-          pagination.total > 0 &&
-          pagination
-        "
-        @page-change="onPageChange"
-      />
-      <slot v-else name="list" :data="tableData" :pagination="pagination" />
+    <section v-if="getHasList" w-full flex>
+      <div class="base-json-form__tree">
+        <!-- todo:完善树形 -->
+      </div>
+      <div class="base-json-form__list" flex-1 min-w-0>
+        <!-- columns: {{ getColumnNoGroupList }} -->
+        <!-- tableData: {{ tableData }} -->
+        <!-- selectedRowKeys: {{ selectedRowKeys }} -->
+        <component
+          v-if="listType === 'table'"
+          v-bind="$attrs"
+          :is="componentMap.Table"
+          :columns="getColumnNoGroupList"
+          :data="tableData"
+          :pagination="
+            getPaginationType === 'pagination' &&
+            pagination.total > 0 &&
+            pagination
+          "
+          @page-change="onPageChange"
+        />
+        <slot v-else name="list" :data="tableData" :pagination="pagination" />
 
-      <base-intersection-observer
-        v-if="getPaginationType === 'scroll'"
-        :disabled="noMore"
-        class="base-infinite-loading__loading secondary"
-        font-size-3
-        text-center
-        @enter="onSubmit"
-      >
-        {{ noMore ? '没有更多了' : '加载中...' }}
-      </base-intersection-observer>
+        <base-intersection-observer
+          v-if="getPaginationType === 'scroll'"
+          :disabled="noMore"
+          class="base-infinite-loading__loading secondary"
+          font-size-3
+          text-center
+          @enter="onSubmit"
+        >
+          {{ noMore ? '没有更多了' : '加载中...' }}
+        </base-intersection-observer>
+      </div>
+      <div class="base-json-form__selected">
+        <!-- todo:完善选中表格 -->
+      </div>
     </section>
   </div>
 </template>
