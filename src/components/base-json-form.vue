@@ -28,6 +28,9 @@ import {
   TimeRangePicker,
   TreeSelect,
   Upload,
+  type FormResetParams,
+  type FormValidateMessage,
+  type FormValidateParams,
 } from 'tdesign-vue-next';
 import { cloneDeep, set } from 'lodash-es';
 import BaseJsonFormItem from './base-json-form-item.vue';
@@ -360,8 +363,8 @@ const onSubmit = async (params: Record<string, any> = {}) => {
     }
   }
 };
-const onReset = async () => {
-  formRef.value.reset();
+const onReset = async (params?: FormResetParams<FormData>) => {
+  formRef.value.reset(params);
 
   if (getHasList.value) {
     onSubmit();
@@ -582,6 +585,24 @@ defineExpose({
   onSubmit,
   model,
   init,
+  clearValidate(fields?: Array<keyof FormData>) {
+    return formRef.value.clearValidate(fields);
+  },
+  reset(params?: FormResetParams<FormData>) {
+    return onReset(params);
+  },
+  setValidateMessage(message: FormValidateMessage<FormData>) {
+    return formRef.value.setValidateMessage(message);
+  },
+  submit(params?: { showErrorMessage?: boolean }) {
+    return formRef.value.submit(params);
+  },
+  validate(params?: FormValidateParams) {
+    return formRef.value.validate(params);
+  },
+  validateOnly(params?: Pick<FormValidateParams, 'fields' | 'trigger'>) {
+    return formRef.value.validateOnly(params);
+  },
 });
 </script>
 
@@ -691,7 +712,7 @@ defineExpose({
                 <base-button theme="primary" @click="onSubmit">
                   {{ getHasList ? '查询' : '提交' }}
                 </base-button>
-                <base-button theme="default" variant="base" @click="onReset">
+                <base-button theme="default" variant="base" @click="() => onReset()">
                   重置
                 </base-button>
               </section>
