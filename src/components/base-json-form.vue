@@ -365,12 +365,16 @@ const onSubmit = async (params: Record<string, any> = {}) => {
     throw new Error('校验不通过')
   }
 };
+const onQuery = async () => {
+  if (getHasList.value) {
+    pagination.value.current = 1;
+  }
+  await onSubmit();
+}
 const onReset = async (params?: FormResetParams<FormData>) => {
   formRef.value.reset(params);
 
-  if (getHasList.value) {
-    onSubmit();
-  }
+  onQuery();
 };
 const getDefaultValueByType = (input?: BaseJsonFormInput) => {
   const { type, multiple, range } = input ?? {};
@@ -585,6 +589,7 @@ onMounted(() => {
 
 defineExpose({
   onSubmit,
+  onQuery,
   onReset,
   model,
   init,
@@ -712,7 +717,7 @@ defineExpose({
               <!-- getHasList: {{ getHasList }} -->
               <slot v-if="$slots.query" name="query" />
               <section v-else flex gap-2>
-                <base-button theme="primary" @click="onSubmit">
+                <base-button theme="primary" @click="() => onQuery()">
                   {{ getHasList ? '查询' : '提交' }}
                 </base-button>
                 <base-button theme="default" variant="base" @click="() => onReset()">
