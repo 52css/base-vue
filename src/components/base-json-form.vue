@@ -585,6 +585,7 @@ onMounted(() => {
 
 defineExpose({
   onSubmit,
+  onReset,
   model,
   init,
   clearValidate(fields?: Array<keyof FormData>) {

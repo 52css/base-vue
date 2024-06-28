@@ -82,6 +82,9 @@ const onSubmit = async () => {
     tabsValue.value = index;
   }
 };
+const onReset = () => {
+  baseJsonFormRefs.value.forEach((item) => item?.onReset())
+}
 </script>
 
 <template>
@@ -142,7 +145,7 @@ const onSubmit = async () => {
   </t-tabs>
   <section flex items-center justify-center gap-2 my-4>
     <base-button @click="onSubmit">提交</base-button>
-    <base-button theme="default">重置</base-button>
+    <base-button theme="default" @click="onReset">重置</base-button>
   </section>
 </template>
 
