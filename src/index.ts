@@ -5,7 +5,7 @@ import { useDPI } from './hooks/use-dpi';
 import { sleep } from './utils/sleep';
 import { registerBaseJsonFormComponent } from './components/base-json-form.vue';
 import { registerBaseButtonComponent } from './components/base-button.vue';
-import { registerBaseTabsComponent } from './components/base-tabs.vue';
+// import { registerBaseTabsComponent } from './components/base-tabs.vue';
 // 导入Unocss
 import 'virtual:uno.css';
 
@@ -24,7 +24,7 @@ export {
   sleep,
   registerBaseJsonFormComponent,
   registerBaseButtonComponent,
-  registerBaseTabsComponent,
+  // registerBaseTabsComponent,
 };
 
 export interface Module {
