@@ -12,7 +12,7 @@ export interface BaseIconSlots {
   default: void;
 }
 export const BaseIconDefault = {
-  size: '22', // 没有单位，单位为px
+  size: '16', // 没有单位，单位为px
 };
 export interface BaseIconEmits {
   (event: 'event1'): void;

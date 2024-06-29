@@ -50,5 +50,5 @@ export default defineConfig(){
 | default | 默认插槽，和 icon 相差 8px | `v-slot`                   | \-     |      |
 | height  | 高度                       | `string` \| `number` | \-     |      |
 | name    | 名称                       | `string`             | \-     |      |
-| size    | 大小                       | `string` \| `number` | \-     |      |
+| size    | 大小                       | `string` \| `number` | `16`     |      |
 | width   | 宽度                       | `string` \| `number` | \-     |      |
