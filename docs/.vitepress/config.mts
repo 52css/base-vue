@@ -7,6 +7,7 @@ import { getSidebar } from 'vitepress-plugin-auto-sidebar';
 // 引入Unocss
 import Unocss from 'unocss/vite';
 import { presetUno, presetAttributify, presetIcons } from 'unocss';
+import svgLoader from 'vite-svg-loader';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -17,7 +18,11 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '文档', link: '/guide/', activeMatch: '^/guide/' },
-      { text: '组件', link: '/components/base-button', activeMatch: '^/components/' },
+      {
+        text: '组件',
+        link: '/components/base-button',
+        activeMatch: '^/components/',
+      },
       {
         text: '更新日志',
         link: 'https://github.com/52css/base-vue',
@@ -61,6 +66,20 @@ export default defineConfig({
       Unocss({
         // 使用Unocss
         presets: [presetUno(), presetAttributify(), presetIcons()],
+      }),
+      /** 将 SVG 静态图转化为 Vue 组件 */
+      svgLoader({
+        svgo: true, // 开启 SVGO 压缩
+        svgoConfig: {
+          plugins: [
+            {
+              name: 'prefixIds',
+              // params: {
+              //   prefix: Math.random().toString(32).slice(2),
+              // },
+            },
+          ],
+        },
       }),
     ],
   },
