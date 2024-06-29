@@ -3,9 +3,9 @@ import { useAsyncRef } from './hooks/use-async-ref';
 import { useEsc } from './hooks/use-esc';
 import { useDPI } from './hooks/use-dpi';
 import { sleep } from './utils/sleep';
-import { registerBaseJsonFormComponent } from './components/base-json-form.vue';
 import { registerBaseButtonComponent } from './components/base-button.vue';
-// import { registerBaseTabsComponent } from './components/base-tabs.vue';
+import { registerBaseJsonFormComponent } from './components/base-json-form.vue';
+import { registerBaseJsonTreeComponent } from './components/base-json-tree.vue';
 // 导入Unocss
 import 'virtual:uno.css';
 
@@ -22,9 +22,9 @@ export {
   useEsc,
   useDPI,
   sleep,
-  registerBaseJsonFormComponent,
   registerBaseButtonComponent,
-  // registerBaseTabsComponent,
+  registerBaseJsonFormComponent,
+  registerBaseJsonTreeComponent,
 };
 
 export interface Module {

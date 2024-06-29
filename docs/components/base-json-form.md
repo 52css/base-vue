@@ -97,7 +97,7 @@
 
 - 默认滚动加载
 
-<preview path="./base-json-form-card.vue"></preview>
+<preview path="./base-json-form-list.vue"></preview>
 
 ## API
 

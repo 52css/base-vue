@@ -48,7 +48,7 @@ const request = (m: any) => {
       address: '地址',
     }"
     :request="request"
-    list-type="card"
+    list-type="list"
   >
     <template #list="{data}">
       <section flex flex-wrap gap-3>

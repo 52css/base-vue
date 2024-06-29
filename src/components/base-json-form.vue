@@ -117,7 +117,7 @@ export type BaseJsonFormLabelAlign = 'left' | 'right' | 'top';
 
 export type BaseJsonFormLayout = 'inline' | 'vertical';
 
-export type BaseJsonFormListType = 'table' | 'card';
+export type BaseJsonFormListType = 'table' | 'list';
 
 export type BaseJsonFormModel = Record<string, BaseJsonFormModelValue>;
 export type BaseJsonFormModelValue =
@@ -453,7 +453,7 @@ useSetDefaultAndSetValue();
 //#region 列表
 const getHasList = computed(() => {
   return (
-    props.listType === 'card' ||
+    props.listType === 'list' ||
     (props.listType === 'table' && Object.keys(props.columns).length > 0)
   );
 });
@@ -657,6 +657,7 @@ defineExpose({
                   ? 'auto'
                   : `calc(${((formItem.span ?? span) * 100) / 12}% - 1rem)`,
               }"
+              :label-width="getHasList && !formItem.label ? 0 : labelWidth"
             >
               <template #label>
                 <base-label :tips="formItem.tips">
@@ -760,7 +761,7 @@ defineExpose({
         <slot v-else name="list" :data="tableData" :pagination="pagination" />
 
         <base-intersection-observer
-          v-if="getPaginationType === 'scroll'"
+          v-if="getPaginationType === 'scroll' && pagination.total > 0"
           :disabled="noMore"
           class="base-infinite-loading__loading secondary"
           font-size-3
