@@ -126,7 +126,7 @@ defineExpose({
   <!-- <div class="base-print">base-print</div> -->
   <div ref="basePrintRef" class="base-print" style="width: fit-content">
     <svg :height="height" :width="width" xmlns="http://www.w3.org/2000/svg">
-      <foreignObject :height="height" :width="width" x="0" y="0">
+      <foreignObject height="100%" width="100%" x="0" y="0">
         <body xmlns="http://www.w3.org/1999/xhtml">
           <slot />
         </body>
