@@ -35,4 +35,5 @@ export const registerBaseSearchComponent = (
 | --------- | --------------- | --------------------- | --------- | ---- |
 | ...       | 继承`Input`组件 | \-                    | \-        |      |
 | clearable | 是否可清空      | `boolean`             | `true`    |      |
+| onSubmit  | 触发调用        | `()=>void`            | \-        |      |
 | trigger   | 触发方式        | `'enter'` \| `'blur'` | `'enter'` |      |
