@@ -177,31 +177,33 @@
 
 - 目前注入 TDesign 下输入组件
 
-| 类型           | 说明       | TDesign                   | 版本  |
-| -------------- | ---------- | ------------------------- | ----- |
-| AutoComplete   | 自动填充   | AutoComplete 自动填充     |       |
-| Cascader       | 级联选择器 | Cascader 级联选择器       |       |
-| `Checkbox`     | 多选框组   | CheckboxGroup 多选框      |       |
-| ColorPicker    | 颜色       | ColorPicker 颜色选择器    |       |
-| DatePicker     | 日期       | DatePicker 日期选择器     |       |
-| Form           |            | Form 表单                 |       |
-| Input          |            | Input 输入框              |       |
-| InputAdornment |            | InputAdornment 输入装饰器 |       |
-| InputNumber    |            | InputNumber 数字输入框    |       |
-| `Radio`        |            | RadioGroup 单选框         |       |
-| RangeInput     |            | RangeInput 范围输入框     |       |
-| Select         |            | Select 选择器             |       |
-| SelectInput    |            | SelectInput 筛选器输入框  |       |
-| Slider         |            | Slider 滑块               |       |
-| Status         | 显示状态   |                           | 1.0.1 |
-| Switch         |            | Switch 开关               |       |
-| TagInput       |            | TagInput 标签输入框       |       |
-| Text           | 显示文本   |                           | 1.0.1 |
-| Textarea       |            | Textarea 多行文本框       |       |
-| TimePicker     |            | TimePicker 时间选择器     |       |
-| Transfer       |            | Transfer 穿梭框           |       |
-| TreeSelect     |            | TreeSelect 树选择         |       |
-| Upload         |            | Upload 上传               |       |
+| 类型             | 说明                                | TDesign                   | 版本  |
+| ---------------- | ----------------------------------- | ------------------------- | ----- |
+| AutoComplete     | 自动填充                            | AutoComplete 自动填充     |       |
+| Cascader         | 级联选择器                          | Cascader 级联选择器       |       |
+| Checkbox         | 多选框组                            | CheckboxGroup 多选框      |       |
+| ColorPicker      | 颜色                                | ColorPicker 颜色选择器    |       |
+| DatePicker       | 日期                                | DatePicker 日期选择器     |       |
+| Form             |                                     | Form 表单                 |       |
+| Input            |                                     | Input 输入框              |       |
+| InputAdornment   |                                     | InputAdornment 输入装饰器 |       |
+| InputNumber      |                                     | InputNumber 数字输入框    |       |
+| Radio            |                                     | RadioGroup 单选框         |       |
+| RangeInput       |                                     | RangeInput 范围输入框     |       |
+| Select           |                                     | Select 选择器             |       |
+| SelectInput      |                                     | SelectInput 筛选器输入框  |       |
+| Slider           |                                     | Slider 滑块               |       |
+| Status           | 显示状态                            |                           | 1.0.1 |
+| Switch           |                                     | Switch 开关               |       |
+| TagInput         |                                     | TagInput 标签输入框       |       |
+| Text             | 显示文本                            |                           | 1.0.1 |
+| Textarea         |                                     | Textarea 多行文本框       |       |
+| TimePicker       |                                     | TimePicker 时间选择器     |       |
+| Transfer         |                                     | Transfer 穿梭框           |       |
+| TreeSelect       |                                     | TreeSelect 树选择         |       |
+| Upload           |                                     | Upload 上传               |       |
+| 以下是自定义组件 |                                     |                           |       |
+| Search           | 搜索组件，在Input基础上增加搜索icon | BaseSearch                |       |
 
 ### 类型定义
 

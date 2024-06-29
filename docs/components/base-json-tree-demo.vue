@@ -57,7 +57,8 @@ const request = async () => {
     }, 200);
   });
 };
-const onBlur = () => {
+const onSubmit = () => {
+  console.log('submit')
   baseJsonTreeRef.value.init();
 }
 </script>
@@ -71,7 +72,7 @@ const onBlur = () => {
       name: {
         type: 'Search',
         placeholder: '请输入内容进行搜索',
-        onBlur: onBlur
+        onSubmit: onSubmit
       },
     }"
     :request="request"

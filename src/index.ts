@@ -3,6 +3,7 @@ import { useAsyncRef } from './hooks/use-async-ref';
 import { useEsc } from './hooks/use-esc';
 import { useDPI } from './hooks/use-dpi';
 import { sleep } from './utils/sleep';
+import { registerBaseSearchComponent } from './components/base-search.vue';
 import { registerBaseButtonComponent } from './components/base-button.vue';
 import { registerBaseJsonFormComponent } from './components/base-json-form.vue';
 import { registerBaseJsonTreeComponent } from './components/base-json-tree.vue';
@@ -22,6 +23,7 @@ export {
   useEsc,
   useDPI,
   sleep,
+  registerBaseSearchComponent,
   registerBaseButtonComponent,
   registerBaseJsonFormComponent,
   registerBaseJsonTreeComponent,
