@@ -24,7 +24,7 @@ export const getBase64ByUrl = (url): Promise<string> => {
       if (ctx) {
         ctx.drawImage(img, 0, 0, img.width, img.height);
       }
-      const quality = 0.8;
+      const quality = 1;
 
       resolve(canvas.toDataURL('image/jpeg', quality));
     };
