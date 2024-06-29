@@ -69,6 +69,7 @@ const onBlur = () => {
     v-model:actived="treeId"
     :inputs="{
       name: {
+        type: 'Search',
         placeholder: '请输入内容进行搜索',
         onBlur: onBlur
       },

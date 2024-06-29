@@ -27,6 +27,10 @@ export const registerBaseJsonTreeComponent = (
 
 ## API
 
-| 参数 | 说明                              | 类型 | 默认值 | 版本 |
-| ---- | --------------------------------- | ---- | ------ | ---- |
-| ...  | 继承 `BaseJsonForm` 和 `Tree`属性 | \-   | \-     |      |
+| 参数       | 说明                              | 类型      | 默认值 | 版本 |
+| ---------- | --------------------------------- | --------- | ------ | ---- |
+| ...        | 继承 `BaseJsonForm` 和 `Tree`属性 | \-        | \-     |      |
+| activable  | 节点是否可高亮                    | `boolean` | `true` |      |
+| expandAll  | 是否展开全部节点                  | `boolean` | `true` |      |
+| hover      | 节点是否有悬浮状态                | `boolean` | `true` |      |
+| transition | 节点展开折叠时是否使用过渡动画    | `boolean` | `true` |      |

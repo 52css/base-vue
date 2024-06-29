@@ -3,8 +3,17 @@ import { type Component, ref } from 'vue';
 import { Tree } from 'tdesign-vue-next';
 
 export interface BaseJsonTreeProps {
+  expandAll?: boolean;
+  activable?: boolean;
+  hover?: boolean;
+  transition?: boolean;
 }
-export const BaseJsonTreeDefault = {};
+export const BaseJsonTreeDefault = {
+  expandAll: true,
+  activable: true,
+  hover: true,
+  transition: true,
+};
 export interface BaseJsonTreeEmits {
   (event: 'event1'): void;
 }

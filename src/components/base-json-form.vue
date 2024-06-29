@@ -1,5 +1,6 @@
 <script lang="ts">
 import { type Component, ref, reactive, computed, watch, onMounted } from 'vue';
+import BaseSearch from './base-search.vue'
 // import { useVModel } from '@vueuse/core';
 import {
   EnhancedTable as Table,
@@ -173,6 +174,7 @@ export interface BaseJsonFormEmits {
 }
 
 export const componentMap: Record<string, Component> = {
+  Search: BaseSearch,
   Table,
   AutoComplete,
   Cascader,
