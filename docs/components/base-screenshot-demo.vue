@@ -28,7 +28,7 @@ const onScreenshot2 = () => {
 <template>
   <h3>文字截图</h3>
   <button @click="onScreenshot">开始截图</button>
-  <base-screenshot ref="baseScreenshotRef" width="352" height="117">
+  <base-screenshot ref="baseScreenshotRef" width="352" height="103">
     <div
       style="
         background: #f0f0f0;
@@ -50,7 +50,7 @@ const onScreenshot2 = () => {
   </base-screenshot>
   <h3>照片截图</h3>
   <button @click="onScreenshot2">开始截图</button>
-  <base-screenshot ref="baseScreenshot2Ref" width="352" height="237">
+  <base-screenshot ref="baseScreenshot2Ref" width="352" height="223">
     <div
       style="
         background: #f0f0f0;

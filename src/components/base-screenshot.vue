@@ -80,7 +80,9 @@ const screenshot = async () => {
       // 修复图片子结束标签不对
       .replace(/<img([^>]+?)>/g, ($0, $1) => {
         return `<img` + $1 + '/>';
-      });
+      })
+      // 删除注释节点
+      .replace(/<!--[\s\S]*?-->/g, '');
 
   // 所有资源需要转换成base64
   const newUrl = await asyncReplace(url, /src="([^"]+)"/g, async ($0, $1) => {
@@ -101,9 +103,16 @@ defineExpose({
 
 <template>
   <div ref="baseScreenshotRef" class="base-screenshot">
-    <svg :height="height" :width="width" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      :height="height"
+      :width="width"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <foreignObject height="100%" width="100%" x="0" y="0">
-        <body xmlns="http://www.w3.org/1999/xhtml">
+        <body
+          xmlns="http://www.w3.org/1999/xhtml"
+          style="margin: 0; padding: 0"
+        >
           <slot />
         </body>
       </foreignObject>
