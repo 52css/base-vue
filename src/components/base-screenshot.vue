@@ -3,10 +3,10 @@ import { ref } from 'vue';
 export interface BaseScreenshotProps {
   width?: number | string;
   height?: number | string;
-  filename?: string
+  filename?: string;
 }
 export const BaseScreenshotDefault = {
-  filename: 'screenshot.jpg'
+  filename: 'screenshot.jpg',
 };
 export interface BaseScreenshotEmits {
   (event: 'event1'): void;
@@ -41,6 +41,22 @@ export const getBase64ByUrl = (url): Promise<string> => {
     img.src = url;
   });
 };
+export const asyncReplace = async (str, regex, asyncReplacer) => {
+  const matches = [...str.matchAll(regex)];
+  const replacements = await Promise.all(
+    matches.map(async (match) => {
+      const replacement = await asyncReplacer(...match);
+      return { match, replacement };
+    })
+  );
+
+  let result = str;
+  for (const { match, replacement } of replacements) {
+    result = result.replace(match[0], replacement);
+  }
+
+  return result;
+};
 </script>
 <script setup lang="ts">
 const props = withDefaults(
@@ -54,15 +70,30 @@ defineOptions({
 const baseScreenshotRef = ref();
 const screenshot = async () => {
   const svg = baseScreenshotRef.value.innerHTML;
+
   const url =
     'data:image/svg+xml;charset=utf-8,' +
-    svg.replace(/\n/g, '').replace(/\t/g, '').replace(/#/g, '%23');
-  const base64 = await getBase64ByUrl(url);
+    svg
+      .replace(/\n/g, '')
+      .replace(/\t/g, '')
+      .replace(/#/g, '%23')
+      // 修复图片子结束标签不对
+      .replace(/<img([^>]+?)>/g, ($0, $1) => {
+        return `<img` + $1 + '/>';
+      });
+
+  // 所有资源需要转换成base64
+  const newUrl = await asyncReplace(url, /src="([^"]+)"/g, async ($0, $1) => {
+    return `src="${await getBase64ByUrl($1)}"`;
+  });
+
+  const base64 = await getBase64ByUrl(newUrl);
   const link = document.createElement('a');
   link.href = base64;
   link.download = props.filename;
   link.click();
 };
+
 defineExpose({
   screenshot,
 });
