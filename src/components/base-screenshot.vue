@@ -4,14 +4,16 @@ export interface BaseScreenshotProps {
   width?: number | string;
   height?: number | string;
   filename?: string;
+  quality?: number;
 }
 export const BaseScreenshotDefault = {
   filename: 'screenshot.jpg',
+  quality: 1,
 };
 export interface BaseScreenshotEmits {
   (event: 'event1'): void;
 }
-export const getBase64ByUrl = (url): Promise<string> => {
+export const getBase64ByUrl = (url, quality): Promise<string> => {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.crossOrigin = 'Anonymous'; // 允许跨域请求
@@ -24,8 +26,6 @@ export const getBase64ByUrl = (url): Promise<string> => {
       if (ctx) {
         ctx.drawImage(img, 0, 0, img.width, img.height);
       }
-      const quality = 1;
-
       resolve(canvas.toDataURL('image/jpeg', quality));
     };
     img.onerror = async () => {
@@ -86,10 +86,10 @@ const screenshot = async () => {
 
   // 所有资源需要转换成base64
   const newUrl = await asyncReplace(url, /src="([^"]+)"/g, async ($0, $1) => {
-    return `src="${await getBase64ByUrl($1)}"`;
+    return `src="${await getBase64ByUrl($1, props.quality)}"`;
   });
 
-  const base64 = await getBase64ByUrl(newUrl);
+  const base64 = await getBase64ByUrl(newUrl, props.quality);
   const link = document.createElement('a');
   link.href = base64;
   link.download = props.filename;
