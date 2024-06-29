@@ -1,6 +1,6 @@
 <script lang="ts">
 import { type Component, ref, reactive, computed, watch, onMounted } from 'vue';
-import BaseSearch from './base-search.vue'
+import BaseSearch from './base-search.vue';
 // import { useVModel } from '@vueuse/core';
 import {
   EnhancedTable as Table,
@@ -662,11 +662,17 @@ defineExpose({
               :label-width="getHasList && !formItem.label ? 0 : labelWidth"
             >
               <template #label>
-                <base-label :tips="formItem.tips">
+                <slot v-if="$slots[formItem.label]" :name="formItem.label" />
+                <base-label v-else :tips="formItem.tips">
                   {{ formItem.label }}
                 </base-label>
               </template>
-              <base-json-form-item>
+              <slot
+                v-if="$slots[formItem.prop]"
+                :name="formItem.prop"
+                :form-model="formData"
+              />
+              <base-json-form-item v-else>
                 <base-json-form-field
                   :componentMap="componentMap"
                   :formData="formData"
@@ -759,7 +765,14 @@ defineExpose({
             pagination
           "
           @page-change="onPageChange"
-        />
+        >
+          <template v-for="(_value, name) in $slots" #[name]="scopeData">
+            <slot :name="name" v-bind="scopeData" />
+          </template>
+          <template #cell-empty-content>
+            <span c-hex-00000042> - </span>
+          </template>
+        </component>
         <slot v-else name="list" :data="tableData" :pagination="pagination" />
 
         <base-intersection-observer

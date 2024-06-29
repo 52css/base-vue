@@ -48,6 +48,10 @@
 
 <preview path="./base-json-form-span.vue"></preview>
 
+## 自定义插槽
+
+<preview path="./base-json-form-custom-slot.vue"></preview>
+
 ## 使用 group 完成复杂表单项
 
 <preview path="./base-json-form-group.vue"></preview>
