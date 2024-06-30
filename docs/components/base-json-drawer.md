@@ -2,7 +2,7 @@
 
 ## 使用场景
 
-- 弹窗需要有展示的表单提交
+- 抽屉需要有展示的表单提交
 
 ## 默认注入`tdesign`组件, 也可以注入成其他`UI组件库`
 
@@ -31,4 +31,4 @@ export const registerBaseJsonDrawerComponent = (
 | ...               | 继承`Dialog` 和 `BaseJsonForm`属性 | \-       | \-       |      |
 | cancelButtonText  | 取消文案                           | `string` | `'取消'` |      |
 | confirmButtonText | 确定文案                           | `string` | `'确定'` |      |
-| size              | 尺寸                               | `string` | \-       |      |
+| width             | 尺寸                               | `string` | \-       |      |
