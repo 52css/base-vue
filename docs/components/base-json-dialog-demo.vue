@@ -57,6 +57,7 @@ const onClick = () => {
   visible.value = true;
 };
 const request = async () => {
+  await sleep(1000)
   // 模拟请求成功
   console.log('模拟请求成功')
   // throw new Error('模拟请求失败')
