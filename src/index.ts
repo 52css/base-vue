@@ -7,6 +7,8 @@ import { registerBaseSearchComponent } from './components/base-search.vue';
 import { registerBaseButtonComponent } from './components/base-button.vue';
 import { registerBaseJsonFormComponent } from './components/base-json-form.vue';
 import { registerBaseJsonTreeComponent } from './components/base-json-tree.vue';
+import { registerBaseJsonDialogComponent } from './components/base-json-dialog.vue';
+import { registerBaseJsonDrawerComponent } from './components/base-json-drawer.vue';
 // 导入Unocss
 import 'virtual:uno.css';
 
@@ -27,6 +29,8 @@ export {
   registerBaseButtonComponent,
   registerBaseJsonFormComponent,
   registerBaseJsonTreeComponent,
+  registerBaseJsonDialogComponent,
+  registerBaseJsonDrawerComponent,
 };
 
 export interface Module {

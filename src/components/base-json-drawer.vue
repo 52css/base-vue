@@ -1,23 +1,24 @@
 <script lang="ts">
 import { type Component, ref } from 'vue';
-import { Dialog } from 'tdesign-vue-next';
+import { Drawer } from 'tdesign-vue-next';
 import BaseJsonForm from './base-json-form.vue';
 
-export interface BaseJsonDialogProps {
+export interface BaseJsonDrawerProps {
   cancelButtonText?: string;
   confirmButtonText?: string;
+  width?: string;
 }
-export const BaseJsonDialogDefault = {
+export const BaseJsonDrawerDefault = {
   cancelButtonText: '取消',
   confirmButtonText: '确定',
 };
-export interface BaseJsonDialogEmits {
+export interface BaseJsonDrawerEmits {
   (event: 'event1'): void;
 }
 export const componentMap: Record<string, Component> = {
-  Dialog,
+  Drawer,
 };
-export const registerBaseJsonDialogComponent = (
+export const registerBaseJsonDrawerComponent = (
   name: string,
   component: Component
 ) => {
@@ -25,10 +26,10 @@ export const registerBaseJsonDialogComponent = (
 };
 </script>
 <script setup lang="ts">
-withDefaults(defineProps<BaseJsonDialogProps>(), BaseJsonDialogDefault);
-defineEmits<BaseJsonDialogEmits>();
+withDefaults(defineProps<BaseJsonDrawerProps>(), BaseJsonDrawerDefault);
+defineEmits<BaseJsonDrawerEmits>();
 defineOptions({
-  name: 'BaseJsonDialog',
+  name: 'BaseJsonDrawer',
 });
 const visible = defineModel('visible');
 const loading = ref(false);
@@ -50,7 +51,7 @@ const onConfirm = async () => {
 
 <template>
   <component
-    :is="componentMap.Dialog"
+    :is="componentMap.Drawer"
     v-model:visible="visible"
     v-bind="$attrs"
     :cancel-btn="{
@@ -65,7 +66,8 @@ const onConfirm = async () => {
     }"
     :destroy-on-close="true"
     :on-confirm="onConfirm"
-    class="base-json-dialog"
+    :size="width"
+    class="base-json-drawer"
   >
     <base-json-form
       v-if="visible"
@@ -76,7 +78,12 @@ const onConfirm = async () => {
   </component>
 </template>
 
-<style scoped lang="scss">
-.base-json-dialog {
+<style lang="scss">
+.base-json-drawer {
+  .t-drawer__footer > div {
+    justify-content: end;
+    flex-direction: row-reverse;
+    gap: 8px;
+  }
 }
 </style>

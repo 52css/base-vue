@@ -802,5 +802,8 @@ defineExpose({
   :deep(.t-pagination__number) {
     margin-top: 0 !important;
   }
+  :deep(.t-date-picker, .t-date-range-picker) {
+    width: 100%;
+  }
 }
 </style>
