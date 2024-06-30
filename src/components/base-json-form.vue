@@ -170,7 +170,10 @@ export const BaseJsonFormDefault = {
 };
 export interface BaseJsonFormEmits {
   (event: 'event1'): void;
-  (event: 'update:modelValue', value: BaseJsonFormModelValue): void;
+  (
+    event: 'submit',
+    res?: any | { rows: BaseJsonFormRow[]; total?: number } | BaseJsonFormRow[]
+  ): void;
 }
 
 export const componentMap: Record<string, Component> = {
@@ -220,9 +223,6 @@ const emit = defineEmits<BaseJsonFormEmits>();
 defineOptions({
   name: 'BaseJsonForm',
 });
-
-// const value = useVModel(props, 'modelValue', emit);
-const value = defineModel();
 
 //#region 表单
 const formRef = ref();
@@ -333,6 +333,7 @@ const onSubmit = async (params: Record<string, any> = {}) => {
     loading.value = true;
     try {
       const res = await props.request?.(lastParams);
+      emit('submit', res);
       const isScroll = getPaginationType.value === 'scroll';
       if (getHasList.value) {
         let rows;
