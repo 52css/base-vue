@@ -65,6 +65,9 @@ export function getRangeOffset(el: Node): [number, number] {
 
   const range = window.getSelection()!.getRangeAt(0);
 
+  // console.log('range', range)
+  // console.log('clips', clips)
+
   const startOffset =
     clips.find((el) => range.startContainer === el[0])![1] + range.startOffset;
   const endOffset =
@@ -96,6 +99,28 @@ const onMouseup = () => {
   lastRange = window.getSelection()!.getRangeAt(0);
   // console.log('mouseup', lastRange)
 };
+// 光标到元素最后
+const cursorToTargetEnd = (target: HTMLElement) => {
+  const range = document.createRange()
+  const selection = window.getSelection()
+  range.setStartAfter(target)
+  // range.setEndAfter(target);
+  range.collapse(true)
+  if (selection) {
+    selection.removeAllRanges()
+    selection.addRange(range)
+  }
+}
+const checkIsUneditable = (target: HTMLElement) => {
+  return target && target.dataset && target.dataset.editable === 'false'
+}
+const onClick = (event: Event) => {
+  const target = event.target as HTMLElement
+
+  if (checkIsUneditable(target)) {
+    cursorToTargetEnd(target)
+  }
+}
 // const isFocus = ref(false);
 // const onFocus = () => {
 //   isFocus.value = true;
@@ -198,6 +223,7 @@ onMounted(() => {
     class="base-contenteditable"
     contenteditable="true"
     @mouseup="onMouseup"
+    @click="onClick($event)"
   >
     <slot />
   </div>

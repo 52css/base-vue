@@ -24,6 +24,7 @@ const baseContenteditableRef = ref();
 const onAddTag = (tag: string) => {
   const hr = document.createElement('hr');
   hr.dataset.content = tag;
+  hr.setAttribute('contenteditable', 'false')
   baseContenteditableRef.value.insertNode(hr);
 };
 </script>
@@ -70,6 +71,9 @@ const onAddTag = (tag: string) => {
       &::before {
         content: attr(data-content);
       }
+    }
+    :deep(hr + hr) {
+      margin-left: 8px;
     }
   }
 }
