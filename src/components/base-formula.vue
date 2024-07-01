@@ -1,6 +1,6 @@
 <script lang="ts">
 import { ref, onMounted } from 'vue';
-import BaseStatus from './base-status.vue';
+import BaseSvgHtml from './base-svg-html.vue';
 import BaseContenteditable from './base-contenteditable.vue';
 
 export interface BaseFormulaProps {
