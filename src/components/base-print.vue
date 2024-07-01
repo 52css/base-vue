@@ -1,19 +1,20 @@
 <script lang="ts">
 import { ref, onMounted, nextTick } from 'vue';
 import { useDPI } from '../hooks/use-dpi';
+import BaseSvgHtml from './base-svg-html.vue';
 
 export type BasePrintLayout = 'landscape' /** 横向 */ | 'portrait'; /** 纵向 */
 export interface BasePrintProps {
   layout?: BasePrintLayout;
   zoomable?: boolean;
-  width?: number | string
-  height?: number | string
+  width?: number | string;
+  height?: number | string;
 }
 export const BasePrintDefault = {
   layout: 'landscape' as BasePrintProps['layout'],
   zoomable: false,
   width: '100%',
-  height: 300
+  height: 300,
 };
 export interface BasePrintEmits {
   (event: 'event1'): void;
@@ -125,13 +126,9 @@ defineExpose({
 <template>
   <!-- <div class="base-print">base-print</div> -->
   <div ref="basePrintRef" class="base-print" style="width: fit-content">
-    <svg :height="height" :width="width" xmlns="http://www.w3.org/2000/svg">
-      <foreignObject height="100%" width="100%" x="0" y="0">
-        <body xmlns="http://www.w3.org/1999/xhtml">
-          <slot />
-        </body>
-      </foreignObject>
-    </svg>
+    <base-svg-html :height="height" :width="width">
+      <slot />
+    </base-svg-html>
   </div>
   <iframe ref="basePrintFrameRef" style="display: none" />
 </template>

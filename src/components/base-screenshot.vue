@@ -1,5 +1,7 @@
 <script lang="ts">
 import { ref } from 'vue';
+import BaseSvgHtml from './base-svg-html.vue';
+
 export interface BaseScreenshotProps {
   width?: number | string;
   height?: number | string;
@@ -110,16 +112,9 @@ defineExpose({
 
 <template>
   <div ref="baseScreenshotRef" class="base-screenshot">
-    <svg :height="height" :width="width" xmlns="http://www.w3.org/2000/svg">
-      <foreignObject height="100%" width="100%" x="0" y="0">
-        <body
-          xmlns="http://www.w3.org/1999/xhtml"
-          style="margin: 0; padding: 0"
-        >
-          <slot />
-        </body>
-      </foreignObject>
-    </svg>
+    <base-svg-html :height="height" :width="width">
+      <slot />
+    </base-svg-html>
   </div>
 </template>
 

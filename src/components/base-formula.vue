@@ -21,26 +21,58 @@ defineOptions({
 });
 const value = defineModel({ type: String, default: '' });
 const baseContenteditableRef = ref();
-const onAddTag = (tag: string) => {
-  const hr = document.createElement('hr');
-  hr.dataset.content = tag;
-  hr.dataset.editable = 'false';
-  baseContenteditableRef.value.insertNode(hr);
+const onAddTag = (e: Event) => {
+  // const hr = document.createElement('hr');
+  // hr.dataset.content = tag;
+  // hr.dataset.editable = 'false';
+  const img = document.createElement('img');
+  img.dataset.editable = 'false';
+  img.style.display = 'inline-block';
+  img.style.verticalAlign = 'middle';
+  const svg = (e.currentTarget as any).outerHTML;
+  const url =
+    'data:image/svg+xml;charset=utf-8,' +
+    svg
+      .replace(/\n/g, '')
+      .replace(/\t/g, '')
+      .replace(/#/g, '%23')
+      // 修复图片子结束标签不对
+      .replace(/<img([^>]+?)>/g, (_$0: string, $1: string) => {
+        return `<img` + $1 + '/>';
+      })
+      // 删除注释节点
+      .replace(/<!--[\s\S]*?-->/g, '');
+  console.log('url', url)
+  img.src = url;
+  baseContenteditableRef.value.insertNode(img);
 };
 </script>
 
 <template>
   <div class="base-formula" flex flex-col gap-2>
     <div class="base-formula__tag-list" flex gap-2 select-none>
-      <base-status
+      <base-svg-html
         v-for="tag in tagList"
         :key="tag"
-        :value="tag"
-        variant="fill"
         cursor-pointer
-        @click="onAddTag(tag)"
+        @click="onAddTag($event)"
+        :width="tag.length * 12 + 16"
+        height="24"
       >
-      </base-status>
+        <div
+          style="
+            display: inline-block;
+            padding: 2px 8px;
+            background-color: #f2f6ff;
+            border-radius: 3px;
+            font-size: 12px;
+            color: #0072ff;
+            line-height: 20px;
+          "
+        >
+          {{ tag }}
+        </div>
+      </base-svg-html>
     </div>
     <base-contenteditable
       ref="baseContenteditableRef"
@@ -57,22 +89,7 @@ const onAddTag = (tag: string) => {
     border: 1px solid #dcdcdc;
     border-radius: 4px;
     padding: 5px;
-    :deep(hr) {
-      display: inline-block;
-      vertical-align: middle;
-      border: none;
-      margin: 0;
-      padding: 2px 8px;
-      background: #f2f6ff;
-      border-radius: 3px;
-      color: #0072ff;
-      font-size: 12px;
-      line-height: 20px;
-      &::before {
-        content: attr(data-content);
-      }
-    }
-    :deep(hr + hr) {
+    :deep(img + img) {
       margin-left: 4px;
     }
   }
