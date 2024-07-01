@@ -93,34 +93,34 @@ const pos: { start?: number; end?: number } = {
 };
 let lastRange: any;
 const onMouseup = () => {
-  const offset = getRangeOffset(baseContenteditableRef.value);
-  pos.start = offset[0];
-  pos.end = offset[1];
-  lastRange = window.getSelection()!.getRangeAt(0);
+  // const offset = getRangeOffset(baseContenteditableRef.value);
+  // pos.start = offset[0];
+  // pos.end = offset[1];
+  // lastRange = window.getSelection()!.getRangeAt(0);
   // console.log('mouseup', lastRange)
 };
 // 光标到元素最后
 const cursorToTargetEnd = (target: HTMLElement) => {
-  const range = document.createRange()
-  const selection = window.getSelection()
-  range.setStartAfter(target)
+  const range = document.createRange();
+  const selection = window.getSelection();
+  range.setStartAfter(target);
   // range.setEndAfter(target);
-  range.collapse(true)
+  range.collapse(true);
   if (selection) {
-    selection.removeAllRanges()
-    selection.addRange(range)
+    selection.removeAllRanges();
+    selection.addRange(range);
   }
-}
+};
 const checkIsUneditable = (target: HTMLElement) => {
-  return target && target.dataset && target.dataset.editable === 'false'
-}
+  return target && target.dataset && target.dataset.editable === 'false';
+};
 const onClick = (event: Event) => {
-  const target = event.target as HTMLElement
+  const target = event.target as HTMLElement;
 
   if (checkIsUneditable(target)) {
-    cursorToTargetEnd(target)
+    cursorToTargetEnd(target);
   }
-}
+};
 // const isFocus = ref(false);
 // const onFocus = () => {
 //   isFocus.value = true;
@@ -158,11 +158,18 @@ defineExpose({
   },
   insertNode(node: Node) {
     // console.log('isFocus.value', isFocus.value)
-    if (lastRange) {
-      // 获取光标的位置
-      var selection = window.getSelection();
-      var range = selection!.getRangeAt(0);
+    // if (lastRange) {
+    // 获取光标的位置
+    var selection = window.getSelection();
+    var range = selection!.getRangeAt(0);
 
+    const isCursorInside = baseContenteditableRef.value.contains(
+      range.commonAncestorContainer
+    );
+
+    // console.log('isCursorInside', isCursorInside);
+
+    if (isCursorInside) {
       // 插入新节点
       range.insertNode(node);
 
@@ -177,7 +184,7 @@ defineExpose({
 
       // 获取光标的位置
       var selection = window.getSelection();
-      selection?.selectAllChildren(baseContenteditableRef.value)
+      selection?.selectAllChildren(baseContenteditableRef.value);
       selection?.collapseToEnd();
     }
   },

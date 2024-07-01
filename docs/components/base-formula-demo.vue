@@ -14,7 +14,7 @@ defineEmits<BaseFormulaDemoEmits>()
 defineOptions({
   name: 'BaseFormulaDemo',
 })
-const value = ref('富文本编辑器, 实现可以添加标签<hr data-content="瞳孔" contenteditable="false" />')
+const value = ref('富文本编辑器, 实现可以添加标签<hr data-content="瞳孔" data-editable="false" />')
 </script>
 
 <template>
