@@ -7,7 +7,7 @@ export interface BaseContenteditableProps {
 }
 export const BaseContenteditableDefault = {};
 export interface BaseContenteditableEmits {
-  (event: 'event1'): void;
+  (event: 'update:modelValue', val?: string): void;
 }
 export function getNodeAndOffset(
   el: Node,
@@ -81,7 +81,7 @@ const props = withDefaults(
   defineProps<BaseContenteditableProps>(),
   BaseContenteditableDefault
 );
-defineEmits<BaseContenteditableEmits>();
+const emit = defineEmits<BaseContenteditableEmits>();
 defineOptions({
   name: 'BaseContenteditable',
 });
@@ -93,10 +93,10 @@ const pos: { start?: number; end?: number } = {
 };
 let lastRange: any;
 const onMouseup = () => {
-  // const offset = getRangeOffset(baseContenteditableRef.value);
-  // pos.start = offset[0];
-  // pos.end = offset[1];
-  // lastRange = window.getSelection()!.getRangeAt(0);
+  const offset = getRangeOffset(baseContenteditableRef.value);
+  pos.start = offset[0];
+  pos.end = offset[1];
+  lastRange = window.getSelection()!.getRangeAt(0);
   // console.log('mouseup', lastRange)
 };
 // 光标到元素最后
@@ -119,6 +119,12 @@ const onClick = (event: Event) => {
 
   if (checkIsUneditable(target)) {
     cursorToTargetEnd(target);
+  }
+};
+const onInput = () => {
+  // console.log('input')
+  if (props.modelValue !== baseContenteditableRef.value.innerHTML) {
+    emit('update:modelValue', baseContenteditableRef.value.innerHTML);
   }
 };
 // const isFocus = ref(false);
@@ -231,6 +237,7 @@ onMounted(() => {
     contenteditable="true"
     @mouseup="onMouseup"
     @click="onClick($event)"
+    @input="onInput"
   >
     <slot />
   </div>
@@ -238,5 +245,11 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .base-contenteditable {
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  padding: 5px;
+  :deep(img + img) {
+    margin-left: 4px;
+  }
 }
 </style>

@@ -86,12 +86,6 @@ const onAddTag = (e: Event) => {
 .base-formula {
   &__editor {
     height: 142px;
-    border: 1px solid #dcdcdc;
-    border-radius: 4px;
-    padding: 5px;
-    :deep(img + img) {
-      margin-left: 4px;
-    }
   }
 }
 </style>
