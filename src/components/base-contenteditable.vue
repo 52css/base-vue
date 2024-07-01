@@ -1,9 +1,9 @@
 <script lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 
 // 参考资料： https://segmentfault.com/a/1190000041457245
 export interface BaseContenteditableProps {
-  value?: string;
+  modelValue?: string;
 }
 export const BaseContenteditableDefault = {};
 export interface BaseContenteditableEmits {
@@ -88,7 +88,7 @@ const pos: { start?: number; end?: number } = {
   start: undefined,
   end: undefined,
 };
-let lastRange;
+let lastRange: any;
 const onMouseup = () => {
   const offset = getRangeOffset(baseContenteditableRef.value);
   pos.start = offset[0];
@@ -96,13 +96,15 @@ const onMouseup = () => {
   lastRange = window.getSelection()!.getRangeAt(0);
   // console.log('mouseup', lastRange)
 };
-const isFocus = ref(false);
-const onFocus = () => {
-  isFocus.value = true;
-};
-const onBlur = () => {
-  isFocus.value = false;
-};
+// const isFocus = ref(false);
+// const onFocus = () => {
+//   isFocus.value = true;
+// };
+// const onBlur = () => {
+//   setTimeout(() => {
+//     isFocus.value = false;
+//   }, 100)
+// };
 defineExpose({
   setSelection(start: number, end: number) {
     const selection = document.getSelection();
@@ -129,8 +131,9 @@ defineExpose({
     selection?.removeAllRanges();
     selection?.addRange(range);
   },
-  insertNode(node) {
-    if (isFocus.value) {
+  insertNode(node: Node) {
+    // console.log('isFocus.value', isFocus.value)
+    if (lastRange) {
       // 获取光标的位置
       var selection = window.getSelection();
       var range = selection!.getRangeAt(0);
@@ -171,14 +174,16 @@ defineExpose({
   },
   setMark() {
     const mark = document.createElement('mark');
-    mark.append(lastRange.extractContents());
-    lastRange.insertNode(mark);
+    if (lastRange) {
+      mark.append(lastRange.extractContents());
+      lastRange.insertNode(mark);
+    }
   },
 });
 
 onMounted(() => {
   // 这里只能单向绑定
-  baseContenteditableRef.value.innerHTML = props.value;
+  baseContenteditableRef.value.innerHTML = props.modelValue;
 });
 </script>
 
@@ -188,8 +193,6 @@ onMounted(() => {
     class="base-contenteditable"
     contenteditable="true"
     @mouseup="onMouseup"
-    @focus="onFocus"
-    @blur="onBlur"
   >
     <slot />
   </div>

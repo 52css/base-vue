@@ -19,17 +19,18 @@ defineEmits<BaseFormulaEmits>();
 defineOptions({
   name: 'BaseFormula',
 });
-const value = defineModel();
+const value = defineModel({ type: String, default: '' });
 const baseContenteditableRef = ref();
 const onAddTag = (tag: string) => {
-  baseContenteditableRef.value.$el.focus()
-  baseContenteditableRef.value.insertMarkText('abc');
+  const hr = document.createElement('hr');
+  hr.dataset.content = tag;
+  baseContenteditableRef.value.insertNode(hr);
 };
 </script>
 
 <template>
   <div class="base-formula" flex flex-col gap-2>
-    <div class="base-formula__tag-list" flex gap-2>
+    <div class="base-formula__tag-list" flex gap-2 select-none>
       <base-status
         v-for="tag in tagList"
         :key="tag"
@@ -43,7 +44,7 @@ const onAddTag = (tag: string) => {
     <base-contenteditable
       ref="baseContenteditableRef"
       class="base-formula__editor"
-      :value="value"
+      v-model="value"
     />
   </div>
 </template>
