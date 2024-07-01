@@ -149,6 +149,11 @@ defineExpose({
     } else {
       baseContenteditableRef.value.append(node);
       baseContenteditableRef.value.focus();
+
+      // 获取光标的位置
+      var selection = window.getSelection();
+      selection?.selectAllChildren(baseContenteditableRef.value)
+      selection?.collapseToEnd();
     }
   },
   insertText(textNode: string) {
