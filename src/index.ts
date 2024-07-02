@@ -5,6 +5,7 @@ import { useDPI } from './hooks/use-dpi';
 import { sleep } from './utils/sleep';
 import { registerBaseSearchComponent } from './components/base-search.vue';
 import { registerBaseButtonComponent } from './components/base-button.vue';
+import { registerBaseLabelComponent } from './components/base-label.vue';
 import { registerBaseJsonFormComponent } from './components/base-json-form.vue';
 import { registerBaseJsonTreeComponent } from './components/base-json-tree.vue';
 import { registerBaseJsonDialogComponent } from './components/base-json-dialog.vue';
@@ -27,6 +28,7 @@ export {
   sleep,
   registerBaseSearchComponent,
   registerBaseButtonComponent,
+  registerBaseLabelComponent,
   registerBaseJsonFormComponent,
   registerBaseJsonTreeComponent,
   registerBaseJsonDialogComponent,

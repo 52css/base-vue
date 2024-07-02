@@ -15,6 +15,12 @@ export const componentMap: Record<string, Component> = {
   Tooltip,
   HelpCircleIcon,
 };
+export const registerBaseLabelComponent = (
+  name: string,
+  component: Component
+) => {
+  componentMap[name] = component;
+};
 </script>
 <script setup lang="ts">
 withDefaults(defineProps<BaseLabelProps>(), BaseLabelDefault);
@@ -25,7 +31,7 @@ defineOptions({
 </script>
 
 <template>
-  <div class="base-label" inline-flex items-center>
+  <div class="base-label" inline-flex items-center gap-1>
     <slot />
     <span c-hex-999>
       <slot v-if="$slots.subLabel" name="subLabel" />
