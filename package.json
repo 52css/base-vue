@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "vite build",
+    "lib:build": "vite build",
+    "lib:deploy": "bash scripts/lib-deploy.sh",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
-    "deploy": "bash scripts/deploy.sh"
+    "docs:deploy": "bash scripts/docs-deploy.sh"
   },
   "keywords": [],
   "author": "",

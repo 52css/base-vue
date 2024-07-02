@@ -5,6 +5,9 @@ import BaseVue from '../../../src/index';
 // 引入组件库的少量全局样式变量
 import 'tdesign-vue-next/es/style/index.css';
 
+// 导入Unocss
+import 'virtual:uno.css';
+
 export default {
   ...DefaultTheme,
   enhanceApp({ app }) {

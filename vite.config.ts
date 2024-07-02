@@ -11,7 +11,7 @@ export default defineConfig({
       fileName: (format) => `base-vue.${format}.js`,
     },
     rollupOptions: {
-      external: ["vue"],
+      external: ["vue", 'tdesign-vue-next', 'tdesign-icons-vue-next'],
       output: {
         globals: {
           vue: "Vue",

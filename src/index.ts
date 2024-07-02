@@ -10,8 +10,6 @@ import { registerBaseJsonFormComponent } from './components/base-json-form.vue';
 import { registerBaseJsonTreeComponent } from './components/base-json-tree.vue';
 import { registerBaseJsonDialogComponent } from './components/base-json-dialog.vue';
 import { registerBaseJsonDrawerComponent } from './components/base-json-drawer.vue';
-// 导入Unocss
-import 'virtual:uno.css';
 
 const componentFileMap = import.meta.glob('./components/**/**.vue', {
   eager: true,
