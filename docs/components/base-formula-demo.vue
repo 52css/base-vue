@@ -1,20 +1,20 @@
 <script lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 export interface BaseFormulaDemoProps {
-  prop1?: string
+  prop1?: string;
 }
-export const BaseFormulaDemoDefault = {}
+export const BaseFormulaDemoDefault = {};
 export interface BaseFormulaDemoEmits {
-  (event: 'event1'): void
+  (event: 'event1'): void;
 }
 </script>
 <script setup lang="ts">
-withDefaults(defineProps<BaseFormulaDemoProps>(), BaseFormulaDemoDefault)
-defineEmits<BaseFormulaDemoEmits>()
+withDefaults(defineProps<BaseFormulaDemoProps>(), BaseFormulaDemoDefault);
+defineEmits<BaseFormulaDemoEmits>();
 defineOptions({
   name: 'BaseFormulaDemo',
-})
-const value = ref('富文本编辑器, 实现可以添加标签')
+});
+const value = ref('富文本编辑器, 实现可以添加标签');
 </script>
 
 <template>

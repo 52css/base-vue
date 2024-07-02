@@ -193,6 +193,7 @@ defineExpose({
       selection?.selectAllChildren(baseContenteditableRef.value);
       selection?.collapseToEnd();
     }
+    onInput()
   },
   insertText(textNode: string) {
     const newNode = document.createTextNode(textNode);
