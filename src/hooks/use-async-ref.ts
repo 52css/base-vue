@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 
-export type UseAsyncRefFn = () => Promise<any>;
+export type UseAsyncRefFn = (...args: any) => Promise<any>;
 export type UseAsyncRefOptions = {
   autoFetch?: boolean;
   defaultValue?: any;
@@ -17,9 +17,9 @@ export const useAsyncRef = <T>(fn: UseAsyncRefFn, options?: UseAsyncRefOptions):
   // data.loading = loading;
   // data.err = err;
 
-  const setData = () => {
+  const setData = (...args: any[]) => {
     loading.value = true;
-    fn()
+    fn(...args)
       .then((res) => {
         data.value = res;
       })
