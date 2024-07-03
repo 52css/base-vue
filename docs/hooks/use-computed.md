@@ -1,4 +1,4 @@
-# useComputedRef 带参数的计算属性
+# useComputed 带参数的计算属性
 
 ## 使用场景
 
@@ -6,7 +6,7 @@
 
 ## Demo
 
-<preview path="./use-computed-ref-demo.vue" title="基本使用"></preview>
+<preview path="./use-computed-demo.vue" title="基本使用"></preview>
 
 ## API
 

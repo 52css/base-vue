@@ -1,7 +1,7 @@
 import { App, Component } from 'vue';
 import { useAsyncRef } from './hooks/use-async-ref';
-import { useComputedRef } from './hooks/use-computed-ref';
-import { useDebounceRef } from './hooks/use-debounce-ref';
+import { useComputed } from './hooks/use-computed';
+import { useDebounce } from './hooks/use-debounce';
 import { useEsc } from './hooks/use-esc';
 import { useDPI } from './hooks/use-dpi';
 import { sleep } from './utils/sleep';
@@ -23,8 +23,8 @@ const componentFileMap = import.meta.glob('./components/**/**.vue', {
 
 export {
   useAsyncRef,
-  useComputedRef,
-  useDebounceRef,
+  useComputed,
+  useDebounce,
   useEsc,
   useDPI,
   sleep,

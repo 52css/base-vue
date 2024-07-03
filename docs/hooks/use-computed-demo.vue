@@ -1,21 +1,21 @@
 <script lang="ts">
 import { ref } from 'vue';
 import { Table as TTable, InputNumber as TInputNumber } from 'tdesign-vue-next';
-import { useComputedRef } from '../../src';
+import { useComputed } from '../../src';
 
-export interface UseComputedRefDemoProps {
+export interface UseComputedDemoProps {
   prop1?: string;
 }
-export const UseComputedRefDemoDefault = {};
-export interface UseComputedRefDemoEmits {
+export const UseComputedDemoDefault = {};
+export interface UseComputedDemoEmits {
   (event: 'event1'): void;
 }
 </script>
 <script setup lang="ts">
-withDefaults(defineProps<UseComputedRefDemoProps>(), UseComputedRefDemoDefault);
-defineEmits<UseComputedRefDemoEmits>();
+withDefaults(defineProps<UseComputedDemoProps>(), UseComputedDemoDefault);
+defineEmits<UseComputedDemoEmits>();
 defineOptions({
-  name: 'UseComputedRefDemo',
+  name: 'UseComputedDemo',
 });
 const columns = [
   { colKey: 'name', title: '蔬菜' },
@@ -41,10 +41,10 @@ const data = ref([
   },
 ]);
 const totalPrice = row => {
-  // console.log('computed')
+  console.log('computed')
   return +(row.price * row.count).toFixed(2);
 };
-const getTotalPrice = useComputedRef(totalPrice)
+const getTotalPrice = useComputed(totalPrice)
 </script>
 
 <template>

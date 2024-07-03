@@ -1,6 +1,6 @@
 import { customRef } from 'vue';
 
-export const useDebounceRef = <T>(value: T, delay = 1000) => {
+export const useDebounce = <T>(value: T, delay = 1000) => {
   let timer: undefined | number;
   return customRef((track, trigger) => ({
     get() {

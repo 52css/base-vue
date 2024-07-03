@@ -1,4 +1,4 @@
-# useDebounceRef 延迟响应
+# useDebounce 延迟响应
 
 ## 使用场景
 
@@ -6,7 +6,7 @@
 
 ## Demo
 
-<preview path="./use-debounce-ref-demo.vue" title="基本使用"></preview>
+<preview path="./use-debounce-demo.vue" title="基本使用"></preview>
 
 ## API
 

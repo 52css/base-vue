@@ -1,10 +1,10 @@
 import { computed } from 'vue';
 
-type UseComputedRefFn = {
+type UseComputedFn = {
   (...args: any): any;
 };
 
-export const useComputedRef = (fn: UseComputedRefFn) => {
+export const useComputed = (fn: UseComputedFn) => {
   const cache = new Map();
 
   function getCache(args: any[]) {
