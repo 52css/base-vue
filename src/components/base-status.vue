@@ -13,7 +13,12 @@ export interface BaseStatusProps {
   theme?: BaseStatusTheme;
   value?: BaseStatusValue;
   modelValue?: BaseStatusValue;
-  options?: BaseStatusOption[];
+  options?:
+    | BaseStatusOption[]
+    | Record<
+        string,
+        string | number | { value: string | number; theme: string }
+      >;
   variant?: BaseStatusVariant;
 }
 export const BaseStatusDefault = {
@@ -44,15 +49,39 @@ const getTheme = computed(() => {
   if (props.theme) {
     return props.theme;
   }
-  if (props?.options) {
-    return props?.options?.find((x) => x.value === getValue.value)?.theme;
+  // 数组
+  if (Array.isArray(props?.options)) {
+    return (
+      props?.options?.find((x) => x.value === getValue.value)?.theme ??
+      'primary'
+    );
+  } else if (props.options) {
+    for (let [_label, val] of Object.entries(props.options)) {
+      if (typeof val === 'object') {
+        if (val.value === getValue.value) {
+          return val.theme ?? 'primary';
+        }
+      }
+    }
   }
+  // 对象或枚举
   return 'primary';
 });
 const color = computed(() => colorMap[getTheme.value as keyof typeof colorMap]);
 const getLabel = computed(() => {
-  if (props?.options) {
+  // 如果是数组
+  if (Array.isArray(props?.options)) {
     return props?.options?.find((x) => x.value === getValue.value)?.label;
+  } else if (props?.options) {
+    for (let [label, val] of Object.entries(props.options)) {
+      if (typeof val === 'object') {
+        if (val.value === getValue.value) {
+          return label;
+        }
+      } else if (val === getValue.value) {
+        return label;
+      }
+    }
   }
 
   return getValue.value;

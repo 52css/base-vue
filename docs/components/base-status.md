@@ -4,19 +4,37 @@
 
 ### 表格显示状态字段
 
+```ts
+export const OrderStatus = {
+  未下单: { value: 0, theme: 'default' },
+  已下单: { value: 1, theme: 'primary' },
+  已配送: { value: 2, theme: 'primary' },
+  已签收: { value: 3, theme: 'success' },
+  退货中: { value: 4, theme: 'danger' },
+};
+```
+
 ```html
-<!-- 接口返回的状态str -->
+<h3>值时状态str</h3>
 <base-status value="进行中" />
 
-<!-- 接口返回的状态 -->
+<h3>值时val + options</h3>
 <base-status
-  :value="2"
+  :value="status"
   :options="[
-    {label: '未开始', value: 0, theme: 'default'},
-    {label: '进行中', value: 1, theme: 'primary'},
-    {label: '已完成', value: 2, theme: 'success'},
-    {label: '失败', value: 3, theme: 'error'}
-  ]"
+      { label: '未开始', value: 0, theme: 'default' },
+      { label: '进行中', value: 1, theme: 'primary' },
+      { label: '已完成', value: 2, theme: 'success' },
+      { label: '失败', value: 3, theme: 'danger' },
+    ]"
+  @click="onStatusClick"
+/>
+
+<h3>值时val + enum</h3>
+<base-status
+  :value="orderStatus"
+  :options="OrderStatus"
+  @click="onOrderStatusClick"
 />
 ```
 
