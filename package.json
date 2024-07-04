@@ -18,6 +18,7 @@
     "@vitejs/plugin-vue": "^5.0.5",
     "@vitepress-demo-preview/component": "^2.3.2",
     "@vitepress-demo-preview/plugin": "^1.2.3",
+    "dayjs": "^1.11.11",
     "lodash-es": "^4.17.21",
     "tdesign-icons-vue-next": "^0.2.2",
     "tdesign-vue-next": "^1.9.6",
