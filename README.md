@@ -27,3 +27,4 @@ app.use(BaseVue);
 [ ] label 改造，支持对象 { label: 'xx', subLabel: 'xx', tips: 'xx'}
 [ ] table 支持不同类型的 `type`
 [ ] 增加`BaseTable`组件，为`Editable` 做准备
+[ ] (groupName) 兼容分组
