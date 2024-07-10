@@ -4,6 +4,7 @@ import { useComputed } from './hooks/use-computed';
 import { useDebounce } from './hooks/use-debounce';
 import { useEsc } from './hooks/use-esc';
 import { useDPI } from './hooks/use-dpi';
+import { useIntersectionObserver } from './hooks/use-intersection-observer';
 import { sleep } from './utils/sleep';
 import { registerBaseSearchComponent } from './components/base-search.vue';
 import { registerBaseButtonComponent } from './components/base-button.vue';
@@ -27,6 +28,7 @@ export {
   useDebounce,
   useEsc,
   useDPI,
+  useIntersectionObserver,
   sleep,
   registerBaseSearchComponent,
   registerBaseButtonComponent,

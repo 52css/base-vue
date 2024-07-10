@@ -1,5 +1,7 @@
 <script lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { toRef } from 'vue';
+import { useIntersectionObserver } from '../hooks/use-intersection-observer';
+
 export interface BaseIntersectionObserverProps {
   disabled?: boolean;
 }
@@ -7,8 +9,8 @@ export const BaseIntersectionObserverDefault = {
   disabled: false,
 };
 export interface BaseIntersectionObserverEmits {
-  (event: 'enter'): void;
-  (event: 'leave'): void;
+  (event: 'enter', entry: IntersectionObserverEntry): void;
+  (event: 'leave', entry: IntersectionObserverEntry): void;
   (event: 'observer', entry: IntersectionObserverEntry): void;
 }
 </script>
@@ -21,30 +23,18 @@ const emit = defineEmits<BaseIntersectionObserverEmits>();
 defineOptions({
   name: 'BaseIntersectionObserver',
 });
-const baseIntersectionObserverRef = ref();
-
-const ob = new IntersectionObserver(async (entries) => {
-  const entry = entries[0];
-  if (props.disabled) {
-    return;
-  }
-  emit('observer', entry)
-  // console.log('entry', entry.isIntersecting, loading.value, noMore.value)
-  if (!entry.isIntersecting) {
-    emit('leave');
-    return;
-  }
-  emit('enter');
-  // console.log('加载更多')
-});
-
-onMounted(async () => {
-  const element = baseIntersectionObserverRef.value;
-  element && ob.observe(element);
-});
-onBeforeUnmount(() => {
-  const element = baseIntersectionObserverRef.value;
-  element && ob.unobserve(element);
+const disabled = toRef(props, 'disabled')
+const baseIntersectionObserverRef = useIntersectionObserver({
+  disabled: disabled,
+  observer(entry) {
+    emit('observer', entry);
+  },
+  leave(entry) {
+    emit('leave', entry);
+  },
+  enter(entry) {
+    emit('enter', entry);
+  },
 });
 </script>
 
