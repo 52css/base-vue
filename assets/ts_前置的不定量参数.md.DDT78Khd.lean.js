@@ -1,0 +1,1 @@
+import{_ as s,X as i,M as a,aw as n}from"./chunks/framework.CUwuibFF.js";const c=JSON.parse('{"title":"前置的不定量参数","description":"","frontmatter":{},"headers":[],"relativePath":"ts/前置的不定量参数.md","filePath":"ts/前置的不定量参数.md"}'),h={name:"ts/前置的不定量参数.md"},k=n("",6),l=[k];function p(t,e,r,d,g,y){return a(),i("div",null,l)}const D=s(h,[["render",p]]);export{c as __pageData,D as default};

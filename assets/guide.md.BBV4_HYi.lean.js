@@ -1,1 +1,0 @@
-import{_ as s,X as a,M as i,av as e}from"./chunks/framework.DUyod95V.js";const m=JSON.parse('{"title":"指南","description":"","frontmatter":{},"headers":[],"relativePath":"guide.md","filePath":"guide.md"}'),n={name:"guide.md"},t=e("",8),l=[t];function r(h,p,d,k,o,c){return i(),a("div",null,l)}const b=s(n,[["render",r]]);export{m as __pageData,b as default};
