@@ -31,7 +31,7 @@ export default defineConfig({
 
     sidebar: getSidebar({
       contentRoot: '/docs',
-      contentDirs: ['components', 'hooks', 'vites', 'interview', 'software'],
+      contentDirs: ['components', 'hooks', 'vites', 'interview', 'ts', 'software'],
       collapsible: true,
       collapsed: false,
     }),
