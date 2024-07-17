@@ -16,7 +16,8 @@ defineOptions({
 </script>
 
 <template>
-  <base-image width="100" height="100" />
+  https://picsum.photos/640/360
+  <base-image width="640" height="360" />
   <div
     class="base-intersection-demo"
     style="
@@ -28,8 +29,8 @@ defineOptions({
   >
     <div style="height: 500px"></div>
     <base-image
-      width="100"
-      height="100"
+      width="640"
+      height="360"
       src="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png"
     >
     </base-image>
