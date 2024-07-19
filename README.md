@@ -27,4 +27,4 @@ app.use(BaseVue);
 [ ] table 支持不同类型的 `type`
 [ ] 增加`BaseTable`组件，为`Editable` 做准备
 
-## test
+## test1
