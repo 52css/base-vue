@@ -3,7 +3,7 @@
 git自动拉取配置
 
 ```sh
-git config pull.rebase false
+git config --global pull.rebase false 
 ```
 
 
