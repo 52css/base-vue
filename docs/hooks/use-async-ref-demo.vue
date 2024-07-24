@@ -22,7 +22,7 @@ const ajax1 = () =>
     }, 1000);
   });
 // 加载数据，并且设置数据为响应数据
-const data = useAsyncRef(ajax1);
+const [data] = useAsyncRef(ajax1);
 
 // 不自动加载数据，通过操作设置数据
 const [data2, setData2] = useAsyncRef(ajax1, {

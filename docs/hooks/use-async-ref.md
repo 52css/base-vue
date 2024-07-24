@@ -7,11 +7,11 @@
 ```ts
 // 没有参数
 const ajax1 = () => new Promise((resolve) => setTimeout(resolve, 200))
-const data1 = useAsyncRef(ajax1))
+const [data1] = useAsyncRef(ajax1))
 
 // 请求带参数
 const ajax2 = (timer) => new Promise((resolve) => setTimeout(resolve, timer))
-const data2 = useAsyncRef(() => ajax2(300)))
+const [data2] = useAsyncRef(() => ajax2(300)))
 ```
 
 ### 等到 xx 时机才触发
@@ -48,7 +48,27 @@ const onClick = () => {
 
 ### UseAsyncRefOptions
 
-| 参数         | 说明                                                                  | 类型      | 默认值      | 版本 |
-| ------------ | --------------------------------------------------------------------- | --------- | ----------- | ---- |
-| autoFetch    | 自动请求, 为`true`返回响应式数据，为`false`返回[`reactiveData`, `cb`] | `boolean` | `true`      |      |
-| defaultValue | 默认值                                                                | `any`     | `undefined` |      |
+| 参数         | 说明                                                                        | 类型      | 默认值      | 版本 |
+| ------------ | --------------------------------------------------------------------------- | --------- | ----------- | ---- |
+| autoFetch    | 自动请求, 为`true`返回响应式数据，为`false`返回[`reactiveData`, `cb`]       | `boolean` | `true`      |      |
+| defaultValue | 默认值                                                                      | `any`     | `undefined` |      |
+| setResponse  | `<R>(response: R, request: Record<string, any>, noMore: Ref<boolean>) => R` | `any`     | `x => x`    |      |
+
+### 返回类型
+
+```ts
+export type UseAsyncRefRun = (...args: any[]) => void;
+export type UseAsyncRefResponse<T> = [
+  Ref<UnwrapRef<T> | undefined>,
+  UseAsyncRefRun,
+  Ref<boolean>,
+  Ref<Error>,
+  Ref<boolean>
+] & {
+  data: Ref<UnwrapRef<T> | undefined>;
+  run: UseAsyncRefRun;
+  loading: Ref<boolean>;
+  err: Ref<Error>;
+  noMore: Ref<boolean>;
+};
+```
