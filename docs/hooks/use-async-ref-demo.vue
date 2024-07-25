@@ -19,7 +19,7 @@ const ajax1 = () =>
   new Promise((resolve) => {
     setTimeout(() => {
       resolve('ajax1');
-    }, 1000);
+    }, 200);
   });
 // 加载数据，并且设置数据为响应数据
 const [data] = useAsyncRef(ajax1);
@@ -30,12 +30,15 @@ const [data2, setData2] = useAsyncRef(ajax1, {
 });
 
 // 调用待参数
-const fetchUserById = (id) => new Promise((resolve) => setTimeout(() => resolve(id), 200));
+const fetchUserById = (params) =>
+  new Promise((resolve) => setTimeout(() => resolve(params.id), 200));
 const [user, setUser] = useAsyncRef(fetchUserById, { autoFetch: false });
-const id = ref(0)
+const id = ref(0);
 const onClick3 = () => {
   id.value += 1;
-  setUser(id.value);
+  setUser({
+    id: id.value,
+  });
 };
 </script>
 
