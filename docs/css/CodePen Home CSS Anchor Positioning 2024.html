@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodePen Home CSS Anchor Positioning 2024</title>
+    <style>
+      @import 'https://unpkg.com/normalize.css' layer(normalize);
+
+      @layer foundation {
+        *,
+        *:after,
+        *:before {
+          box-sizing: border-box;
+        }
+
+        body {
+          min-height: 200vh;
+          font-family: sans-serif, system-ui;
+        }
+        :root {
+          color-scheme: light only;
+          --alpha: 0.15;
+          --backdrop: white;
+          --line: color-mix(in lch, canvasText 25%, transparent);
+          --shadow: 0 0 0 1px rgba(0, 0, 0, 0.08),
+            0px 1px 1px rgba(0, 0, 0, 0.02),
+            0px 4px 8px -4px rgba(0, 0, 0, 0.04),
+            0px 16px 24px -8px rgba(0, 0, 0, 0.06);
+        }
+
+        :root:has([aria-pressed='true']) {
+          color-scheme: dark only;
+          --alpha: 0.3;
+          --backdrop: black;
+          --line: color-mix(in lch, canvasText 15%, transparent);
+          --shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.145),
+            0px 1px 1px rgba(0, 0, 0, 0.02),
+            0px 4px 8px -4px rgba(0, 0, 0, 0.04),
+            0px 16px 24px -8px rgba(0, 0, 0, 0.06);
+        }
+
+        :root:has([aria-pressed='true']) img {
+          filter: brightness(0.75);
+        }
+
+        body::before {
+          --size: 45px;
+          --line: color-mix(in lch, canvasText, transparent 70%);
+          content: '';
+          height: 100vh;
+          width: 100vw;
+          position: fixed;
+          background: linear-gradient(
+                90deg,
+                var(--line) 1px,
+                transparent 1px var(--size)
+              )
+              50% 50% / var(--size) var(--size),
+            linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50%
+              50% / var(--size) var(--size);
+          mask: linear-gradient(-20deg, transparent 50%, white);
+          top: 0;
+          transform-style: flat;
+          pointer-events: none;
+          z-index: -1;
+        }
+
+        .bear-link {
+          color: canvasText;
+          position: fixed;
+          top: 1rem;
+          left: 1rem;
+          width: 48px;
+          aspect-ratio: 1;
+          display: grid;
+          place-items: center;
+          border-radius: 12px;
+          opacity: 0.8;
+        }
+
+        :where(.x-link, .bear-link):is(:hover, :focus-visible) {
+          opacity: 1;
+        }
+
+        .bear-link svg {
+          width: 75%;
+        }
+
+        h1 {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          translate: -50% -50%;
+          margin: 0;
+          z-index: -1;
+        }
+
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border-width: 0;
+        }
+
+        [popovertarget] svg {
+          transition: rotate 0.2s, transform 0.2s;
+        }
+
+        [popover] {
+          margin: 0;
+          inset: unset;
+          border: 0;
+          padding: 4px;
+          border-radius: 6px;
+          box-shadow: var(--shadow);
+          background: var(--backdrop);
+        }
+
+        /*	Popover stuff */
+
+        ul {
+          margin: 0;
+          padding: 0;
+          list-style-type: none;
+        }
+
+        hr {
+          opacity: 0.25;
+        }
+
+        button {
+          width: 40px;
+          aspect-ratio: 1;
+          border-radius: 6px;
+          border: 0;
+          background: transparent;
+          cursor: pointer;
+          position: relative;
+        }
+
+        li,
+        a {
+          position: relative;
+        }
+
+        :is(button, li, a)::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: hsl(0 0% 50% / var(--alpha));
+          opacity: var(--intent, 0);
+          transition: opacity 0.2s;
+          border-radius: 6px;
+          pointer-events: none;
+        }
+
+        :is(button, li:not(:has(button, a)), a):is(:hover, :focus-visible) {
+          --intent: 1;
+        }
+
+        li {
+          white-space: nowrap;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          padding: 0 0.5rem;
+        }
+
+        li:has(button, a) {
+          padding: 0;
+        }
+
+        [popover] a {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          padding: 0 0.5rem;
+          text-decoration: none;
+          color: currentColor;
+        }
+
+        [type='search'] {
+          height: 100%;
+          text-align: left;
+          padding: 0;
+          border: 0;
+          background: transparent;
+        }
+
+        [type='search'] + svg {
+          opacity: 0.5;
+        }
+
+        [popover] button {
+          width: 100%;
+          height: 100%;
+          aspect-ratio: auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 0.5rem;
+        }
+
+        [popover] {
+          --speed: 0.5s;
+          opacity: 0;
+          scale: 0.9;
+          filter: blur(10px);
+          transition: display var(--speed) allow-discrete,
+            overlay var(--speed) allow-discrete, opacity var(--speed),
+            scale var(--speed), filter var(--speed);
+        }
+        [popover]:popover-open {
+          opacity: 1;
+          scale: 1;
+          filter: blur(0px);
+        }
+        @starting-style {
+          [popover]:popover-open {
+            opacity: 0;
+            scale: 0.9;
+            filter: blur(10px);
+          }
+        }
+      }
+
+      @layer theme {
+        .theme-toggle {
+          color: var(--color);
+          position: fixed;
+          top: 1rem;
+          right: 1rem;
+          width: 48px;
+          aspect-ratio: 1;
+          padding: 0;
+          border: 0;
+          display: grid;
+          place-items: center;
+          border-radius: 12px;
+          background: transparent;
+          transition: background 0.2s;
+          cursor: pointer;
+          z-index: 10;
+        }
+
+        .theme-toggle:is(:hover, :focus-visible) {
+          background: hsl(0 0% 90%);
+        }
+
+        .dark .theme-toggle:is(:hover, :focus-visible) {
+          background: hsl(0 0% 30%);
+        }
+
+        .theme-toggle[aria-pressed='true'] svg path:last-of-type {
+          display: block;
+        }
+
+        .theme-toggle svg {
+          color: currentColor;
+          width: 50%;
+        }
+
+        .theme-toggle[aria-pressed='true'] svg path:first-of-type,
+        .theme-toggle svg path:last-of-type {
+          display: none;
+        }
+
+        ::view-transition-group(root) {
+          animation-duration: 1.25s;
+        }
+        ::view-transition-new(root),
+        ::view-transition-old(root) {
+          mix-blend-mode: normal;
+        }
+
+        ::view-transition-new(root) {
+          z-index: 2;
+        }
+
+        ::view-transition-new(root) {
+          animation-name: reveal-light;
+        }
+
+        ::view-transition-old(root),
+        .dark::view-transition-old(root) {
+          animation: none;
+        }
+        .dark::view-transition-new(root) {
+          animation-name: reveal-dark;
+        }
+
+        @keyframes reveal-dark {
+          from {
+            clip-path: polygon(-30% 0, -30% 0, -15% 100%, -10% 115%);
+          }
+          to {
+            clip-path: polygon(-30% 0, 130% 0, 115% 100%, -10% 115%);
+          }
+        }
+
+        @keyframes reveal-light {
+          from {
+            clip-path: polygon(130% 0, 130% 0, 115% 100%, 110% 115%);
+          }
+          to {
+            clip-path: polygon(130% 0, -30% 0, -15% 100%, 110% 115%);
+          }
+        }
+      }
+
+      @layer cover {
+        .playing {
+          position: absolute;
+          width: 200px;
+          top: 40vh;
+          left: calc(50% - (20ch + 200px));
+          font-size: 14px;
+          border-radius: 6px;
+          display: grid;
+          box-shadow: var(--shadow);
+        }
+        .playing img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          aspect-ratio: 1;
+          border-radius: 6px 6px 0 0;
+        }
+        .details {
+          display: grid;
+          gap: 0.25rem;
+          font-weight: 600;
+        }
+        .details div:last-of-type {
+          font-size: 12px;
+          font-weight: 200;
+        }
+        .playing__meta {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0.25rem calc(4px + 0.5rem);
+          padding-right: 0.25rem;
+          background: var(--backdrop);
+          border-radius: 0 0 6px 6px;
+          min-height: 40px;
+        }
+        .playing__meta svg {
+          width: 20px;
+          rotate: 90deg;
+        }
+      }
+
+      :root:has(#context:popover-open) [popovertarget='context'] svg {
+        rotate: 270deg;
+      }
+      :root:has(#share:popover-open) [popovertarget='share'] svg,
+      :root:has(#playlist:popover-open) [popovertarget='playlist'] svg {
+        rotate: 270deg;
+      }
+
+      @supports (anchor-name: --anchor) {
+        [popovertarget='context'] {
+          anchor-name: --anchor;
+        }
+        #context {
+          position-anchor: --anchor;
+        }
+
+        [popovertarget='share'] {
+          anchor-name: --share;
+        }
+        #share {
+          position-anchor: --share;
+        }
+
+        [popovertarget='playlist'] {
+          anchor-name: --playlist;
+        }
+        #playlist {
+          position-anchor: --playlist;
+        }
+
+        [popover] {
+          inset: unset;
+          /*	  inset-area: bottom right;*/
+          top: anchor(top);
+          left: anchor(right);
+          position-try-options: flip-block, flip-inline;
+          position-try-fallbacks: flip-block, flip-inline;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>drag && scroll.</h1>
+    <button aria-pressed="false" class="theme-toggle">
+      <svg
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"
+        />
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+        />
+      </svg>
+      <span class="sr-only">Toggle Theme</span>
+    </button>
+    <a
+      class="bear-link"
+      href="https://twitter.com/intent/follow?screen_name=jh3yy"
+      target="_blank"
+      rel="noreferrer noopener"
+    >
+      <svg
+        class="w-9"
+        viewBox="0 0 969 955"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="161.191"
+          cy="320.191"
+          r="133.191"
+          stroke="currentColor"
+          stroke-width="20"
+        ></circle>
+        <circle
+          cx="806.809"
+          cy="320.191"
+          r="133.191"
+          stroke="currentColor"
+          stroke-width="20"
+        ></circle>
+        <circle
+          cx="695.019"
+          cy="587.733"
+          r="31.4016"
+          fill="currentColor"
+        ></circle>
+        <circle
+          cx="272.981"
+          cy="587.733"
+          r="31.4016"
+          fill="currentColor"
+        ></circle>
+        <path
+          d="M564.388 712.083C564.388 743.994 526.035 779.911 483.372 779.911C440.709 779.911 402.356 743.994 402.356 712.083C402.356 680.173 440.709 664.353 483.372 664.353C526.035 664.353 564.388 680.173 564.388 712.083Z"
+          fill="currentColor"
+        ></path>
+        <rect
+          x="310.42"
+          y="448.31"
+          width="343.468"
+          height="51.4986"
+          fill="#FF1E1E"
+        ></rect>
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M745.643 288.24C815.368 344.185 854.539 432.623 854.539 511.741H614.938V454.652C614.938 433.113 597.477 415.652 575.938 415.652H388.37C366.831 415.652 349.37 433.113 349.37 454.652V511.741L110.949 511.741C110.949 432.623 150.12 344.185 219.845 288.24C289.57 232.295 384.138 200.865 482.744 200.865C581.35 200.865 675.918 232.295 745.643 288.24Z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    </a>
+    <div class="playing">
+      <img
+        src="https://i.discogs.com/RzrH60n8QsiPTGHcQuofxn61a0FvoTwgwehWYQ3eY8s/rs:fit/g:sm/q:90/h:420/w:426/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ0MTI3/NDctMTM2NDIxMzQw/NC0zNDYxLmpwZWc.jpeg"
+        alt="Album cover for 'Daft Punk: Random Access Memories'"
+      />
+      <div class="playing__meta">
+        <div class="details">
+          <div>The Cell</div>
+          <div>C2C</div>
+        </div>
+        <div class="actions">
+          <button popovertarget="context" id="anchor">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                fill="none"
+                stroke-width="2"
+                stroke-linejoin="round"
+                d="M4.5 15.75l7.5-7.5 7.5 7.5"
+              />
+            </svg>
+            <span class="sr-only">Toggle menu</span>
+          </button>
+          <nav popover="auto" id="context" anchor="anchor">
+            <ul>
+              <li>Add to queue</li>
+              <hr />
+              <li>Go to song radio</li>
+              <li>Go to artist</li>
+              <li>Go to album</li>
+              <hr />
+              <li>Save to your Liked Songs</li>
+              <li>
+                <button popovertarget="playlist" id="playlist-anchor">
+                  <span>Add to playlist</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      fill="none"
+                      stroke-width="2"
+                      stroke-linejoin="round"
+                      d="M4.5 15.75l7.5-7.5 7.5 7.5"
+                    />
+                  </svg>
+                </button>
+              </li>
+              <hr />
+              <li>
+                <button popovertarget="share" id="share-anchor">
+                  <span>Share</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      fill="none"
+                      stroke-width="2"
+                      stroke-linejoin="round"
+                      d="M4.5 15.75l7.5-7.5 7.5 7.5"
+                    />
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </nav>
+          <div popover="auto" id="share" anchor="share-anchor">
+            <ul>
+              <li>
+                <a
+                  href="https://twitter.com/intent/follow?screen_name=jh3yy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Share on X</a
+                >
+              </li>
+              <li>Copy Song Link</li>
+              <li>Embed track</li>
+            </ul>
+          </div>
+          <div popover="auto" id="playlist" anchor="playlist-anchor">
+            <ul>
+              <li>
+                <input type="search" placeholder="Find a playlist" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    fill="none"
+                    stroke="var(--text-1)"
+                    stroke-linejoin="round"
+                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                  />
+                </svg>
+              </li>
+              <li>Create playlist</li>
+              <hr />
+              <li>Lofi</li>
+              <li>Chill</li>
+              <li>Liked</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      import gsap from 'https://cdn.skypack.dev/gsap@3.12.0';
+      import { Draggable } from 'https://cdn.skypack.dev/gsap@3.12.0/Draggable';
+
+      gsap.registerPlugin(Draggable);
+
+      const cover = document.querySelector('.playing');
+      Draggable.create(cover, {
+        type: 'top,left',
+      });
+
+      // View Transition extras
+      const TOGGLE = document.querySelector('.theme-toggle');
+
+      const SWITCH = () => {
+        const isDark = TOGGLE.matches('[aria-pressed=true]') ? false : true;
+        TOGGLE.setAttribute('aria-pressed', isDark);
+        document.documentElement.className = isDark ? 'dark' : 'light';
+      };
+
+      const TOGGLE_THEME = () => {
+        if (!document.startViewTransition) SWITCH();
+        document.startViewTransition(SWITCH);
+      };
+
+      TOGGLE.addEventListener('click', TOGGLE_THEME);
+    </script>
+  </body>
+</html>
