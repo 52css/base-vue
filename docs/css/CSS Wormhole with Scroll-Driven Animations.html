@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Wormhole with Scroll-Driven Animations</title>
+    <style>
+      /* See https://brm.us/css-scroll-velocity for details */
+
+      @property --y-pos {
+        syntax: '<number>';
+        inherits: true;
+        initial-value: 0;
+      }
+      @property --delayed-y-pos {
+        syntax: '<number>';
+        inherits: true;
+        initial-value: 0;
+      }
+      @property --x-pos {
+        syntax: '<number>';
+        inherits: true;
+        initial-value: 0;
+      }
+      @property --delayed-x-pos {
+        syntax: '<number>';
+        inherits: true;
+        initial-value: 0;
+      }
+
+      @keyframes adjust-y-pos {
+        to {
+          --y-pos: 1;
+          --delayed-y-pos: 1;
+        }
+      }
+
+      @keyframes adjust-x-pos {
+        to {
+          --x-pos: 1;
+          --delayed-x-pos: 1;
+        }
+      }
+
+      html {
+        animation: adjust-x-pos linear, adjust-y-pos linear;
+        animation-timeline: scroll(nearest inline), scroll(nearest block);
+      }
+
+      .box {
+        border-radius: 50%;
+        transition: --delayed-y-pos 0.15s linear, --delayed-x-pos 0.15s linear;
+        --y-velocity: calc(var(--y-pos) - var(--delayed-y-pos));
+        --y-direction: sign(var(--y-velocity));
+        --x-velocity: calc(var(--x-pos) - var(--delayed-x-pos));
+        --x-direction: sign(var(--x-velocity));
+        transform-origin: 50% 50%;
+        transform: translateY(calc(var(--y-velocity) * -10%))
+          translateX(calc(var(--x-velocity) * -10%))
+          /* rotate(calc(var(--y-velocity) * -10deg)) */;
+      }
+
+      .box {
+        width: 90%;
+        aspect-ratio: 1;
+        padding: 5%;
+        background: rgb(0 0 0 / 0.15);
+        pointer-events: none;
+        overflow: hidden;
+
+        @media (prefers-color-scheme: dark) {
+          background: rgb(255 255 255 / 0.15);
+        }
+      }
+
+      body > .box {
+        position: fixed;
+        width: 70vmin;
+        padding: 5vmin;
+        left: 50%;
+        top: 50%;
+        translate: -50% -50%;
+      }
+
+      html,
+      body {
+        overscroll-behavior: contain;
+      }
+
+      body {
+        height: 500vh;
+        width: 500vh;
+      }
+
+      html {
+        color-scheme: light dark;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="box">
+        <div class="box">
+          <div class="box">
+            <div class="box">
+              <div class="box">
+                <div class="box">
+                  <div class="box">
+                    <div class="box">
+                      <div class="box">
+                        <div class="box">
+                          <div class="box">
+                            <div class="box">
+                              <div class="box">
+                                <div class="box">
+                                  <div class="box"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

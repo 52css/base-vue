@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>纯 CSS 检测滚动的速度和方向</title>
+    <style>
+      html,
+      body {
+        scroll-behavior: smooth;
+      }
+      @property --scroll-position {
+        syntax: '<number>';
+        inherits: true;
+        initial-value: 0;
+      }
+      @property --scroll-position-delayed {
+        syntax: '<number>';
+        inherits: true;
+        initial-value: 0;
+      }
+      @property --scroll-velocity {
+        syntax: '<number>';
+        inherits: true;
+        initial-value: 0;
+      }
+      @keyframes adjust-pos {
+        to {
+          --scroll-position: 100;
+          --scroll-position-delayed: 100;
+        }
+      }
+      :root {
+        animation: adjust-pos 3s linear both;
+        animation-timeline: scroll();
+      }
+      body {
+        margin: 0;
+        transition: --scroll-position-delayed 0.15s linear;
+        --scroll-velocity: calc(
+          var(--scroll-position) - var(--scroll-position-delayed)
+        );
+        --scroll-dynamic: calc(var(--scroll-velocity) / var(--scroll-velocity));
+        --scroll-speed: max(
+          var(--scroll-velocity),
+          -1 * var(--scroll-velocity)
+        );
+        --scroll-direction: calc(var(--scroll-velocity) / var(--scroll-speed));
+      }
+      main {
+        padding: 10px;
+      }
+      .item {
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        gap: 10px;
+      }
+      .item::before,
+      .item::after {
+        content: '';
+        height: 20px;
+        border-radius: 4px;
+        width: 85%;
+        background-color: #e4ccff;
+      }
+      .item::after {
+        width: 50%;
+      }
+      .item:nth-child(odd)::before {
+        width: 100%;
+      }
+      .item:nth-child(odd)::after {
+        width: 70%;
+      }
+      .debug {
+        position: fixed;
+        padding: 15px;
+        width: 300px;
+        background: #fff;
+        border: 1px solid royalblue;
+        font-size: 16px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        counter-reset: scroll-position calc(var(--scroll-position) * 1)
+          scroll-position-delayed calc(var(--scroll-position-delayed) * 1)
+          scroll-velocity calc(var(--scroll-velocity) * 1) scroll-dynamic
+          calc(var(--scroll-dynamic) * 1) scroll-direction
+          calc(var(--scroll-direction) * 1);
+      }
+      [data-id='--scroll-position']::after {
+        content: '--scroll-position: ' counter(scroll-position);
+      }
+      [data-id='--scroll-position-delayed']::after {
+        content: '--scroll-position-delayed: ' counter(scroll-position-delayed);
+      }
+      [data-id='--scroll-velocity']::after {
+        content: '--scroll-velocity: ' counter(scroll-velocity);
+      }
+      [data-id='--scroll-dynamic']::after {
+        content: '--scroll-dynamic: ' counter(scroll-dynamic);
+      }
+      [data-id='--scroll-direction']::after {
+        content: '--scroll-direction: ' counter(scroll-direction);
+      }
+      .back {
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E %3Cpath fill='%23fff' d='M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z'%3E%3C/path%3E %3C/svg%3E")
+          center/ 20px no-repeat royalblue;
+        border-radius: 8px;
+        width: 60px;
+        height: 60px;
+        transform: scaleY(var(--scroll-direction));
+      }
+    </style>
+  </head>
+  <body>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <a class="back" href="#"></a>
+    <div class="debug">
+      <div data-id="--scroll-position"></div>
+      <div data-id="--scroll-position-delayed"></div>
+      <div data-id="--scroll-velocity"></div>
+      <div data-id="--scroll-dynamic"></div>
+      <div data-id="--scroll-direction"></div>
+    </div>
+  </body>
+</html>
