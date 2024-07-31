@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SVG中的paint-order现在也支持普通文本了</title>
+    <style>
+      html,
+      body {
+        font-family: -apple-system, 'BlinkMacSystemFont', sans-serif;
+        margin: 0;
+        height: 100%;
+        display: flex;
+        justify-content: safe center;
+        flex-direction: column;
+        align-items: center;
+        background: aliceblue;
+        gap: 20px;
+      }
+      .txt {
+        font-size: 60px;
+        font-weight: normal;
+        color: #ffe8a3;
+        margin: 0;
+        -webkit-text-stroke: 4px #9747ff;
+        paint-order: stroke;
+      }
+      p {
+        padding: 0 0.5em;
+        width: 300px;
+        outline: 1px dashed #9747ff;
+        overflow: hidden;
+        resize: horizontal;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="txt">前端侦探</h1>
+    <p class="txt">欢迎关注前端侦探</p>
+  </body>
+</html>
