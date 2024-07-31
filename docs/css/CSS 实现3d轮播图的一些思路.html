@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS 实现3d轮播图的一些思路</title>
+    <style>
+      html,
+      body {
+        font-family: -apple-system, 'BlinkMacSystemFont', sans-serif;
+        margin: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        background: aliceblue;
+        gap: 10px;
+        counter-reset: num;
+      }
+      @property --index {
+        syntax: '<number>';
+        initial-value: 0;
+        inherits: false;
+      }
+      .item {
+        position: absolute;
+        display: grid;
+        place-content: center;
+        width: 100px;
+        height: 100px;
+        border-radius: 8px;
+        background-color: #3e65ff;
+        color: #fff;
+        font-size: 30px;
+        counter-increment: num;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+        filter: hue-rotate(calc(var(--i) * 20deg));
+
+        /* transform: translate(var(--x), var(--y)) scale(var(--scale)); */
+        /* transition: .3s --x, .3s --y, .3s --scale; */
+        transition: 0.3s;
+      }
+      .item-wrap {
+        display: contents;
+        animation: slide 12s calc(-2s * var(--i)) steps(6) infinite;
+      }
+      .item::before {
+        content: counter(num);
+      }
+      @keyframes slide {
+        0% {
+          --index: 0;
+        }
+        100% {
+          --index: 6;
+        }
+      }
+      @container style(--index: 0) {
+        .item {
+          transform: translate(0, 0) scale(1);
+          z-index: 4;
+        }
+      }
+      @container style(--index: 1) {
+        .item {
+          transform: translate(120%, -30%) scale(0.9);
+          z-index: 3;
+        }
+      }
+      @container style(--index: 2) {
+        .item {
+          transform: translate(100%, -70%) scale(0.8);
+          z-index: 2;
+        }
+      }
+      @container style(--index: 3) {
+        .item {
+          transform: translate(0, -90%) scale(0.7);
+          z-index: 1;
+        }
+      }
+      @container style(--index: 4) {
+        .item {
+          transform: translate(-100%, -70%) scale(0.8);
+          z-index: 2;
+        }
+      }
+      @container style(--index: 5) {
+        .item {
+          transform: translate(-120%, -30%) scale(0.9);
+          z-index: 3;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="item-wrap" style="--i: 0">
+      <div class="item"></div>
+    </div>
+    <div class="item-wrap" style="--i: 1">
+      <div class="item"></div>
+    </div>
+    <div class="item-wrap" style="--i: 2">
+      <div class="item"></div>
+    </div>
+    <div class="item-wrap" style="--i: 3">
+      <div class="item"></div>
+    </div>
+    <div class="item-wrap" style="--i: 4">
+      <div class="item"></div>
+    </div>
+    <div class="item-wrap" style="--i: 5">
+      <div class="item"></div>
+    </div>
+  </body>
+</html>
