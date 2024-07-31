@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS align-content也能适用于普通容器了</title>
+    <style>
+      html,
+      body {
+        font-family: -apple-system, 'BlinkMacSystemFont', sans-serif;
+        margin: 0;
+        height: 100%;
+        display: flex;
+        justify-content: safe center;
+        flex-direction: column;
+        align-items: center;
+        background: aliceblue;
+        gap: 20px;
+      }
+      textarea {
+        padding: 10px;
+        align-content: safe center;
+        flex-shrink: 0;
+      }
+      .con {
+        border-radius: 4px;
+        padding: 10px;
+        width: 100px;
+        height: 100px;
+        background: #ffd75a;
+        align-content: center;
+        list-style-position: inside;
+        flex-shrink: 0;
+      }
+      .flex {
+        display: flex;
+        width: 400px;
+        height: 300px;
+        outline: 1px dashed #9747ff;
+        align-content: center;
+        flex-wrap: wrap;
+      }
+      .item {
+        display: inline-flex;
+        width: 80px;
+        margin: 10px;
+        aspect-ratio: 1/1;
+        background: #ffe8a3;
+        color: #333;
+        font-size: 30px;
+        border-radius: 10px;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+    </div>
+    <div class="con">欢迎关注前端侦探</div>
+    <ol class="con">
+      <li>欢迎</li>
+      <li>关注</li>
+      <li>前端侦探</li>
+    </ol>
+    <textarea rows="3">欢迎关注前端侦探</textarea>
+  </body>
+</html>
