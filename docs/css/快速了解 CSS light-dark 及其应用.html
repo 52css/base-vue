@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>快速了解 CSS light-dark 及其应用</title>
+    <style>
+      html,
+      body {
+        font-family: -apple-system, 'BlinkMacSystemFont', sans-serif;
+        margin: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
+      body {
+        background: var(--bg);
+        color: var(--color);
+      }
+      fieldset {
+        border: 0;
+      }
+      :root {
+        --bg: light-dark(aliceblue, #000);
+        --color: light-dark(#000, #fff);
+        --primary-red: light-dark(rgb(255, 69, 69), rgb(119, 2, 2));
+        --primary-blue: light-dark(rgb(0, 68, 255), rgb(36, 36, 154));
+        --primary-green: light-dark(rgb(0, 214, 61), rgb(5, 94, 5));
+        --primary-color: var(--primary-red);
+      }
+      button {
+        border: 0;
+        font-size: 24px;
+        border-radius: 8px;
+        padding: 10px 24px;
+        color: #fff;
+        background: none;
+        overflow: hidden;
+        text-transform: uppercase;
+        background-color: var(--primary-color);
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      :has(#light:checked) {
+        body {
+          color-scheme: light;
+        }
+      }
+      :has(#dark:checked) {
+        body {
+          color-scheme: dark;
+        }
+      }
+      :has(#auto:checked) {
+        body {
+          color-scheme: light dark;
+        }
+      }
+      :has(#red:checked) {
+        body {
+          --primary-color: var(--primary-red);
+        }
+      }
+      :has(#blue:checked) {
+        body {
+          --primary-color: var(--primary-blue);
+        }
+      }
+      :has(#green:checked) {
+        body {
+          --primary-color: var(--primary-green);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <fieldset>
+      <label>主题色</label>
+      <input type="radio" name="color" value="red" id="red" checked /><label
+        for="red"
+        >红色</label
+      >
+      <input type="radio" name="color" value="blue" id="blue" /><label
+        for="blue"
+        >蓝色</label
+      >
+      <input type="radio" name="color" value="green" id="green" /><label
+        for="green"
+        >绿色</label
+      >
+    </fieldset>
+    <fieldset>
+      <label>黑暗/白天模式</label>
+      <input type="radio" name="theme" value="light" id="light" checked /><label
+        for="light"
+        >白天</label
+      >
+      <input type="radio" name="theme" value="dark" id="dark" /><label
+        for="dark"
+        >黑夜</label
+      >
+      <input type="radio" name="theme" value="auto" id="auto" /><label
+        for="auto"
+        >自动</label
+      >
+    </fieldset>
+    <button>前端侦探</button>
+  </body>
+</html>
