@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS 锚点定位终于来了！</title>
+    <style>
+      html,
+      body {
+        font-family: -apple-system, 'BlinkMacSystemFont', sans-serif;
+        margin: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: aliceblue;
+        gap: 10px;
+      }
+      .btn {
+        border: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 4px;
+        anchor-name: --menu;
+        background: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 14.25a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5zm7 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5zM24.75 16a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0z' fill='%23191919'/%3E%3C/svg%3E")
+          center;
+      }
+      button:hover {
+        background-color: rgba(65, 105, 225, 0.2);
+      }
+      .menu {
+        position-anchor: --menu;
+        inset-area: bottom span-right;
+        background-color: #fff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+        border-radius: 4px;
+        border: 0;
+        margin: 0;
+      }
+      .item {
+        display: block;
+        width: -webkit-fill-available;
+        text-align: left;
+        border: 0;
+        padding: 2px 10px;
+        background-color: transparent;
+        font-size: 14px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <button
+      class="btn"
+      popovertarget="more"
+      style="position-anchor: --menu"
+    ></button>
+    <div
+      class="menu"
+      id="more"
+      popover
+      style="position-anchor: --menu; inset-area: bottom span-right"
+    >
+      <button class="item">编辑</button>
+      <button class="item">删除</button>
+      <button
+        class="item"
+        hidden
+        popovertarget="other"
+        style="anchor-name: --other"
+      >
+        其他 →
+      </button>
+      <div
+        class="menu"
+        id="other"
+        popover
+        style="position-anchor: --other; inset-area: right span-bottom"
+      >
+        <button class="item">还原</button>
+        <button class="item">保存</button>
+      </div>
+    </div>
+  </body>
+</html>
