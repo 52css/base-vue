@@ -2,42 +2,8 @@
 
 ## 使用场景
 
-### 初始化加载数据
-
-```ts
-// 没有参数
-const ajax1 = () => new Promise((resolve) => setTimeout(resolve, 200))
-const [data1] = useAsyncRef(ajax1))
-
-// 请求带参数
-const ajax2 = (timer) => new Promise((resolve) => setTimeout(resolve, timer))
-const [data2] = useAsyncRef(() => ajax2(300)))
-```
-
-### 等到 xx 时机才触发
-
-```ts
-const ajax1 = () => new Promise((resolve) => setTimeout(resolve, 200));
-const [data1, setData1] = useAsyncRef(ajax1, { autoFetch: false });
-const onClick = () => {
-  setData1();
-};
-```
-
-### 等到 xx 时机才触发, 需要传递参数
-
-```ts
-const fetchUserById = (params) =>
-  new Promise((resolve) => setTimeout(() => resolve(params.id), 200));
-const [user, setUser] = useAsyncRef(fetchUserById, { autoFetch: false });
-const id = ref(0);
-const onClick3 = () => {
-  id.value += 1;
-  setUser({
-    id: id.value,
-  });
-};
-```
+* 初始化加载数据
+* 等待xx时机触发加载
 
 ## Demo
 

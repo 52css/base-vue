@@ -40,37 +40,45 @@ export const useAsyncRef = <T>(
   // 增加状态
   const pagination = ref({
     pageNum: 1,
-    pageSize: 20,
+    pageSize: 10,
     total: 0,
+    isFirst: false,
     isLast: false,
   });
 
   const run = (params?: UseAsyncRefRunParams) => {
-    if (loading.value || err.value || pagination.value.isLast) {
+    const pageNum = params?.pageNum ?? pagination.value.pageNum;
+    const pageSize = params?.pageSize ?? pagination.value.pageSize;
+    if (
+      pageNum !== 1 &&
+      (loading.value || err.value || pagination.value.isLast)
+    ) {
       return;
     }
     loading.value = true;
     fn({
       ...params,
-      pageNum: params?.pageNum ?? pagination.value.pageNum,
-      pageSize: params?.pageSize ?? pagination.value.pageSize,
+      pageNum,
+      pageSize,
     })
       .then((res) => {
         if (res.total) {
           const currentList = res.data ?? [];
-          const currentPageNum = params?.pageNum ?? pagination.value.pageNum;
           // 如果指定了页码或者第一页，返回当前页数据
           const list =
-            currentPageNum === 1 || params?.pageNum
+            pageNum === 1
               ? currentList
               : [...(data.value as any[]), ...currentList];
+          const isFirst = pageNum === 1
           const isLast = list.length >= res.total;
 
           pagination.value = {
             ...pagination.value,
-            pageNum: currentPageNum + 1,
-            isLast
-          }
+            total: res.total,
+            isFirst,
+            isLast,
+          };
+          data.value = list;
         } else {
           data.value = res;
         }

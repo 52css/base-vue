@@ -1,6 +1,6 @@
 {
   "name": "@52css/base-vue",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -20,6 +20,7 @@
     "@vitepress-demo-preview/plugin": "^1.2.3",
     "dayjs": "^1.11.11",
     "lodash-es": "^4.17.21",
+    "mockjs": "^1.1.0",
     "tdesign-icons-vue-next": "^0.2.2",
     "tdesign-vue-next": "^1.9.6",
     "vite": "^5.3.1",
