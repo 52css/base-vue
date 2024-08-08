@@ -1,6 +1,6 @@
 <script lang="ts">
 import Mock from 'mockjs';
-import { ref } from 'vue';
+import { computed } from 'vue';
 import { useAsyncRef } from '../../src';
 export interface UseAsyncRefDemoProps {
   prop1?: string;
@@ -68,9 +68,27 @@ defineOptions({
   name: 'UseAsyncRefDemo',
 });
 // 初始化调用的数据
-const [list] = useAsyncRef((pagination) => getUserList({ ...pagination }), {
+const {
+  data: list,
+  run: listRun,
+  pagination: listPagination,
+  loading: listLoading,
+  err: listErr,
+} = useAsyncRef((pagination) => getUserList({ ...pagination }), {
   defaultValue: [] as UserListItem[],
 });
+const getListDisabled = computed(() => {
+  return listPagination.value.isLast || listLoading.value || !!listErr.value;
+});
+const onLoadNext = () => {
+  if (getListDisabled.value) {
+    return;
+  }
+  listRun({
+    pageNum: listPagination.value.pageNum + 1,
+    pageSize: listPagination.value.pageSize,
+  });
+};
 const [user, userRun, userLoading] = useAsyncRef(
   ({ id }) => getUserById({ id }),
   {
@@ -91,6 +109,7 @@ const onUserClick = (item) => {
       {{ item.name }} / {{ item.gender }}
     </li>
   </ul>
+  <button :disabled="getListDisabled" @click="onLoadNext">加载下一页</button>
   <h3>点击item，后获取的项</h3>
   user:
   <template v-if="userLoading"> Loading... </template>

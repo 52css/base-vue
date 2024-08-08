@@ -26,12 +26,22 @@
 ### 返回类型
 
 ```ts
+
 export type UseAsyncRefFnParams = {
   pageNum: number;
   pageSize: number;
   [key: string]: any;
 };
 export type UseAsyncRefFn = (params: UseAsyncRefFnParams) => Promise<any>;
+
+export type UseAsyncRefPagination = {
+  pageSize: number;
+  pageNum: number;
+  total: number;
+  isFirst: boolean;
+  isLast: boolean;
+};
+
 export type UseAsyncRefOptions<T> = {
   autoFetch?: boolean;
   defaultValue?: T;
@@ -46,11 +56,13 @@ export type UseAsyncRefResponse<T> = [
   Ref<UnwrapRef<T> | undefined>,
   UseAsyncRefRun,
   Ref<boolean>,
+  Ref<UseAsyncRefPagination>,
   Ref<Error>
 ] & {
   data: Ref<UnwrapRef<T> | undefined>;
   run: UseAsyncRefRun;
   loading: Ref<boolean>;
+  pagination: Ref<UseAsyncRefPagination>;
   err: Ref<Error>;
 };
 ```

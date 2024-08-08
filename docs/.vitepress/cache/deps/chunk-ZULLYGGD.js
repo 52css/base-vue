@@ -127,7 +127,7 @@ function useSizeProps(size) {
 var use_size_props_default = useSizeProps;
 
 // node_modules/tdesign-icons-vue-next/esm/style/css.js
-import "/Users/wei/Projects/github/52css/base-vue/node_modules/tdesign-icons-vue-next/esm/style/index.css";
+import "/Users/a1-6/Projects/github/52css/base-vue/node_modules/tdesign-icons-vue-next/esm/style/index.css";
 
 // node_modules/tdesign-icons-vue-next/esm/components/activity.js
 function ownKeys2(object, enumerableOnly) {
@@ -94750,4 +94750,4 @@ export {
   IconFont2 as IconFont,
   Icon
 };
-//# sourceMappingURL=chunk-GIZSH33E.js.map
+//# sourceMappingURL=chunk-ZULLYGGD.js.map
