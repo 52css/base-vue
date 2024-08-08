@@ -16,7 +16,7 @@ export type UseAsyncRefPagination = {
 };
 
 export type UseAsyncRefOptions<T> = {
-  autoFetch?: boolean;
+  manual?: boolean;
   defaultValue?: T;
 };
 export type UseAsyncRefRunParams = {
@@ -43,7 +43,7 @@ export const useAsyncRef = <T>(
   fn: UseAsyncRefFn,
   options?: UseAsyncRefOptions<T>
 ): UseAsyncRefResponse<T> => {
-  const autoFetch = options?.autoFetch ?? true;
+  const manual = options?.manual ?? false;
   const defaultValue = options?.defaultValue;
   const data = ref<T | undefined>(defaultValue);
   const loading = ref(false);
@@ -102,7 +102,7 @@ export const useAsyncRef = <T>(
       });
   };
 
-  if (autoFetch) {
+  if (!manual) {
     run();
   }
 

@@ -92,7 +92,7 @@ const onLoadNext = () => {
 const [user, userRun, userLoading] = useAsyncRef(
   ({ id }) => getUserById({ id }),
   {
-    autoFetch: false,
+    manual: true,
   }
 );
 const onUserClick = (item) => {

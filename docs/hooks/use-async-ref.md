@@ -2,8 +2,8 @@
 
 ## 使用场景
 
-* 初始化加载数据
-* 等待xx时机触发加载
+- 初始化加载数据
+- 等待 xx 时机触发加载
 
 ## Demo
 
@@ -20,13 +20,12 @@
 
 | 参数         | 说明     | 类型      | 默认值      | 版本 |
 | ------------ | -------- | --------- | ----------- | ---- |
-| autoFetch    | 自动请求 | `boolean` | `true`      |      |
-| defaultValue | 默认值   | `any`     | `undefined` |      |
+| manual       | 手动请求 | `boolean` | `false`     |      |
+| defaultValue | 默认值   | `T`     | `undefined` |      |
 
 ### 返回类型
 
 ```ts
-
 export type UseAsyncRefFnParams = {
   pageNum: number;
   pageSize: number;
@@ -43,7 +42,7 @@ export type UseAsyncRefPagination = {
 };
 
 export type UseAsyncRefOptions<T> = {
-  autoFetch?: boolean;
+  manual?: boolean;
   defaultValue?: T;
 };
 export type UseAsyncRefRunParams = {
