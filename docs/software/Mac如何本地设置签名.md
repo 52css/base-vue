@@ -22,7 +22,7 @@ mkdir -p ~/.cert
 自动生成证书：
 
 ```sh
-mkcert -key-file ~/.cert/key.pem -cert-file ~/.cert/cert.pem localhost 192.168.101.146 192.168.101.29
+mkcert -key-file ~/.cert/key.pem -cert-file ~/.cert/cert.pem localhost 192.168.101.146 192.168.101.29 192.168.31.94 192.168.100.208
 ```
 
 让系统信任生成的证书：

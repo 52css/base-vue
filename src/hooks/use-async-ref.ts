@@ -6,8 +6,17 @@ export type UseAsyncRefFnParams = {
   [key: string]: any;
 };
 export type UseAsyncRefFn = (params: UseAsyncRefFnParams) => Promise<any>;
+
+export type UseAsyncRefPagination = {
+  pageSize: number;
+  pageNum: number;
+  total: number;
+  isFirst: boolean;
+  isLast: boolean;
+};
+
 export type UseAsyncRefOptions<T> = {
-  autoFetch?: boolean;
+  manual?: boolean;
   defaultValue?: T;
 };
 export type UseAsyncRefRunParams = {
@@ -20,11 +29,13 @@ export type UseAsyncRefResponse<T> = [
   Ref<UnwrapRef<T> | undefined>,
   UseAsyncRefRun,
   Ref<boolean>,
+  Ref<UseAsyncRefPagination>,
   Ref<Error>
 ] & {
   data: Ref<UnwrapRef<T> | undefined>;
   run: UseAsyncRefRun;
   loading: Ref<boolean>;
+  pagination: Ref<UseAsyncRefPagination>;
   err: Ref<Error>;
 };
 
@@ -32,7 +43,7 @@ export const useAsyncRef = <T>(
   fn: UseAsyncRefFn,
   options?: UseAsyncRefOptions<T>
 ): UseAsyncRefResponse<T> => {
-  const autoFetch = options?.autoFetch ?? true;
+  const manual = options?.manual ?? false;
   const defaultValue = options?.defaultValue;
   const data = ref<T | undefined>(defaultValue);
   const loading = ref(false);
@@ -69,7 +80,7 @@ export const useAsyncRef = <T>(
             pageNum === 1
               ? currentList
               : [...(data.value as any[]), ...currentList];
-          const isFirst = pageNum === 1
+          const isFirst = pageNum === 1;
           const isLast = list.length >= res.total;
 
           pagination.value = {
@@ -91,15 +102,16 @@ export const useAsyncRef = <T>(
       });
   };
 
-  if (autoFetch) {
+  if (!manual) {
     run();
   }
 
-  const rtv = [data, run, loading, err] as UseAsyncRefResponse<T>;
+  const rtv = [data, run, loading, pagination, err] as UseAsyncRefResponse<T>;
 
   rtv.data = data;
   rtv.run = run;
   rtv.loading = loading;
+  rtv.pagination = pagination;
   rtv.err = err;
 
   return rtv;

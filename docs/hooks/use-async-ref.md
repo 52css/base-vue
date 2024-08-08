@@ -2,8 +2,8 @@
 
 ## 使用场景
 
-* 初始化加载数据
-* 等待xx时机触发加载
+- 初始化加载数据
+- 等待 xx 时机触发加载
 
 ## Demo
 
@@ -20,8 +20,8 @@
 
 | 参数         | 说明     | 类型      | 默认值      | 版本 |
 | ------------ | -------- | --------- | ----------- | ---- |
-| autoFetch    | 自动请求 | `boolean` | `true`      |      |
-| defaultValue | 默认值   | `any`     | `undefined` |      |
+| manual       | 手动请求 | `boolean` | `false`     |      |
+| defaultValue | 默认值   | `T`     | `undefined` |      |
 
 ### 返回类型
 
@@ -32,8 +32,17 @@ export type UseAsyncRefFnParams = {
   [key: string]: any;
 };
 export type UseAsyncRefFn = (params: UseAsyncRefFnParams) => Promise<any>;
+
+export type UseAsyncRefPagination = {
+  pageSize: number;
+  pageNum: number;
+  total: number;
+  isFirst: boolean;
+  isLast: boolean;
+};
+
 export type UseAsyncRefOptions<T> = {
-  autoFetch?: boolean;
+  manual?: boolean;
   defaultValue?: T;
 };
 export type UseAsyncRefRunParams = {
@@ -46,11 +55,13 @@ export type UseAsyncRefResponse<T> = [
   Ref<UnwrapRef<T> | undefined>,
   UseAsyncRefRun,
   Ref<boolean>,
+  Ref<UseAsyncRefPagination>,
   Ref<Error>
 ] & {
   data: Ref<UnwrapRef<T> | undefined>;
   run: UseAsyncRefRun;
   loading: Ref<boolean>;
+  pagination: Ref<UseAsyncRefPagination>;
   err: Ref<Error>;
 };
 ```
