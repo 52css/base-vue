@@ -76,15 +76,15 @@ export const useAsyncRef = <T>(
         if (res.total) {
           const currentList = res.data ?? [];
           // 如果指定了页码或者第一页，返回当前页数据
-          const list =
-            pageNum === 1
-              ? currentList
-              : [...(data.value as any[]), ...currentList];
           const isFirst = pageNum === 1;
+          const list = isFirst
+            ? currentList
+            : [...(data.value as any[]), ...currentList];
           const isLast = list.length >= res.total;
 
           pagination.value = {
-            ...pagination.value,
+            pageNum,
+            pageSize,
             total: res.total,
             isFirst,
             isLast,
