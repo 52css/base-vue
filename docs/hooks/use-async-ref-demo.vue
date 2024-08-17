@@ -29,13 +29,22 @@ const users = Mock.mock({
   ],
 }).list;
 
+export type GetUserListRequest = {
+  pageNum;
+  pageSize;
+};
+export type GetUserListResponse = {
+  total: number;
+  data: UserListItem[];
+};
+
 export async function getUserList({
   pageNum,
   pageSize,
 }: {
   pageNum: number;
   pageSize: number;
-}): Promise<{ total: number; data: UserListItem[] }> {
+}): Promise<GetUserListResponse> {
   return new Promise((resolve) => {
     setTimeout(() => {
       const total = users.length;
@@ -74,9 +83,15 @@ const {
   pagination: listPagination,
   loading: listLoading,
   err: listErr,
-} = useAsyncRef((pagination) => getUserList({ ...pagination }), {
-  defaultValue: [] as UserListItem[],
-});
+} = useAsyncRef<GetUserListResponse, GetUserListRequest>(
+  (pagination) => getUserList({ ...pagination }),
+  {
+    defaultValue: {
+      total: 0,
+      data: [] as UserListItem[],
+    },
+  }
+);
 const getListDisabled = computed(() => {
   return listPagination.value.isLast || listLoading.value || !!listErr.value;
 });
@@ -105,7 +120,11 @@ const onUserClick = (item) => {
 <template>
   <h3>初始化加载数据</h3>
   <ul>
-    <li v-for="item in list" :key="item.id" @click="() => onUserClick(item)">
+    <li
+      v-for="item in list?.data"
+      :key="item.id"
+      @click="() => onUserClick(item)"
+    >
       {{ item.name }} / {{ item.gender }}
     </li>
   </ul>

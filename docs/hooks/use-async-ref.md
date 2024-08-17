@@ -11,27 +11,22 @@
 
 ## API
 
-| 参数    | 说明     | 类型                                            | 默认值 | 版本 |
-| ------- | -------- | ----------------------------------------------- | ------ | ---- |
-| fn      | 传递参数 | `(params: UseAsyncRefFnParams) => Promise<any>` | \-     |      |
-| options | 配置参数 | `UseAsyncRefOptions`                            | \-     |      |
+| 参数    | 说明     | 类型                                  | 默认值 | 版本 |
+| ------- | -------- | ------------------------------------- | ------ | ---- |
+| fn      | 传递参数 | `(params: TParams) => Promise<TData>` | \-     |      |
+| options | 配置参数 | `UseAsyncRefOptions`                  | \-     |      |
 
 ### UseAsyncRefOptions
 
 | 参数         | 说明     | 类型      | 默认值      | 版本 |
 | ------------ | -------- | --------- | ----------- | ---- |
 | manual       | 手动请求 | `boolean` | `false`     |      |
-| defaultValue | 默认值   | `T`     | `undefined` |      |
+| defaultValue | 默认值   | `T`       | `undefined` |      |
 
 ### 返回类型
 
 ```ts
-export type UseAsyncRefFnParams = {
-  pageNum: number;
-  pageSize: number;
-  [key: string]: any;
-};
-export type UseAsyncRefFn = (params: UseAsyncRefFnParams) => Promise<any>;
+export type UseAsyncRefFn<TData, TParams> = (params: TParams) => Promise<TData>;
 
 export type UseAsyncRefPagination = {
   pageSize: number;
@@ -41,25 +36,20 @@ export type UseAsyncRefPagination = {
   isLast: boolean;
 };
 
-export type UseAsyncRefOptions<T> = {
+export type UseAsyncRefOptions<TData> = {
   manual?: boolean;
-  defaultValue?: T;
+  defaultValue?: TData;
 };
-export type UseAsyncRefRunParams = {
-  pageNum?: number;
-  pageSize?: number;
-  [key: string]: any;
-};
-export type UseAsyncRefRun = (params?: UseAsyncRefRunParams) => void;
-export type UseAsyncRefResponse<T> = [
-  Ref<UnwrapRef<T> | undefined>,
-  UseAsyncRefRun,
+
+export type UseAsyncRefResponse<TData, TParams> = [
+  Ref<UnwrapRef<TData> | undefined>,
+  (params?: TParams) => void,
   Ref<boolean>,
   Ref<UseAsyncRefPagination>,
   Ref<Error>
 ] & {
-  data: Ref<UnwrapRef<T> | undefined>;
-  run: UseAsyncRefRun;
+  data: Ref<UnwrapRef<TData> | undefined>;
+  run: (params?: TParams) => void;
   loading: Ref<boolean>;
   pagination: Ref<UseAsyncRefPagination>;
   err: Ref<Error>;

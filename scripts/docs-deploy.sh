@@ -21,6 +21,6 @@ git commit -m 'deploy'
 
 # 如果你是要部署到 https://<USERNAME>.github.io/<REPO>
 # git push -f git@github.com:52css/base-vue.git master:gh-pages
-git push -f https://github.com/52css/base-vue.git master:gh-pages
+git push -f https://github.com/52css/base-vue.git HEAD:gh-pages
 
 # cd -
