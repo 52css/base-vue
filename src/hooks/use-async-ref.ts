@@ -1,4 +1,4 @@
-import { ref, Ref, UnwrapRef } from 'vue';
+import { ref, Ref, UnwrapRef, watch } from 'vue';
 
 export type UseAsyncRefFn<TData, TParams> = (params: TParams) => Promise<TData>;
 
@@ -13,6 +13,25 @@ export type UseAsyncRefPagination = {
 export type UseAsyncRefOptions<TData> = {
   manual?: boolean;
   defaultValue?: TData;
+  cacheKey?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  refreshDeps?: any[];
+};
+
+const storage = {
+  get(key: string, defaultValue: any) {
+    const value = localStorage.getItem(key);
+    if (value) {
+      return JSON.parse(value);
+    }
+    return defaultValue;
+  },
+  set(key: string, value: any) {
+    localStorage.setItem(key, JSON.stringify(value));
+  },
+  has(key: string) {
+    return localStorage.getItem(key) !== null;
+  },
 };
 
 export type UseAsyncRefResponse<TData, TParams> = [
@@ -41,7 +60,9 @@ export const useAsyncRef = <
   options?: UseAsyncRefOptions<TData>
 ): UseAsyncRefResponse<TData, TParams> => {
   const manual = options?.manual ?? false;
-  const defaultValue = options?.defaultValue;
+  const defaultValue = options?.cacheKey
+    ? storage.get(options.cacheKey, options?.defaultValue)
+    : options?.defaultValue;
   const data = ref<TData | undefined>(defaultValue);
   const loading = ref(false);
   const err = ref();
@@ -93,11 +114,21 @@ export const useAsyncRef = <
             isFirst,
             isLast,
           };
+          if (options?.cacheKey) {
+            storage.set(options.cacheKey, {
+              total: res.total,
+              data: list,
+            });
+          }
+
           data.value = {
             total: res.total,
             data: list,
           } as TData;
         } else {
+          if (options?.cacheKey) {
+            storage.set(options.cacheKey, res);
+          }
           data.value = res;
         }
       })
@@ -112,6 +143,14 @@ export const useAsyncRef = <
   if (!manual) {
     run();
   }
+
+  // 增加依赖变更监听
+  watch(
+    () => options?.refreshDeps,
+    () => {
+      run();
+    }
+  );
 
   const rtv = [data, run, loading, pagination, err] as UseAsyncRefResponse<
     TData,
