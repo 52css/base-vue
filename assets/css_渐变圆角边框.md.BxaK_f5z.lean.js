@@ -1,0 +1,1 @@
+import{_ as e,X as t,M as s}from"./chunks/framework.BFDeQwB9.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"css/渐变圆角边框.md","filePath":"css/渐变圆角边框.md"}'),a={name:"css/渐变圆角边框.md"};function r(c,_,o,n,p,d){return s(),t("div")}const f=e(a,[["render",r]]);export{m as __pageData,f as default};

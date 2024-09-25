@@ -1,0 +1,1 @@
+import{_ as s,X as n,M as a,aw as l}from"./chunks/framework.BFDeQwB9.js";const u=JSON.parse('{"title":"不可变类型","description":"","frontmatter":{},"headers":[],"relativePath":"ts/不可变类型.md","filePath":"ts/不可变类型.md"}'),p={name:"ts/不可变类型.md"},e=l("",5),o=[e];function r(c,t,E,y,i,b){return a(),n("div",null,o)}const m=s(p,[["render",r]]);export{u as __pageData,m as default};

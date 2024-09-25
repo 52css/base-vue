@@ -1,0 +1,1 @@
+import{_ as s,X as n,M as a,aw as l}from"./chunks/framework.BFDeQwB9.js";const u=JSON.parse('{"title":"前置的不定量参数","description":"","frontmatter":{},"headers":[],"relativePath":"ts/前置的不定量参数.md","filePath":"ts/前置的不定量参数.md"}'),p={name:"ts/前置的不定量参数.md"},o=l("",6),e=[o];function r(c,t,y,E,F,i){return a(),n("div",null,e)}const d=s(p,[["render",r]]);export{u as __pageData,d as default};
