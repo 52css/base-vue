@@ -51,10 +51,7 @@ export default defineConfig({
     },
   },
   markdown: {
-    theme: {
-      light: 'vitesse-light',
-      dark: 'vitesse-dark',
-    },
+    theme: "github-dark",
     lineNumbers: true,
     config(md) {
       md.use(componentPreview);
